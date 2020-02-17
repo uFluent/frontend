@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 
-import styles from "./Styles";
+import styles from "./Camera.styles";
 
 export class CameraPage extends React.Component {
   camera = null;
