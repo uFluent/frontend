@@ -12,6 +12,7 @@ export class CameraPage extends React.Component {
   camera = null;
 
   state = {
+    //The captures array, a gallery of pictures, will need moving to a context that stores things between app loads
     captures: [],
     capturing: null,
     hasCameraPermission: null
@@ -39,7 +40,7 @@ export class CameraPage extends React.Component {
   }
 
   render() {
-    const { hasCameraPermission, flashMode, capturing } = this.state;
+    const { hasCameraPermission, capturing } = this.state;
 
     if (hasCameraPermission === null) {
       return <View />;

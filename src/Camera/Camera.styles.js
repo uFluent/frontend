@@ -4,11 +4,11 @@ const { width: winWidth, height: winHeight } = Dimensions.get("window");
 
 export default StyleSheet.create({
   preview: {
-    height: winHeight,
+    height: winHeight - 180,
     width: winWidth,
     position: "absolute",
     left: 0,
-    top: 0,
+    top: 20,
     right: 0,
     bottom: 0
   },
@@ -24,10 +24,10 @@ export default StyleSheet.create({
     bottom: 0
   },
   captureBtn: {
-    width: 60,
-    height: 60,
+    width: 200,
+    height: 200,
     borderWidth: 2,
-    borderRadius: 60,
+    borderRadius: 0,
     borderColor: "#FFFFFF"
   },
   captureBtnActive: {
@@ -41,5 +41,17 @@ export default StyleSheet.create({
     borderRadius: 76,
     backgroundColor: "red",
     borderColor: "transparent"
+  },
+  galleryContainer: {
+    bottom: 100
+  },
+  galleryImageContainer: {
+    width: 75,
+    height: 75,
+    marginRight: 5
+  },
+  galleryImage: {
+    width: 75,
+    height: 75
   }
 });
