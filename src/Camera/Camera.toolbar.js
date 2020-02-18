@@ -6,12 +6,8 @@ import { View, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
 
 import styles from "./Camera.styles";
 
-const { FlashMode: CameraFlashModes } = Camera.Constants;
-
 export default ({
   capturing = false,
-  flashMode = CameraFlashModes.off,
-  setFlashMode,
   onCaptureIn,
   onCaptureOut,
   onLongCapture,
@@ -19,25 +15,6 @@ export default ({
 }) => (
   <Grid style={styles.bottomToolbar}>
     <Row>
-      <Col style={styles.alignCenter}>
-        <TouchableOpacity
-          onPress={() =>
-            setFlashMode(
-              flashMode === CameraFlashModes.on
-                ? CameraFlashModes.off
-                : CameraFlashModes.on
-            )
-          }
-        >
-          <Ionicons
-            name={
-              flashMode == CameraFlashModes.on ? "md-flash" : "md-flash-off"
-            }
-            color="white"
-            size={30}
-          />
-        </TouchableOpacity>
-      </Col>
       <Col size={2} style={styles.alignCenter}>
         <TouchableWithoutFeedback
           onPressIn={onCaptureIn}

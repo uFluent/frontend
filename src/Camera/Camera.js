@@ -13,15 +13,10 @@ export class CameraPage extends React.Component {
 
   state = {
     captures: [],
-    // setting flash to be turned off by default
-    flashMode: Camera.Constants.FlashMode.off,
     capturing: null,
-    // start the back camera by default
-    // cameraType: Camera.Constants.Type.back,
     hasCameraPermission: null
   };
 
-  setFlashMode = flashMode => this.setState({ flashMode });
   handleCaptureIn = () => this.setState({ capturing: true });
 
   handleCaptureOut = () => {
@@ -66,7 +61,6 @@ export class CameraPage extends React.Component {
       <React.Fragment>
         <View>
           <Camera
-            flashMode={flashMode}
             style={styles.preview}
             ref={camera => (this.camera = camera)}
           />
@@ -74,8 +68,6 @@ export class CameraPage extends React.Component {
 
         <Toolbar
           capturing={capturing}
-          flashMode={flashMode}
-          setFlashMode={this.setFlashMode}
           onCaptureIn={this.handleCaptureIn}
           onCaptureOut={this.handleCaptureOut}
           onLongCapture={this.handleLongCapture}
