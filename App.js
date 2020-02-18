@@ -7,6 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./src/Home";
 import Profile from "./src/Profile/Profile";
 import { CameraPage } from "./src/Camera/Camera";
+import HeaderBar from "./src/Headers/HeaderBar";
 
 const Stack = createStackNavigator();
 
@@ -25,11 +26,15 @@ export default function App() {
         }}
       >
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{ headerTitle: props => <HeaderBar {...props} /> }}
+        />
         <Stack.Screen
           name="CameraPage"
           component={CameraPage}
-          options={{ title: "Camera" }}
+          options={{ headerTitle: props => <HeaderBar {...props} /> }}
         />
       </Stack.Navigator>
     </NavigationContainer>
