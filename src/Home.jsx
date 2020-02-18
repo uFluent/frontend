@@ -15,7 +15,7 @@ const Home = () => {
       />
       <Button
         title="CameraPage"
-        onPress={() => navigation.navigate("CameraPage")}
+        onPress={() => navigation.navigate("Camera")}
       />
     </View>
   );

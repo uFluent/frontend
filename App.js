@@ -32,7 +32,7 @@ export default function App() {
           options={{ headerTitle: props => <HeaderBar {...props} /> }}
         />
         <Stack.Screen
-          name="CameraPage"
+          name="Camera"
           component={CameraPage}
           options={{ headerTitle: props => <HeaderBar {...props} /> }}
         />
@@ -40,12 +40,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
