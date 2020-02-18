@@ -24,7 +24,6 @@ export default StyleSheet.create({
     fontWeight: "bold",
     borderStyle: "solid",
     borderColor: "white",
-
     borderRadius: 5,
     borderWidth: 1
   }
