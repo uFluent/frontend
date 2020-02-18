@@ -12,6 +12,11 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0
   },
+  background: {
+    backgroundColor: "#f4511e",
+    height: winHeight,
+    width: winWidth
+  },
   alignCenter: {
     flex: 1,
     alignItems: "center",

@@ -6,7 +6,7 @@ import { View, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
 
 import styles from "./Camera.styles";
 
-export default ({
+export const Toolbar = ({
   capturing = false,
   onCaptureIn,
   onCaptureOut,
@@ -32,3 +32,5 @@ export default ({
     </Row>
   </Grid>
 );
+
+export const HomeButton = () => {};

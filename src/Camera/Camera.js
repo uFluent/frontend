@@ -4,7 +4,7 @@ import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
-import Toolbar from "./Camera.toolbar";
+import { Toolbar } from "./Camera.toolbar";
 
 import styles from "./Camera.styles";
 
@@ -50,7 +50,7 @@ export class CameraPage extends React.Component {
 
     return (
       <React.Fragment>
-        <View>
+        <View style={styles.background}>
           <Camera
             style={styles.preview}
             ref={camera => (this.camera = camera)}
