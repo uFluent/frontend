@@ -9,7 +9,6 @@ const Profile = () => {
   return (
     <View style={styles.alignCenter}>
       <Text>User profile</Text>
-      <Button title="Home" onPress={() => navigation.navigate("Home")} />
     </View>
   );
 };
