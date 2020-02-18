@@ -19,7 +19,7 @@ export default ({
         <TouchableWithoutFeedback
           onPressIn={onCaptureIn}
           onPressOut={onCaptureOut}
-          onLongPress={onLongCapture}
+          onLongPress={onShortCapture}
           onPress={onShortCapture}
         >
           <View

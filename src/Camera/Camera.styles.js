@@ -20,7 +20,7 @@ export default StyleSheet.create({
   bottomToolbar: {
     width: winWidth,
     position: "absolute",
-    height: 100,
+    height: winHeight,
     bottom: 0
   },
   captureBtn: {

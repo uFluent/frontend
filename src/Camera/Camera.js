@@ -31,19 +31,9 @@ export class CameraPage extends React.Component {
     });
   };
 
-  handleLongCapture = async () => {
-    const videoData = await this.camera.recordAsync();
-    this.setState({
-      capturing: false,
-      captures: [videoData, ...this.state.captures]
-    });
-  };
-
   async componentDidMount() {
     const camera = await Permissions.askAsync(Permissions.CAMERA);
-    const audio = await Permissions.askAsync(Permissions.AUDIO_RECORDING);
-    const hasCameraPermission =
-      camera.status === "granted" && audio.status === "granted";
+    const hasCameraPermission = camera.status === "granted";
 
     this.setState({ hasCameraPermission });
   }
