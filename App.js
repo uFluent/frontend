@@ -29,12 +29,18 @@ export default function App() {
         <Stack.Screen
           name="Profile"
           component={Profile}
-          options={{ headerTitle: props => <HeaderBar {...props} /> }}
+          options={{
+            headerLeft: null,
+            headerTitle: props => <HeaderBar {...props} />
+          }}
         />
         <Stack.Screen
           name="Camera"
           component={CameraPage}
-          options={{ headerTitle: props => <HeaderBar {...props} /> }}
+          options={{
+            headerLeft: null,
+            headerTitle: props => <HeaderBar {...props} />
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
