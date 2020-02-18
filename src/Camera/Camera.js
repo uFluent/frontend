@@ -22,7 +22,6 @@ export class CameraPage extends React.Component {
   };
 
   setFlashMode = flashMode => this.setState({ flashMode });
-  // setCameraType = cameraType => this.setState({ cameraType });
   handleCaptureIn = () => this.setState({ capturing: true });
 
   handleCaptureOut = () => {
@@ -55,12 +54,7 @@ export class CameraPage extends React.Component {
   }
 
   render() {
-    const {
-      hasCameraPermission,
-      flashMode,
-      // cameraType,
-      capturing
-    } = this.state;
+    const { hasCameraPermission, flashMode, capturing } = this.state;
 
     if (hasCameraPermission === null) {
       return <View />;
@@ -72,7 +66,6 @@ export class CameraPage extends React.Component {
       <React.Fragment>
         <View>
           <Camera
-            // type={cameraType}
             flashMode={flashMode}
             style={styles.preview}
             ref={camera => (this.camera = camera)}
@@ -82,9 +75,7 @@ export class CameraPage extends React.Component {
         <Toolbar
           capturing={capturing}
           flashMode={flashMode}
-          // cameraType={cameraType}
           setFlashMode={this.setFlashMode}
-          // setCameraType={this.setCameraType}
           onCaptureIn={this.handleCaptureIn}
           onCaptureOut={this.handleCaptureOut}
           onLongCapture={this.handleLongCapture}

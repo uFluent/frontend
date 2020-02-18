@@ -6,14 +6,12 @@ import { View, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
 
 import styles from "./Camera.styles";
 
-const { FlashMode: CameraFlashModes, Type: CameraTypes } = Camera.Constants;
+const { FlashMode: CameraFlashModes } = Camera.Constants;
 
 export default ({
   capturing = false,
-  //   cameraType = CameraTypes.back,
   flashMode = CameraFlashModes.off,
   setFlashMode,
-  setCameraType,
   onCaptureIn,
   onCaptureOut,
   onLongCapture,
@@ -54,19 +52,6 @@ export default ({
           </View>
         </TouchableWithoutFeedback>
       </Col>
-      {/* <Col style={styles.alignCenter}>
-        <TouchableOpacity
-          onPress={() =>
-            setCameraType(
-              cameraType === CameraTypes.back
-                ? CameraTypes.front
-                : CameraTypes.back
-            )
-          }
-        >
-          <Ionicons name="md-reverse-camera" color="white" size={30} />
-        </TouchableOpacity>
-      </Col> */}
     </Row>
   </Grid>
 );
