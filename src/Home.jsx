@@ -13,10 +13,7 @@ const Home = () => {
   return (
     <View style={styles.alignCenter}>
       <Text>Hello</Text>
-      <Button
-        title="Go to Jane's profile"
-        onPress={() => navigation.navigate("Profile", { name: "Jane" })}
-      />
+
       <Button
         title="CameraPage"
         onPress={() => navigation.navigate("Camera")}
