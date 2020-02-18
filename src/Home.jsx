@@ -13,11 +13,6 @@ const Home = () => {
   return (
     <View style={styles.alignCenter}>
       <Text>Hello</Text>
-
-      <Button
-        title="CameraPage"
-        onPress={() => navigation.navigate("Camera")}
-      />
     </View>
   );
 };

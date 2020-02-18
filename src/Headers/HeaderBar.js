@@ -13,18 +13,13 @@ export default props => {
   };
   return (
     <View style={styles.headerBar}>
-      <Button
-        style={styles.homeButton}
-        styleDisabled={styles.homeButton}
-        onPress={() => handlePress("Home")}
-      >
+      <Button onPress={() => handlePress("Home")}>
         <Ionicons name="md-home" size={30} style={styles.homeButton} />
       </Button>
-      <Button
-        style={styles.homeButton}
-        styleDisabled={styles.homeButton}
-        onPress={() => handlePress("Profile")}
-      >
+      <Button onPress={() => handlePress("Camera")}>
+        <Ionicons name="md-camera" size={30} style={styles.cameraButton} />
+      </Button>
+      <Button onPress={() => handlePress("Profile")}>
         <Ionicons name="md-person" size={30} style={styles.homeButton} />
       </Button>
     </View>
