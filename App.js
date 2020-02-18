@@ -25,7 +25,14 @@ export default function App() {
           }
         }}
       >
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerLeft: null,
+            headerTitle: props => <HeaderBar {...props} />
+          }}
+        />
         <Stack.Screen
           name="Profile"
           component={Profile}
