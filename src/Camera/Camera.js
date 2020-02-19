@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { Toolbar } from "./Camera.toolbar";
+import { getPictureData } from "../../api";
 
 import styles from "./Camera.styles";
 
@@ -27,6 +28,7 @@ export class CameraPage extends React.Component {
 
   handleShortCapture = async () => {
     const photoData = await this.camera.takePictureAsync({ base64: true });
+    const photoInfo = getPictureData(photData.base64);
     this.setState({
       capturing: false,
       captures: [photoData, ...this.state.captures],
@@ -77,7 +79,6 @@ export class CameraPage extends React.Component {
               style={styles.preview}
               source={{ uri: this.state.captures[0].uri }}
             />
-            <Text>{this.state.captures[0].uri}</Text>
           </View>
         </React.Fragment>
       );
