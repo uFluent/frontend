@@ -85,6 +85,7 @@ export class CameraPage extends React.Component {
               style={styles.preview}
               source={{ uri: this.state.captures[0].uri }}
             />
+            <Text>{this.state.captures[0].uri}</Text>
           </View>
         </React.Fragment>
       );
