@@ -29,8 +29,6 @@ class Home extends React.Component {
     return (
       <View style={styles.alignCenter}>
         <Text>Hello</Text>
-        <Text>{this.state.picUri}</Text>
-        <Text>{this.state.uri}</Text>
         <Image
           source={{ uri: this.state.uri }}
           style={{ width: 300, height: 300 }}
