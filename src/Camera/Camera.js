@@ -6,7 +6,6 @@ import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { Toolbar } from "./Camera.toolbar";
 import { getPictureData } from "../../api";
-import * as ImagePicker from "expo-image-picker";
 import * as MediaLibrary from "expo-media-library";
 
 import styles from "./Camera.styles";
