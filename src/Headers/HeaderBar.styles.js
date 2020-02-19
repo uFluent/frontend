@@ -16,7 +16,6 @@ export default StyleSheet.create({
     fontWeight: "bold"
   },
   homeButton: {
-    color: "white",
     width: 40,
     height: 40,
     padding: 5,
@@ -28,16 +27,7 @@ export default StyleSheet.create({
     borderWidth: 1
   },
   cameraButton: {
-    backgroundColor: "white",
-    color: "#f4511e",
     width: 80,
-    height: 40,
-    padding: 5,
-    paddingHorizontal: 27,
-    fontWeight: "bold",
-    borderStyle: "solid",
-    borderColor: "white",
-    borderRadius: 5,
-    borderWidth: 1
+    paddingHorizontal: 27
   }
 });
