@@ -1,8 +1,6 @@
 import React from "react";
-import { Camera } from "expo-camera";
-import { Ionicons } from "@expo/vector-icons";
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { View, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
+import { View, TouchableWithoutFeedback } from "react-native";
 
 import styles from "./Camera.styles";
 
@@ -10,7 +8,6 @@ export const Toolbar = ({
   capturing = false,
   onCaptureIn,
   onCaptureOut,
-  onLongCapture,
   onShortCapture
 }) => (
   <Grid style={styles.bottomToolbar}>

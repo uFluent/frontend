@@ -6,6 +6,8 @@ import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { Toolbar } from "./Camera.toolbar";
 import { getPictureData } from "../../api";
+import * as ImagePicker from "expo-image-picker";
+import * as MediaLibrary from "expo-media-library";
 
 import styles from "./Camera.styles";
 
@@ -28,7 +30,10 @@ export class CameraPage extends React.Component {
 
   handleShortCapture = async () => {
     const photoData = await this.camera.takePictureAsync({ base64: true });
-    const photoInfo = getPictureData(photData.base64);
+    const photoInfo = getPictureData(photoData.base64);
+    const asset = await MediaLibrary.createAssetAsync(photoData.uri);
+    MediaLibrary.createAlbumAsync("Expo", asset, false);
+
     this.setState({
       capturing: false,
       captures: [photoData, ...this.state.captures],
@@ -38,7 +43,9 @@ export class CameraPage extends React.Component {
 
   async componentDidMount() {
     const camera = await Permissions.askAsync(Permissions.CAMERA);
-    const hasCameraPermission = camera.status === "granted";
+    const imageRoll = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    const hasCameraPermission =
+      camera.status === "granted" && imageRoll.status === "granted";
 
     this.setState({ hasCameraPermission });
   }
