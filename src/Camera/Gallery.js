@@ -14,7 +14,8 @@ export default class Gallery extends React.Component {
   state = {
     photoData: this.props.photoData,
     saved: false,
-    word: null
+    word: null,
+    fontSize: 50
   };
 
   savePhoto = async uri => {
@@ -39,7 +40,15 @@ export default class Gallery extends React.Component {
     }, 1);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.word !== prevState.word) {
+      console.log("here");
+      this.setState({ fontSize: 50 - this.state.word.length });
+    }
+  }
+
   render() {
+    console.log(this.state.fontSize);
     return (
       <React.Fragment>
         <View style={styles.background}>
@@ -64,7 +73,9 @@ export default class Gallery extends React.Component {
           </Button>
         </View>
         <View style={styles.lowerText}>
-          <Text style={styles.bigText}>{this.state.word}</Text>
+          <Text style={{ fontSize: this.state.fontSize }}>
+            {this.state.word}
+          </Text>
           <Button onPress={this.speakWord}>
             <View style={styles.speakButton}>
               <Ionicons name="md-megaphone" size={30} />
