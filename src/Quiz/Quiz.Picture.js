@@ -5,9 +5,8 @@ import * as MediaLibrary from "expo-media-library";
 
 import styles from "./Quiz.Styles.js";
 
-class QuizPicture extends React.Component {
+export default class QuizPicture extends React.Component {
   state = {
-    picUri: "",
     uri: ""
   };
 
@@ -17,9 +16,7 @@ class QuizPicture extends React.Component {
     });
     const pic =
       pictures.assets[Math.ceil(Math.random() * pictures.assets.length)];
-    const localId = await MediaLibrary.getAssetInfoAsync(pic.id);
-    console.log(pictures);
-    this.setState({ picUri: localId.localUri, uri: pic.uri });
+    this.setState({ uri: pic.uri });
   };
 
   componentDidMount() {
