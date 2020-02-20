@@ -52,10 +52,20 @@ export default StyleSheet.create({
     backgroundColor: "green",
     zIndex: 10,
     display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center"
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    flexDirection: "row"
   },
   bigText: {
     fontSize: 60
+  },
+  speakButton: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around"
   }
 });

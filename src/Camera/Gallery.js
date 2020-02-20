@@ -4,7 +4,7 @@ import { View, Image, Text } from "react-native";
 import Button from "react-native-button";
 import { Ionicons } from "@expo/vector-icons";
 
-import { getPictureData } from "../../api";
+import { getPictureData, sayWord, translateWord } from "../../api";
 
 import * as MediaLibrary from "expo-media-library";
 
@@ -25,12 +25,18 @@ export default class Gallery extends React.Component {
     }
   };
 
+  speakWord = () => {
+    sayWord(this.state.word, "es");
+  };
+
   componentDidMount() {
     //This is causing a memory leak!!!!!
     // const photoInfo = getPictureData(this.state.photoData.base64);
     setTimeout(() => {
-      this.setState({ word: "Bonjour" });
-    }, 5000);
+      translateWord("cat", "es").then(result => {
+        this.setState({ word: result[0].translation });
+      });
+    }, 1);
   }
 
   render() {
@@ -59,6 +65,11 @@ export default class Gallery extends React.Component {
         </View>
         <View style={styles.lowerText}>
           <Text style={styles.bigText}>{this.state.word}</Text>
+          <Button onPress={this.speakWord}>
+            <View style={styles.speakButton}>
+              <Ionicons name="md-megaphone" size={30} />
+            </View>
+          </Button>
         </View>
       </React.Fragment>
     );
