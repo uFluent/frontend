@@ -1,10 +1,14 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-
 import { useNavigation } from "@react-navigation/native";
+
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { Toolbar } from "./Camera.toolbar";
+
+import * as MediaLibrary from "expo-media-library";
+
+import Gallery from "./Gallery";
 
 import styles from "./Camera.styles";
 
@@ -16,7 +20,7 @@ export class CameraPage extends React.Component {
     captures: [],
     capturing: null,
     hasCameraPermission: null,
-    viewMode: false
+    viewPhoto: false
   };
 
   handleCaptureIn = () => this.setState({ capturing: true });
@@ -27,6 +31,10 @@ export class CameraPage extends React.Component {
 
   handleShortCapture = async () => {
     const photoData = await this.camera.takePictureAsync({ base64: true });
+
+    // const asset = await MediaLibrary.createAssetAsync(photoData.uri);
+    // MediaLibrary.createAlbumAsync("Expo", asset, false);
+
     this.setState({
       capturing: false,
       captures: [photoData, ...this.state.captures],
@@ -36,10 +44,16 @@ export class CameraPage extends React.Component {
 
   async componentDidMount() {
     const camera = await Permissions.askAsync(Permissions.CAMERA);
-    const hasCameraPermission = camera.status === "granted";
+    const imageRoll = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    const hasCameraPermission =
+      camera.status === "granted" && imageRoll.status === "granted";
 
     this.setState({ hasCameraPermission });
   }
+
+  returnToCamera = () => {
+    this.setState({ viewPhoto: false });
+  };
 
   render() {
     const { hasCameraPermission, capturing } = this.state;
@@ -71,15 +85,12 @@ export class CameraPage extends React.Component {
       );
     else
       return (
-        <React.Fragment>
-          <View style={styles.background}>
-            <Image
-              style={styles.preview}
-              source={{ uri: this.state.captures[0].uri }}
-            />
-            <Text>{this.state.captures[0].uri}</Text>
-          </View>
-        </React.Fragment>
+        <View style={styles.background}>
+          <Gallery
+            photoData={this.state.captures[0]}
+            returnToCamera={this.returnToCamera}
+          />
+        </View>
       );
   }
 }

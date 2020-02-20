@@ -42,6 +42,16 @@ export default props => {
           style={[styles.homeButton, colorStyle(props.children === "Profile")]}
         />
       </Button>
+      {/* <Button onPress={() => handlePress("QuizPicture")}>
+        <Ionicons
+          name=""
+          size={30}
+          style={[
+            styles.homeButton,
+            colorStyle(props.children === "QuizPicture")
+          ]}
+        />
+      </Button> */}
     </View>
   );
 };

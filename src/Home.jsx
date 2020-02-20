@@ -1,20 +1,18 @@
 import React from "react";
-import { Text, View, Button } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { useNavigation } from "@react-navigation/native";
+import { Text, View, Image } from "react-native";
+
+import * as MediaLibrary from "expo-media-library";
 
 import styles from "./Styles";
 
-const Stack = createStackNavigator();
-
-const Home = () => {
-  const navigation = useNavigation();
-  return (
-    <View style={styles.alignCenter}>
-      <Text>Hello</Text>
-    </View>
-  );
-};
+class Home extends React.Component {
+  render() {
+    return (
+      <View style={styles.alignCenter}>
+        <Text>uFluent</Text>
+      </View>
+    );
+  }
+}
 
 export default Home;

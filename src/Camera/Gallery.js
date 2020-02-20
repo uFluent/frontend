@@ -1,17 +1,77 @@
 import React from "react";
-import { View, Image, ScrollView } from "react-native";
+import { View, Image, Text } from "react-native";
 
-import styles from "./Camera.styles";
+import Button from "react-native-button";
+import { Ionicons } from "@expo/vector-icons";
 
-export default ({ captures = [] }) => (
-  <ScrollView
-    horizontal={true}
-    style={[styles.bottomToolbar, styles.galleryContainer]}
-  >
-    {captures.map(({ uri }) => (
-      <View style={styles.galleryImageContainer} key={uri}>
-        <Image source={{ uri }} style={styles.galleryImage} />
-      </View>
-    ))}
-  </ScrollView>
-);
+import { getPictureData, sayWord, translateWord } from "../../api";
+
+import * as MediaLibrary from "expo-media-library";
+
+import styles from "./Gallery.styles";
+
+export default class Gallery extends React.Component {
+  state = {
+    photoData: this.props.photoData,
+    saved: false,
+    word: null
+  };
+
+  savePhoto = async uri => {
+    if (!this.state.saved) {
+      const asset = await MediaLibrary.createAssetAsync(uri);
+      MediaLibrary.createAlbumAsync("Expo", asset, false);
+      this.setState({ saved: true });
+    }
+  };
+
+  speakWord = () => {
+    sayWord(this.state.word, "es");
+  };
+
+  componentDidMount() {
+    //This is causing a memory leak!!!!!
+    // const photoInfo = getPictureData(this.state.photoData.base64);
+    setTimeout(() => {
+      translateWord("cat", "es").then(result => {
+        this.setState({ word: result[0].translation });
+      });
+    }, 1);
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <View style={styles.background}>
+          <Image
+            style={styles.preview}
+            source={{ uri: this.state.photoData.uri }}
+          />
+        </View>
+        <View style={styles.topButtons}>
+          <Button onPress={this.props.returnToCamera}>
+            <View style={styles.cameraButton}>
+              <Ionicons name="md-camera" size={30} style={styles.cameraIcons} />
+              <Ionicons
+                name="md-return-left"
+                size={30}
+                style={styles.cameraIcons}
+              />
+            </View>
+          </Button>
+          <Button onPress={() => this.savePhoto(this.state.photoData.uri)}>
+            <Ionicons name="md-save" size={30} style={styles.saveButton} />
+          </Button>
+        </View>
+        <View style={styles.lowerText}>
+          <Text style={styles.bigText}>{this.state.word}</Text>
+          <Button onPress={this.speakWord}>
+            <View style={styles.speakButton}>
+              <Ionicons name="md-megaphone" size={30} />
+            </View>
+          </Button>
+        </View>
+      </React.Fragment>
+    );
+  }
+}
