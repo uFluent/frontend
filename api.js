@@ -9,7 +9,6 @@ export const translateWord = (wordToTranslate, languageToChangeTo) => {
   )
     .then(response => response.json())
     .then(responseJson => {
-      console.log(responseJson.matches);
       return responseJson.matches;
     })
     .catch(error => {
