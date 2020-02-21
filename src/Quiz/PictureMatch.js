@@ -4,8 +4,11 @@ import { AsyncStorage } from "react-native";
 import Button from "react-native-button";
 
 import * as MediaLibrary from "expo-media-library";
+import { Ionicons } from "@expo/vector-icons";
 
 import { getListOfWords } from "./Words";
+
+import { sayWord } from "../../api";
 
 export default class PictureMatch extends Component {
   state = {
@@ -76,7 +79,12 @@ export default class PictureMatch extends Component {
           <View>
             {this.state.incorrectWords.map(word => {
               return (
-                <Button onPress={() => this.guessWord(word)}>{word}</Button>
+                <View key={word}>
+                  <Button onPress={() => this.guessWord(word)}>{word}</Button>
+                  <Button onPress={() => sayWord(word, this.state.language)}>
+                    <Ionicons name="md-megaphone" size={30} />
+                  </Button>
+                </View>
               );
             })}
           </View>

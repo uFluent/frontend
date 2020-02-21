@@ -17,10 +17,12 @@ export const translateWord = (wordToTranslate, languageToChangeTo) => {
 };
 
 export const sayWord = (word, language) => {
+  let variableRate = 0.6;
+  if (language === "en") variableRate = 1;
   Speech.speak(word, {
     language: language,
     pitch: 1,
-    rate: 1
+    rate: variableRate
   });
 };
 
