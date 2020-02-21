@@ -12,8 +12,12 @@ export default class PictureMatch extends Component {
     image: null,
     correctWord: null,
     incorrectWords: [],
-    language: "no"
+    language: "es"
   };
+
+  componentDidMount() {
+    this.getPicture();
+  }
 
   getPicture = async () => {
     const pictures = await MediaLibrary.getAssetsAsync({
@@ -26,7 +30,6 @@ export default class PictureMatch extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.image !== prevState.image) {
-      console.log(this.state.image.slice(32));
       this.getWord();
     }
   }
@@ -36,18 +39,30 @@ export default class PictureMatch extends Component {
       "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FcameraApp-33d6ed69-a607-41a5-9687-1eb6229ce0d9/Camera/" +
         this.state.image.slice(32)
     );
-    //The name of the directory keeps changing! ^^^
+    //The name of the directory keeps changing somehow! ^^^
     const newWords = await getListOfWords(correctWord, 3, this.state.language);
-
+    //Change second argument in this function to reference the user level ^^^
     this.setState({
       correctWord: correctWord,
       incorrectWords: newWords
     });
   };
 
-  componentDidMount() {
-    this.getPicture();
-  }
+  guessWord = word => {
+    if (word === this.state.correctWord) {
+      this.correctGuess();
+    } else {
+      this.wrongGuess();
+    }
+  };
+
+  correctGuess = () => {
+    //something happens here
+  };
+
+  wrongGuess = () => {
+    //something happens here
+  };
 
   render() {
     if (this.state.image) {
@@ -60,7 +75,9 @@ export default class PictureMatch extends Component {
           />
           <View>
             {this.state.incorrectWords.map(word => {
-              return <Button>{word}</Button>;
+              return (
+                <Button onPress={() => this.guessWord(word)}>{word}</Button>
+              );
             })}
           </View>
         </View>
