@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+
 import QuizSelector from "./src/Quiz/QuizSelector";
 import Home from "./src/Home";
 import Profile from "./src/Profile/Profile";
@@ -12,6 +13,7 @@ import QuizPicture from "./src/Quiz/Quiz.Picture";
 import Gallery from "./src/Camera/Gallery";
 import PictureMatch from "./src//Quiz/PictureMatch";
 import WordMatch from "./src/Quiz/WordMatch";
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -47,14 +49,6 @@ export default function App() {
         <Stack.Screen
           name="Camera"
           component={CameraPage}
-          options={{
-            headerLeft: null,
-            headerTitle: props => <HeaderBar {...props} />
-          }}
-        />
-        <Stack.Screen
-          name="QuizPicture"
-          component={QuizPicture}
           options={{
             headerLeft: null,
             headerTitle: props => <HeaderBar {...props} />
