@@ -1,18 +1,19 @@
 import React from "react";
-import { Text, View, Image } from "react-native";
-
+import { View } from "react-native";
+import Button from "react-native-button";
 import * as MediaLibrary from "expo-media-library";
-
+import { useNavigation } from "@react-navigation/native";
 import styles from "./Styles";
 
-class Home extends React.Component {
-  render() {
-    return (
-      <View style={styles.alignCenter}>
-        <Text>uFluent</Text>
-      </View>
-    );
-  }
-}
+export default function Home() {
+  const navigation = useNavigation();
 
-export default Home;
+  const goToQuiz = () => {
+    navigation.navigate("QuizSelector");
+  };
+  return (
+    <View style={styles.alignCenter}>
+      <Button onPress={goToQuiz}>uFluent</Button>
+    </View>
+  );
+}
