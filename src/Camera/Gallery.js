@@ -47,7 +47,7 @@ export default class Gallery extends React.Component {
       const englishWord = "elephant";
       translateWord("elephant", "es").then(result => {
         this.setState({
-          word: result[0].translation,
+          word: result,
           englishWord: englishWord
         });
       });

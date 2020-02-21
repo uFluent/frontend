@@ -40,25 +40,37 @@ export default class PictureMatch extends Component {
       newWords.push(words[Math.floor(Math.random() * words.length)]);
     }
     newWords.push(correctWord);
-    const translatedWord = [];
-    newWords.map(word => {
-      translateWord(word, this.state.language).then(result => {
-        translatedWord.push(result[0].translation);
-      })
-    })
-    
-    console.log(translatedWord.length,newWords.length );
-    if (translatedWord.length === newWords.length) {
+    // const translatedWord = [];
+    // newWords.map(word => {
+    //   translateWord(word, this.state.language).then(result => {
+    //     translatedWord.push(result[0].translation);
+    //   })
+    // })
 
-      console.log(newWords, translatedWord);
-      this.setState({
-        correctWord: correctWord,
-        incorrectWords: translatedWord.sort(function() {
-          return 0.5 - Math.random();
-        })
-      });
-    }
+    // console.log(translatedWord.length,newWords.length );
+    // if (translatedWord.length === newWords.length) {
+
+    //   console.log(newWords, translatedWord);
+    this.setState({
+      correctWord: correctWord,
+      incorrectWords: newWords.sort(function() {
+        return 0.5 - Math.random();
+      })
+    });
+    this.translateWords();
   };
+
+  translateWords = () => {
+    newWords.map(word => {
+      this.setState({
+        incorrectWords: [
+          ...this.state.incorrectWords,
+          translateWord(word, this.state.language)
+        ]
+      });
+    });
+  };
+  // };
   componentDidMount() {
     this.getPicture();
   }
