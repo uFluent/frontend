@@ -4,6 +4,8 @@ import { View, TouchableWithoutFeedback } from "react-native";
 
 import styles from "./Camera.styles";
 
+import { Ionicons } from "@expo/vector-icons";
+
 export const Toolbar = ({
   capturing = false,
   onCaptureIn,
@@ -22,7 +24,12 @@ export const Toolbar = ({
           <View
             style={[styles.captureBtn, capturing && styles.captureBtnActive]}
           >
-            {capturing && <View style={styles.captureBtnInternal} />}
+            <Ionicons
+              name="md-camera"
+              size={70}
+              style={[styles.cameraIcon, capturing && styles.cameraIconActive]}
+            />
+            {/* {capturing && <View style={styles.captureBtnInternal} />} */}
           </View>
         </TouchableWithoutFeedback>
       </Col>

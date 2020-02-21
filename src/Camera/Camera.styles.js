@@ -25,28 +25,41 @@ export default StyleSheet.create({
   bottomToolbar: {
     width: winWidth,
     position: "absolute",
-    height: winHeight,
+    height: 170,
     bottom: 0
   },
   captureBtn: {
-    width: 200,
-    height: 200,
+    width: 100,
+    height: 100,
     borderWidth: 2,
-    borderRadius: 0,
-    borderColor: "#FFFFFF"
+    borderRadius: 50,
+    borderColor: "rgb(0, 210, 46)",
+    backgroundColor: "rgb(43, 128, 62)",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "center"
   },
   captureBtnActive: {
-    width: 80,
-    height: 80
+    width: 100,
+    height: 100,
+    borderWidth: 2,
+    borderRadius: 50,
+    borderColor: "rgb(43, 128, 62)",
+    backgroundColor: "rgb(0, 210, 46)"
   },
   captureBtnInternal: {
-    width: 76,
-    height: 76,
-    borderWidth: 2,
-    borderRadius: 76,
-    backgroundColor: "red",
-    borderColor: "transparent"
+    // width: 76,
+    // height: 76,
+    // borderWidth: 2,
+    // borderRadius: 76,
+    // backgroundColor: "red",
+    // borderColor: "transparent"
   },
+  cameraIcon: {
+    color: "rgb(0, 210, 46)"
+  },
+  cameraIconActive: { color: "rgb(43, 128, 62)" },
   galleryContainer: {
     bottom: 100
   },
