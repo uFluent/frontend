@@ -5,12 +5,12 @@ import axios from "axios";
 
 export const translateWord = (wordToTranslate, languageToChangeTo) => {
   return fetch(
-    `https://api.mymemory.translated.net/get?q=${wordToTranslate}&langpair=en|${languageToChangeTo}`
+    `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200221T160402Z.f59e589640b65d4b.800e13bd0a0f63c412a70eaabe374b29b4df230b&text=${wordToTranslate}&lang=${languageToChangeTo}&format=plain`
   )
     .then(response => response.json())
     .then(responseJson => {
-      console.log(responseJson.matches);
-      return responseJson.matches;
+      console.log(responseJson);
+      return responseJson.text[0];
     })
     .catch(error => {
       console.error(error);
