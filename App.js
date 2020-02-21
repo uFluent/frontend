@@ -9,7 +9,6 @@ import Home from "./src/Home";
 import Profile from "./src/Profile/Profile";
 import { CameraPage } from "./src/Camera/Camera";
 import HeaderBar from "./src/Headers/HeaderBar";
-import QuizPicture from "./src/Quiz/Quiz.Picture";
 import Gallery from "./src/Camera/Gallery";
 import PictureMatch from "./src//Quiz/PictureMatch";
 import WordMatch from "./src/Quiz/WordMatch";
