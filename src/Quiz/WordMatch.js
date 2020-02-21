@@ -1,7 +1,11 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 export default function WordMatch() {
-  console.log('hello')
-  return (<View>PICTURE MATCH</View>);
+  console.log("hello");
+  return (
+    <View>
+      <Text>Word Match</Text>
+    </View>
+  );
 }

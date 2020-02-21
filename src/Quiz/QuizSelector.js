@@ -14,8 +14,8 @@ export default function QuizSelector() {
   };
   return (
     <View style={styles.alignCenter}>
-      <Button onPress={goToWordMatch}>Picture Match</Button>
-      <Button onPress={goToPictureMatch}>Word Match</Button>
+      <Button onPress={goToPictureMatch}>Picture Match</Button>
+      <Button onPress={goToWordMatch}>Word Match</Button>
     </View>
   );
 }
