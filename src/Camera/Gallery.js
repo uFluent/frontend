@@ -17,7 +17,8 @@ export default class Gallery extends React.Component {
     photoData: this.props.photoData,
     saved: false,
     word: null,
-    fontSize: 50
+    fontSize: 50,
+    englishWord:null
   };
 
   savePhoto = async uri => {
@@ -31,10 +32,8 @@ export default class Gallery extends React.Component {
 
   storeData = async (uri, word) => {
     try {
-      await AsyncStorage.setItem(uri, word);
-    } catch (error) {
-      // Error saving data
-    }
+      await AsyncStorage.setItem(uri, this.state.englishWord);
+    } catch (error) {}
   };
 
   speakWord = () => {
@@ -45,8 +44,12 @@ export default class Gallery extends React.Component {
     //This is causing a memory leak!!!!!
     // const photoInfo = getPictureData(this.state.photoData.base64);
     setTimeout(() => {
-      translateWord("person", "es").then(result => {
-        this.setState({ word: result });
+      const englishWord = "elephant";
+      translateWord("elephant", "es").then(result => {
+        this.setState({
+          word: result,
+          englishWord: englishWord
+        });
       });
     }, 3000);
   }
