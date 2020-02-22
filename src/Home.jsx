@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import Button from "react-native-button";
 import * as MediaLibrary from "expo-media-library";
 import { useNavigation } from "@react-navigation/native";
@@ -15,9 +15,9 @@ export default function Home() {
   return (
     <View style={styles.alignCenter}>
       <Text style={styles.logoText}>uFluent</Text>
-      <Buttons onPress={() => goToPage("Camera")} style={styles.homepageButton}>
+      <Button onPress={() => goToPage("Camera")} style={styles.homepageButton}>
         Camera
-      </Buttons>
+      </Button>
       <Button
         onPress={() => goToPage("QuizSelector")}
         style={styles.homepageButton}

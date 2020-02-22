@@ -10,6 +10,8 @@ import { getListOfWords } from "./Words";
 
 import { sayWord } from "../../api";
 
+import styles from "./Quiz.Styles";
+
 export default class PictureMatch extends Component {
   state = {
     image: null,
@@ -70,20 +72,19 @@ export default class PictureMatch extends Component {
   render() {
     if (this.state.image) {
       return (
-        <View>
+        <View style={styles.screen}>
           <Text>Picture Match</Text>
-          <Image
-            source={{ uri: this.state.image }}
-            style={{ width: 300, height: 300 }}
-          />
-          <View>
+          <Image source={{ uri: this.state.image }} style={styles.picture} />
+          <View style={styles.options}>
             {this.state.incorrectWords.map(word => {
               return (
-                <View key={word}>
+                <View style={styles.wordOption} key={word}>
                   <Button onPress={() => this.guessWord(word)}>{word}</Button>
-                  <Button onPress={() => sayWord(word, this.state.language)}>
-                    <Ionicons name="md-megaphone" size={30} />
-                  </Button>
+                  <View style={styles.speakWord}>
+                    <Button onPress={() => sayWord(word, this.state.language)}>
+                      <Ionicons name="md-megaphone" size={30} />
+                    </Button>
+                  </View>
                 </View>
               );
             })}
