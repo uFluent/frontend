@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import Button from "react-native-button";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -15,6 +15,18 @@ export default props => {
   const handlePress = targetPath => {
     navigation.navigate(targetPath);
   };
+  const DisplayFlag = {
+    fr: { file: require(`../Flags/fr.png`) },
+    es: {
+      file: require(`../Flags/es.png`)
+    },
+    en: {
+      file: require(`../Flags/en.png`)
+    },
+    no: {
+      file: require(`../Flags/no.png`)
+    }
+  };
   return (
     <View style={styles.headerBar}>
       <Button onPress={() => handlePress("Home")}>
@@ -24,6 +36,28 @@ export default props => {
           style={[styles.homeButton, colorStyle(props.children === "Home")]}
         />
       </Button>
+
+      <Button onPress={() => handlePress("Camera")}>
+        <Ionicons
+          name="md-camera"
+          size={30}
+          style={[
+            styles.homeButton,
+            styles.cameraButton,
+            colorStyle(props.children === "Camera")
+          ]}
+        />
+      </Button>
+      <Button>
+        <Text>Level: {props.userData.score}</Text>
+      </Button>
+      <Button onPress={() => handlePress("Profile")}>
+        <Image
+          source={DisplayFlag[props.userData.language].file}
+          style={{ width: 50, height: 40 }}
+        />
+      </Button>
+
       <Button onPress={() => handlePress("Profile")}>
         <Ionicons
           name="md-person"
