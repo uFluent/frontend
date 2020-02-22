@@ -8,5 +8,15 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#f4511e"
+  },
+  logoText: {
+    fontSize: 70,
+    color: "green"
+  },
+  homepageButton: {
+    padding: 10,
+    borderColor: "black",
+    width: 90,
+    height: 90
   }
 });

@@ -14,9 +14,16 @@ export default function Home() {
 
   return (
     <View style={styles.alignCenter}>
-      <Text>uFluent</Text>
-      <Buttons onPress={() => goToPage("Camera")}>Camera</Buttons>
-      <Button onPress={() => goToPage("QuizSelector")}>Games</Button>
+      <Text style={styles.logoText}>uFluent</Text>
+      <Buttons onPress={() => goToPage("Camera")} style={styles.homepageButton}>
+        Camera
+      </Buttons>
+      <Button
+        onPress={() => goToPage("QuizSelector")}
+        style={styles.homepageButton}
+      >
+        Games
+      </Button>
     </View>
   );
 }
