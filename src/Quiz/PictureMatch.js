@@ -8,7 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { getListOfWords } from "./Words";
 
-import { sayWord } from "../../api";
+import { sayWord, getGenericPicture } from "../../api";
 
 import styles from "./Quiz.Styles";
 
@@ -25,16 +25,39 @@ export default class PictureMatch extends Component {
   }
 
   getPicture = async () => {
-    const pictures = await MediaLibrary.getAssetsAsync({
-      album: "-2075771444"
-    });
-    const pic =
-      pictures.assets[Math.floor(Math.random() * pictures.assets.length)];
-    this.setState({ image: pic.uri });
+    //Decided whether to get picture from phone album or backend
+    const albumData = await MediaLibrary.getAlbumAsync("Expo");
+    const numberOfPicturesInPhone = albumData.assetCount;
+    if (Math.random() > 0.5) {
+      //Get picture from phone
+      const pictures = await MediaLibrary.getAssetsAsync({
+        album: "-2075771444"
+      });
+      const pic =
+        pictures.assets[Math.floor(Math.random() * pictures.assets.length)];
+      this.setState({ image: pic.uri, correctWord: null });
+    } else {
+      //Get picture from backend
+      const randomNum = Math.ceil(Math.random() * 10);
+      //Change number 10 on above line to match number of pictures we have in backend
+      const pic = await getGenericPicture(randomNum);
+      const imageUri = pic.pictureData;
+      const correctWord = pic.word;
+      const newWords = await getListOfWords(
+        correctWord,
+        3,
+        this.state.language
+      );
+      this.setState({
+        image: imageUri,
+        correctWord: correctWord,
+        incorrectWords: newWords
+      });
+    }
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.image !== prevState.image) {
+    if (this.state.image !== prevState.image && !this.state.correctWord) {
       this.getWord();
     }
   }
