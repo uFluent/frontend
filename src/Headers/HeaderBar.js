@@ -36,8 +36,7 @@ export default props => {
           style={[styles.homeButton, colorStyle(props.children === "Home")]}
         />
       </Button>
-
-      <Button onPress={() => handlePress("Camera")}>
+      {/* <Button onPress={() => handlePress("Camera")}>
         <Ionicons
           name="md-camera"
           size={30}
@@ -47,24 +46,26 @@ export default props => {
             colorStyle(props.children === "Camera")
           ]}
         />
-      </Button>
-      <Button>
+      </Button> */}
+      <View style={styles.profileButtons}>
         <Text>Level: {props.userData.score}</Text>
-      </Button>
-      <Button onPress={() => handlePress("Profile")}>
-        <Image
-          source={DisplayFlag[props.userData.language].file}
-          style={{ width: 50, height: 40 }}
-        />
-      </Button>
-
-      <Button onPress={() => handlePress("Profile")}>
-        <Ionicons
-          name="md-person"
-          size={30}
-          style={[styles.homeButton, colorStyle(props.children === "Profile")]}
-        />
-      </Button>
+        <Button onPress={() => handlePress("Profile")}>
+          <Image
+            source={DisplayFlag[props.userData.language].file}
+            style={{ width: 50, height: 40 }}
+          />
+        </Button>
+        <Button onPress={() => handlePress("Profile")}>
+          <Ionicons
+            name="md-person"
+            size={30}
+            style={[
+              styles.homeButton,
+              colorStyle(props.children === "Profile")
+            ]}
+          />
+        </Button>
+      </View>
     </View>
   );
 };
