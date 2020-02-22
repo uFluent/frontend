@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import Button from "react-native-button";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -14,6 +14,18 @@ export default props => {
   const navigation = useNavigation();
   const handlePress = targetPath => {
     navigation.navigate(targetPath);
+  };
+  const DisplayFlag = {
+    fr: { file: require(`../Flags/fr.png`) },
+    es: {
+      file: require(`../Flags/es.png`)
+    },
+    en: {
+      file: require(`../Flags/en.png`)
+    },
+    no: {
+      file: require(`../Flags/no.png`)
+    }
   };
   return (
     <View style={styles.headerBar}>
@@ -33,6 +45,15 @@ export default props => {
             styles.cameraButton,
             colorStyle(props.children === "Camera")
           ]}
+        />
+      </Button>
+      <Button>
+        <Text>Level: {props.userData.score}</Text>
+      </Button>
+      <Button onPress={() => handlePress("Profile")}>
+        <Image
+          source={DisplayFlag[props.userData.language].file}
+          style={{ width: 50, height: 40 }}
         />
       </Button>
       <Button onPress={() => handlePress("Profile")}>
