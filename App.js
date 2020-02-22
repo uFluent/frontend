@@ -64,7 +64,6 @@ export default class App extends React.Component {
         <ProfileLogin
           userData={this.state.userData}
           setUsername={this.setUsername}
-
         />
       );
     }
@@ -111,16 +110,6 @@ export default class App extends React.Component {
             <Stack.Screen
               name="Camera"
               component={CameraPage}
-              options={{
-                headerLeft: null,
-                headerTitle: props => (
-                  <HeaderBar {...props} userData={this.state.userData} />
-                )
-              }}
-            />
-            <Stack.Screen
-              name="QuizPicture"
-              component={QuizPicture}
               options={{
                 headerLeft: null,
                 headerTitle: props => (
