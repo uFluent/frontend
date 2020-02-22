@@ -36,6 +36,7 @@ export default props => {
           style={[styles.homeButton, colorStyle(props.children === "Home")]}
         />
       </Button>
+
       <Button onPress={() => handlePress("Camera")}>
         <Ionicons
           name="md-camera"
@@ -56,6 +57,7 @@ export default props => {
           style={{ width: 50, height: 40 }}
         />
       </Button>
+
       <Button onPress={() => handlePress("Profile")}>
         <Ionicons
           name="md-person"
@@ -63,16 +65,6 @@ export default props => {
           style={[styles.homeButton, colorStyle(props.children === "Profile")]}
         />
       </Button>
-      {/* <Button onPress={() => handlePress("QuizPicture")}>
-        <Ionicons
-          name=""
-          size={30}
-          style={[
-            styles.homeButton,
-            colorStyle(props.children === "QuizPicture")
-          ]}
-        />
-      </Button> */}
     </View>
   );
 };
