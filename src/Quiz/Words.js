@@ -39,7 +39,11 @@ export const getListOfWords = async (correctWord, number, language) => {
   for (let i = 1; i < number; i++) {
     const newWord = words[Math.floor(Math.random() * words.length)];
     const newTranslatedWord = await translateWord(newWord, language);
-    newList.push(newTranslatedWord);
+    if (newList.includes(newTranslatedWord)) {
+      i--;
+    } else {
+      newList.push(newTranslatedWord);
+    }
   }
   return newList.sort(function() {
     return 0.5 - Math.random();
