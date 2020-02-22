@@ -8,12 +8,15 @@ import styles from "./Styles";
 export default function Home() {
   const navigation = useNavigation();
 
-  const goToQuiz = () => {
-    navigation.navigate("QuizSelector");
+  const goToPage = target => {
+    navigation.navigate(target);
   };
+
   return (
     <View style={styles.alignCenter}>
-      <Button onPress={goToQuiz}>uFluent</Button>
+      <Text>uFluent</Text>
+      <Buttons onPress={() => goToPage("Camera")}>Camera</Buttons>
+      <Button onPress={() => goToPage("QuizSelector")}>Games</Button>
     </View>
   );
 }
