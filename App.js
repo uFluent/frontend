@@ -157,15 +157,21 @@ export default class App extends React.Component {
             />
             <Stack.Screen
               name="PictureMatch"
-              component={PictureMatch}
-              initialParams={{ increaseScore: this.increaseScore }}
               options={{
                 headerLeft: null,
                 headerTitle: props => (
                   <HeaderBar {...props} userData={this.state.userData} />
                 )
               }}
-            />
+            >
+              {props => (
+                <PictureMatch
+                  {...props}
+                  userData={this.state.userData}
+                  increaseScore={this.increaseScore}
+                />
+              )}
+            </Stack.Screen>
             <Stack.Screen
               name="WordMatch"
               component={WordMatch}
