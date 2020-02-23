@@ -85,6 +85,10 @@ export default class App extends React.Component {
     });
   };
 
+  //We need: a loading screen that plays when you start the app
+  //Then it checks if there is user data stored in phone - if no, goes to profileLogin
+  //If yes, sends api request for userinfo, then when it gets it goes to home page
+
   render() {
     const { isLoading, userData } = this.state;
     if (!userData) {
