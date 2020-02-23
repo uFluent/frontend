@@ -89,14 +89,6 @@ export default class PictureMatch extends Component {
     }
   };
 
-  correctGuess = () => {
-    //something happens here
-  };
-
-  wrongGuess = () => {
-    //something happens here
-  };
-
   render() {
     const styles = styleMaker(this.state);
     if (this.state.image) {

@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Button from "react-native-button";
-import { styleMaker } from "./Quiz.Styles";
+import styles from "./QuizSelector.styles";
 
 export default function QuizSelector() {
   const navigation = useNavigation();
@@ -12,9 +12,8 @@ export default function QuizSelector() {
   const goToPictureMatch = () => {
     navigation.navigate("PictureMatch");
   };
-  const styles = styleMaker();
   return (
-    <View style={styles.alignCenter}>
+    <View>
       <Button onPress={goToPictureMatch}>Picture Match</Button>
       <Button onPress={goToWordMatch}>Word Match</Button>
     </View>

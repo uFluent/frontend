@@ -2,7 +2,12 @@ import { StyleSheet, Dimensions } from "react-native";
 
 const { width: winWidth, height: winHeight } = Dimensions.get("window");
 
-export const styleMaker = (saved, word) => {
+export const styleMaker = state => {
+  let pictureOpacity = 1;
+  if (state.guess !== null) {
+    pictureOpacity = 0.4;
+  }
+
   return StyleSheet.create({
     screen: {
       display: "flex",
@@ -23,7 +28,8 @@ export const styleMaker = (saved, word) => {
     picture: {
       resizeMode: "cover",
       height: 200,
-      minWidth: 200
+      minWidth: 200,
+      opacity: pictureOpacity
     },
     options: {
       display: "flex",
