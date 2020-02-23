@@ -8,7 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { getListOfWords } from "./Words";
 
-import { sayWord, getGenericPicture } from "../../api";
+import { sayWord, getGenericPicture, translateWord } from "../../api";
 
 import styles from "./Quiz.Styles";
 
@@ -16,8 +16,10 @@ export default class PictureMatch extends Component {
   state = {
     image: null,
     correctWord: null,
+    translatedCorrectWord: null,
     incorrectWords: [],
-    language: "es"
+    language: "es",
+    guess: null
   };
 
   componentDidMount() {
@@ -51,7 +53,8 @@ export default class PictureMatch extends Component {
       this.setState({
         image: imageUri,
         correctWord: correctWord,
-        incorrectWords: newWords
+        incorrectWords: newWords[0],
+        translatedCorrectWord: newWords[1]
       });
     }
   };
@@ -70,17 +73,19 @@ export default class PictureMatch extends Component {
     //The name of the directory keeps changing somehow! ^^^
     const newWords = await getListOfWords(correctWord, 3, this.state.language);
     //Change second argument in this function to reference the user level ^^^
+
     this.setState({
       correctWord: correctWord,
-      incorrectWords: newWords
+      incorrectWords: newWords[0],
+      translatedCorrectWord: newWords[1]
     });
   };
 
   guessWord = word => {
     if (word === this.state.correctWord) {
-      this.correctGuess();
+      this.setState({ guess: "correct" });
     } else {
-      this.wrongGuess();
+      this.setState({ guess: "incorrect" });
     }
   };
 
@@ -100,14 +105,35 @@ export default class PictureMatch extends Component {
           <Image source={{ uri: this.state.image }} style={styles.picture} />
           <View style={styles.options}>
             {this.state.incorrectWords.map(word => {
+              {
+                console.log(word, this.state.translatedCorrectWord);
+              }
               return (
-                <View style={styles.wordOption} key={word}>
-                  <Button onPress={() => this.guessWord(word)}>{word}</Button>
-                  <View style={styles.speakWord}>
-                    <Button onPress={() => sayWord(word, this.state.language)}>
-                      <Ionicons name="md-megaphone" size={30} />
-                    </Button>
-                  </View>
+                <View
+                  style={
+                    !this.state.guess
+                      ? styles.wordOption
+                      : this.state.translatedCorrectWord === word
+                      ? { ...styles.wordOption, ...styles.correctGuess }
+                      : { ...styles.wordOption, ...styles.incorrectGuess }
+                  }
+                  key={word}
+                >
+                  <Button
+                    onPress={() => this.guessWord(word)}
+                    disabled={this.state.guess !== null}
+                  >
+                    {word}
+                  </Button>
+                  {!this.state.guess && (
+                    <View style={styles.speakWord}>
+                      <Button
+                        onPress={() => sayWord(word, this.state.language)}
+                      >
+                        <Ionicons name="md-megaphone" size={30} />
+                      </Button>
+                    </View>
+                  )}
                 </View>
               );
             })}

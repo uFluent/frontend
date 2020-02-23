@@ -45,7 +45,10 @@ export const getListOfWords = async (correctWord, number, language) => {
       newList.push(newTranslatedWord);
     }
   }
-  return newList.sort(function() {
-    return 0.5 - Math.random();
-  });
+  return [
+    newList.sort(function() {
+      return 0.5 - Math.random();
+    }),
+    translatedCorrectWord
+  ];
 };
