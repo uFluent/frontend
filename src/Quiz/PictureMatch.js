@@ -47,10 +47,10 @@ export default class PictureMatch extends Component {
       const imageUri = pic.pictureData;
       const correctWord = pic.word;
       const num = this.props.userData.score;
-      if (num > 4) num = 4;
+      if (num > 3) num = 3;
       const newWords = await getListOfWords(
         correctWord,
-        num + 1,
+        num + 2,
         this.state.language
       );
       this.setState({
@@ -81,10 +81,10 @@ export default class PictureMatch extends Component {
     );
     //The name of the directory keeps changing somehow! ^^^
     let num = this.props.userData.score;
-    if (num > 4) num = 4;
+    if (num > 3) num = 3;
     const newWords = await getListOfWords(
       correctWord,
-      num + 1,
+      num + 2,
       this.state.language
     );
     //Change second argument in this function to reference the user level ^^^

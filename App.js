@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { AsyncStorage } from "react-native";
 
 import QuizSelector from "./src/Quiz/QuizSelector";
 import Home from "./src/Home";
@@ -44,11 +45,22 @@ export default class App extends React.Component {
     });
   };
 
-  componentDidUpdate() {
-    console.log(this.state.userData);
-  }
+  getUserFromLocalStorage = async () => {
+    const username = await AsyncStorage.getItem("username");
+    if (username)
+      this.setState({
+        userData: {
+          username: username,
+          avatarUrl: "https://picsum.photos/id/237/200/300",
+          language: "fr",
+          score: 0,
+          imageCount: 3
+        }
+      });
+  };
 
   componentDidMount() {
+    this.getUserFromLocalStorage();
     //hard code data in, should be api request
     this.setState({
       // userData: { // IF YOU DONT WANT TO LOG IN ALL THE TIME ADD THIS IS
@@ -63,7 +75,6 @@ export default class App extends React.Component {
   }
 
   increaseScore = () => {
-    console.log("here");
     this.setState(currentState => {
       return {
         userData: {
@@ -75,7 +86,6 @@ export default class App extends React.Component {
   };
 
   render() {
-    console.log(this.state.userData.score);
     const { isLoading, userData } = this.state;
     if (!userData) {
       return (
