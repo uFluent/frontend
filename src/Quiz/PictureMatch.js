@@ -19,7 +19,8 @@ export default class PictureMatch extends Component {
     translatedCorrectWord: null,
     incorrectWords: [],
     language: "es",
-    guess: null
+    guess: null,
+    guessedWord: null
   };
 
   componentDidMount() {
@@ -88,10 +89,10 @@ export default class PictureMatch extends Component {
   };
 
   guessWord = word => {
-    if (word === this.state.correctWord) {
+    if (word === this.state.translatedCorrectWord) {
       this.setState({ guess: "correct" });
     } else {
-      this.setState({ guess: "incorrect" });
+      this.setState({ guess: "incorrect", guessedWord: word });
     }
   };
 
@@ -101,6 +102,12 @@ export default class PictureMatch extends Component {
 
   render() {
     const styles = styleMaker(this.state);
+
+    let feedback = "Great!";
+    if (this.state.guess === "incorrect") {
+      feedback = "Not quite!";
+    }
+
     if (this.state.image) {
       return (
         <View style={styles.screen}>
@@ -109,7 +116,7 @@ export default class PictureMatch extends Component {
             <Image source={{ uri: this.state.image }} style={styles.picture} />
             {this.state.guess !== null && (
               <View style={styles.pictureOverlay}>
-                <Text style={styles.guessConfirmationText}>Great!</Text>
+                <Text style={styles.guessConfirmationText}>{feedback}</Text>
                 <View style={styles.speakWord}>
                   <Button
                     onPress={() =>
@@ -137,7 +144,9 @@ export default class PictureMatch extends Component {
                       ? styles.wordOption
                       : this.state.translatedCorrectWord === word
                       ? { ...styles.wordOption, ...styles.correctGuess }
-                      : { ...styles.wordOption, ...styles.incorrectGuess }
+                      : this.state.guessedWord === word
+                      ? { ...styles.wordOption, ...styles.incorrectGuess }
+                      : { ...styles.wordOption, ...styles.otherGuess }
                   }
                   key={word}
                 >

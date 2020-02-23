@@ -8,6 +8,9 @@ export const styleMaker = state => {
     pictureOpacity = 0;
   }
 
+  let feedbackColour = "green";
+  if (state.guess === "incorrect") feedbackColour = "red";
+
   return StyleSheet.create({
     screen: {
       display: "flex",
@@ -60,11 +63,12 @@ export const styleMaker = state => {
       backgroundColor: "green"
     },
     incorrectGuess: {
-      opacity: 0.5
+      backgroundColor: "orange"
     },
+    otherGuess: { opacity: 0.5 },
     guessConfirmationText: {
       fontSize: 40,
-      color: "green"
+      color: feedbackColour
     },
     speakWord: {
       backgroundColor: "orange",
