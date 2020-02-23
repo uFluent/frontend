@@ -36,7 +36,6 @@ export const getGenericPicture = num => {
   return axios
     .get(`https://ufluent.herokuapp.com/api/pictures/${num}`)
     .then(result => {
-      console.log("in api", result);
       return result.data.picture;
     })
     .catch(err => {

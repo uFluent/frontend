@@ -29,7 +29,23 @@ export const words = [
   "couch",
   "doll",
   "car",
-  "bus"
+  "bus",
+  "pineapple",
+  "orange",
+  "lemon",
+  "lime",
+  "pencil",
+  "pen",
+  "eraser",
+  "tissue",
+  "drink",
+  "bubble",
+  "wallet",
+  "library",
+  "paper",
+  "fox",
+  "branch",
+  "tree"
 ];
 
 export const getListOfWords = async (correctWord, number, language) => {
@@ -45,7 +61,10 @@ export const getListOfWords = async (correctWord, number, language) => {
       newList.push(newTranslatedWord);
     }
   }
-  return newList.sort(function() {
-    return 0.5 - Math.random();
-  });
+  return [
+    newList.sort(function() {
+      return 0.5 - Math.random();
+    }),
+    translatedCorrectWord
+  ];
 };

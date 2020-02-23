@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import ModalDropdown from "react-native-modal-dropdown";
+import { AsyncStorage } from "react-native";
 
 export default class ProfileLogin extends React.Component {
   state = {
@@ -21,7 +22,7 @@ export default class ProfileLogin extends React.Component {
     userData: ""
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
     const regex = new RegExp("^[a-zA-Z0-9]+$");
     const word = this.state.text;
@@ -30,6 +31,8 @@ export default class ProfileLogin extends React.Component {
     } else {
       this.props.setUsername(this.state.text);
       this.setState({ submittedUser: this.state.text, text: "" });
+      //Save username to local storage
+      await AsyncStorage.setItem("username", this.state.text);
     }
   };
 
@@ -38,10 +41,12 @@ export default class ProfileLogin extends React.Component {
   }
 
   componentDidUpdate(prevProp, prevState) {
-    if (this.state.submittedUser !== prevState.submittedUser)
+    if (this.state.submittedUser !== prevState.submittedUser) {
+      console.log("oh no");
       this.setState({
         userData: { ...this.state.userData, username: this.state.submittedUser }
-      }); //this will replace the user temp with the name of the user that is submitted, then at the same time there should be a post reqest to the backend database.
+      });
+    } //this will replace the user temp with the name of the user that is submitted, then at the same time there should be a post reqest to the backend database.
   }
 
   render(props) {

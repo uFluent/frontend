@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { AsyncStorage } from "react-native";
 
 import QuizSelector from "./src/Quiz/QuizSelector";
 import Home from "./src/Home";
@@ -23,12 +24,13 @@ export default class App extends React.Component {
   };
 
   setUsername = setUsername => {
+    console.log("username set");
     this.setState({
       userData: {
         username: setUsername,
         avatarUrl: "https://picsum.photos/id/237/200/300",
         language: "fr",
-        score: 100,
+        score: 0,
         imageCount: 3
       }
     });
@@ -43,7 +45,22 @@ export default class App extends React.Component {
     });
   };
 
+  getUserFromLocalStorage = async () => {
+    const username = await AsyncStorage.getItem("username");
+    if (username)
+      this.setState({
+        userData: {
+          username: username,
+          avatarUrl: "https://picsum.photos/id/237/200/300",
+          language: "fr",
+          score: 0,
+          imageCount: 3
+        }
+      });
+  };
+
   componentDidMount() {
+    this.getUserFromLocalStorage();
     //hard code data in, should be api request
     this.setState({
       // userData: { // IF YOU DONT WANT TO LOG IN ALL THE TIME ADD THIS IS
@@ -56,6 +73,21 @@ export default class App extends React.Component {
       isLoading: false
     });
   }
+
+  increaseScore = () => {
+    this.setState(currentState => {
+      return {
+        userData: {
+          ...currentState.userData,
+          score: currentState.userData.score + 1
+        }
+      };
+    });
+  };
+
+  //We need: a loading screen that plays when you start the app
+  //Then it checks if there is user data stored in phone - if no, goes to profileLogin
+  //If yes, sends api request for userinfo, then when it gets it goes to home page
 
   render() {
     const { isLoading, userData } = this.state;
@@ -139,14 +171,21 @@ export default class App extends React.Component {
             />
             <Stack.Screen
               name="PictureMatch"
-              component={PictureMatch}
               options={{
                 headerLeft: null,
                 headerTitle: props => (
                   <HeaderBar {...props} userData={this.state.userData} />
                 )
               }}
-            />
+            >
+              {props => (
+                <PictureMatch
+                  {...props}
+                  userData={this.state.userData}
+                  increaseScore={this.increaseScore}
+                />
+              )}
+            </Stack.Screen>
             <Stack.Screen
               name="WordMatch"
               component={WordMatch}
