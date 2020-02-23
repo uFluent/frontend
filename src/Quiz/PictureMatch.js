@@ -63,6 +63,12 @@ export default class PictureMatch extends Component {
     if (this.state.image !== prevState.image && !this.state.correctWord) {
       this.getWord();
     }
+    if (
+      this.state.correctWord !== prevState.correctWord &&
+      this.state.incorrectWords[0] !== prevState.incorrectWords[0]
+    ) {
+      this.setState({ guess: null });
+    }
   }
 
   getWord = async () => {
@@ -89,6 +95,10 @@ export default class PictureMatch extends Component {
     }
   };
 
+  nextWord = () => {
+    this.getPicture();
+  };
+
   render() {
     const styles = styleMaker(this.state);
     if (this.state.image) {
@@ -98,7 +108,24 @@ export default class PictureMatch extends Component {
           <View style={styles.pictureContainer}>
             <Image source={{ uri: this.state.image }} style={styles.picture} />
             {this.state.guess !== null && (
-              <Text style={styles.guessConfirmationText}>Great!</Text>
+              <View style={styles.pictureOverlay}>
+                <Text style={styles.guessConfirmationText}>Great!</Text>
+                <View style={styles.speakWord}>
+                  <Button
+                    onPress={() =>
+                      sayWord(
+                        this.state.translatedCorrectWord,
+                        this.state.language
+                      )
+                    }
+                  >
+                    <Ionicons name="md-megaphone" size={30} />
+                  </Button>
+                </View>
+                <Button style={styles.nextButton} onPress={this.nextWord}>
+                  Next
+                </Button>
+              </View>
             )}
           </View>
           <View style={styles.options}>

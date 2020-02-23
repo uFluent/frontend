@@ -29,7 +29,23 @@ export const words = [
   "couch",
   "doll",
   "car",
-  "bus"
+  "bus",
+  "pineapple",
+  "orange",
+  "lemon",
+  "lime",
+  "pencil",
+  "pen",
+  "eraser",
+  "tissue",
+  "drink",
+  "bubble",
+  "wallet",
+  "library",
+  "paper",
+  "fox",
+  "branch",
+  "tree"
 ];
 
 export const getListOfWords = async (correctWord, number, language) => {

@@ -5,7 +5,7 @@ const { width: winWidth, height: winHeight } = Dimensions.get("window");
 export const styleMaker = state => {
   let pictureOpacity = 1;
   if (state.guess !== null) {
-    pictureOpacity = 0.4;
+    pictureOpacity = 0;
   }
 
   return StyleSheet.create({
@@ -18,18 +18,26 @@ export const styleMaker = state => {
     },
     title: {},
     pictureContainer: {
-      display: "flex",
-      justifyContent: "space-evenly",
-      alignItems: "center",
       height: 200,
       width: 200,
-      flexDirection: "column"
+      position: "relative"
+    },
+    pictureOverlay: {
+      height: 200,
+      width: 200,
+      position: "absolute",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "space-around"
     },
     picture: {
       resizeMode: "cover",
       height: 200,
       minWidth: 200,
-      opacity: pictureOpacity
+      opacity: pictureOpacity,
+      zIndex: -10,
+      position: "absolute"
     },
     options: {
       display: "flex",
@@ -56,9 +64,7 @@ export const styleMaker = state => {
     },
     guessConfirmationText: {
       fontSize: 40,
-      color: "green",
-      zIndex: 10,
-      position: "absolute"
+      color: "green"
     },
     speakWord: {
       backgroundColor: "orange",
