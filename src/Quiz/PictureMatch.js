@@ -10,7 +10,7 @@ import { getListOfWords } from "./Words";
 
 import { sayWord, getGenericPicture, translateWord } from "../../api";
 
-import styles from "./Quiz.Styles";
+import { styleMaker } from "./Quiz.Styles";
 
 export default class PictureMatch extends Component {
   state = {
@@ -98,16 +98,19 @@ export default class PictureMatch extends Component {
   };
 
   render() {
+    const styles = styleMaker(this.state);
     if (this.state.image) {
       return (
         <View style={styles.screen}>
           <Text>Picture Match</Text>
-          <Image source={{ uri: this.state.image }} style={styles.picture} />
+          <View style={styles.pictureContainer}>
+            <Image source={{ uri: this.state.image }} style={styles.picture} />
+            {this.state.guess !== null && (
+              <Text style={styles.guessConfirmationText}>Great!</Text>
+            )}
+          </View>
           <View style={styles.options}>
             {this.state.incorrectWords.map(word => {
-              {
-                console.log(word, this.state.translatedCorrectWord);
-              }
               return (
                 <View
                   style={
