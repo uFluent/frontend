@@ -23,12 +23,13 @@ export default class App extends React.Component {
   };
 
   setUsername = setUsername => {
+    console.log("username set");
     this.setState({
       userData: {
         username: setUsername,
         avatarUrl: "https://picsum.photos/id/237/200/300",
         language: "fr",
-        score: 100,
+        score: 0,
         imageCount: 3
       }
     });
@@ -42,6 +43,10 @@ export default class App extends React.Component {
       userData: { ...this.state.userData, language: language }
     });
   };
+
+  componentDidUpdate() {
+    console.log(this.state.userData);
+  }
 
   componentDidMount() {
     //hard code data in, should be api request
@@ -57,7 +62,20 @@ export default class App extends React.Component {
     });
   }
 
+  increaseScore = () => {
+    console.log("here");
+    this.setState(currentState => {
+      return {
+        userData: {
+          ...currentState.userData,
+          score: currentState.userData.score + 1
+        }
+      };
+    });
+  };
+
   render() {
+    console.log(this.state.userData.score);
     const { isLoading, userData } = this.state;
     if (!userData) {
       return (
@@ -140,6 +158,7 @@ export default class App extends React.Component {
             <Stack.Screen
               name="PictureMatch"
               component={PictureMatch}
+              initialParams={{ increaseScore: this.increaseScore }}
               options={{
                 headerLeft: null,
                 headerTitle: props => (

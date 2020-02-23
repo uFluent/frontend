@@ -91,6 +91,7 @@ export default class PictureMatch extends Component {
   guessWord = word => {
     if (word === this.state.translatedCorrectWord) {
       this.setState({ guess: "correct" });
+      this.props.route.params.increaseScore();
     } else {
       this.setState({ guess: "incorrect", guessedWord: word });
     }

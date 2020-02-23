@@ -38,10 +38,12 @@ export default class ProfileLogin extends React.Component {
   }
 
   componentDidUpdate(prevProp, prevState) {
-    if (this.state.submittedUser !== prevState.submittedUser)
+    if (this.state.submittedUser !== prevState.submittedUser) {
+      console.log("oh no");
       this.setState({
         userData: { ...this.state.userData, username: this.state.submittedUser }
-      }); //this will replace the user temp with the name of the user that is submitted, then at the same time there should be a post reqest to the backend database.
+      });
+    } //this will replace the user temp with the name of the user that is submitted, then at the same time there should be a post reqest to the backend database.
   }
 
   render(props) {
