@@ -27,9 +27,13 @@ export const sayWord = (word, language) => {
 };
 
 export const getPictureData = base64 => {
-  return axios.post("url", { base64 }).then(results => {
-    return results;
-  });
+  let img = new FormData();
+  img.append("file", { uri: base64 });
+  return axios
+    .post("https://ufluent.herokuapp.com/api/pictures/", { data: img })
+    .then(results => {
+      console.log(results);
+    });
 };
 
 export const getUser = username => {
@@ -95,6 +99,3 @@ export const getGenericPicture = num => {
       console.log(err);
     });
 };
-
-
-
