@@ -18,7 +18,7 @@ export default class Gallery extends React.Component {
     saved: false,
     word: null,
     fontSize: 50,
-    englishWord:null
+    englishWord: null
   };
 
   savePhoto = async uri => {
@@ -37,7 +37,7 @@ export default class Gallery extends React.Component {
   };
 
   speakWord = () => {
-    sayWord(this.state.word, "es");
+    sayWord(this.state.word, this.props.userData.language);
   };
 
   componentDidMount() {
@@ -45,7 +45,7 @@ export default class Gallery extends React.Component {
     // const photoInfo = getPictureData(this.state.photoData.base64);
     setTimeout(() => {
       const englishWord = "elephant";
-      translateWord("elephant", "es").then(result => {
+      translateWord("elephant", this.props.userData.language).then(result => {
         this.setState({
           word: result,
           englishWord: englishWord
@@ -61,6 +61,7 @@ export default class Gallery extends React.Component {
   }
 
   render() {
+    console.log(this.props.userData);
     const styles = styleMaker(this.state.saved, this.state.word);
     return (
       <React.Fragment>

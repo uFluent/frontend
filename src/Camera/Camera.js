@@ -89,6 +89,7 @@ export class CameraPage extends React.Component {
           <Gallery
             photoData={this.state.captures[0]}
             returnToCamera={this.returnToCamera}
+            userData={this.props.userData}
           />
         </View>
       );

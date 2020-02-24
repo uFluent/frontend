@@ -145,24 +145,29 @@ export default class App extends React.Component {
             />
             <Stack.Screen
               name="Camera"
-              component={CameraPage}
               options={{
                 headerLeft: null,
                 headerTitle: props => (
                   <HeaderBar {...props} userData={this.state.userData} />
                 )
               }}
-            />
+            >
+              {props => (
+                <CameraPage {...props} userData={this.state.userData} />
+              )}
+            </Stack.Screen>
+
             <Stack.Screen
               name="Gallery"
-              component={Gallery}
               options={{
                 headerLeft: null,
                 headerTitle: props => (
                   <HeaderBar {...props} userData={this.state.userData} />
                 )
               }}
-            />
+            >
+              {props => <Gallery {...props} userData={this.state.userData} />}
+            </Stack.Screen>
             <Stack.Screen
               name="QuizSelector"
               component={QuizSelector}
@@ -192,14 +197,21 @@ export default class App extends React.Component {
             </Stack.Screen>
             <Stack.Screen
               name="WordMatch"
-              component={WordMatch}
               options={{
                 headerLeft: null,
                 headerTitle: props => (
                   <HeaderBar {...props} userData={this.state.userData} />
                 )
               }}
-            />
+            >
+              {props => (
+                <WordMatch
+                  {...props}
+                  userData={this.state.userData}
+                  increaseScore={this.increaseScore}
+                />
+              )}
+            </Stack.Screen>
           </Stack.Navigator>
         </NavigationContainer>
       );
