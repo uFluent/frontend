@@ -32,6 +32,59 @@ export const getPictureData = base64 => {
   });
 };
 
+export const getUser = username => {
+  return fetch(`http://ufluent.herokuapp.com/api/users/${username}/`)
+    .then(response => response.json())
+    .then(responseJson => {
+      return responseJson;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+};
+
+export const postUser = username => {
+  return fetch(`http://ufluent.herokuapp.com/api/users/`, {
+    method: "POST",
+    body: JSON.stringify({ username: username, language: "en" })
+  }).then(function(res) {
+    return res
+      .json()
+      .then(function(data) {
+        return data;
+      })
+      .catch(error => {
+        return { status: 400, msg: "User already taken" };
+      });
+  });
+};
+
+export const patchUser = (username, language) => {
+  //GET A NETWORK REQUEST FAILED, issue with backend?
+  return fetch(`http://ufluent.herokuapp.com/api/users/test123`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      avatarUrl: "https://picsum.photos/id/237/200/300",
+      language: "fr"
+    })
+  })
+    .then(function(res) {
+      console.log(res, "<<<res??");
+      return res.json();
+    })
+    .then(responseJson => {
+      console.log(responseJson, "<< res JSON");
+      return responseJson;
+    })
+    .catch(error => {
+      console.log(error);
+      console.log("in the error");
+    });
+};
+// avatarUrl: "https://picsum.photos/id/237/200/300",
+// score: 2,
+// img_id: 1
+
 export const getGenericPicture = num => {
   return axios
     .get(`https://ufluent.herokuapp.com/api/pictures/${num}`)
@@ -43,20 +96,5 @@ export const getGenericPicture = num => {
     });
 };
 
-export const postUsername = name => {
-  return axios
-    .post(`https://ufluent.herokuapp.com/api/users/`, {
-      username: name,
-      language: "en"
-    })
-    .then(result => {
-      console.log(result);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-};
 
-export const getUserData = name => {};
 
-export const patchUserData = (language, avatar_url, score, img_id) => {};
