@@ -19,7 +19,7 @@ import * as api from "../../api";
 export default class ProfileLogin extends React.Component {
   state = {
     text: "",
-    submittedUser: "test",
+    // submittedUser: "",
     userData: "",
     newUser: true
   };
@@ -35,12 +35,12 @@ export default class ProfileLogin extends React.Component {
         if (res.status) {
           return Alert.alert(res.msg);
         } else {
-          // AsyncStorage.setItem("username", this.state.text);
+          AsyncStorage.setItem("username", this.state.text);
           this.props.setUsername(this.state.text, res);
-          this.setState({
-            submittedUser: this.state.text,
-            text: ""
-          });
+          // this.setState({
+          //   submittedUser: this.state.text,
+          //   text: ""
+          // });
         }
       });
     }
@@ -57,12 +57,12 @@ export default class ProfileLogin extends React.Component {
         if (res.status) {
           return Alert.alert(res.msg);
         } else {
-          // AsyncStorage.setItem("username", this.state.text);
+          AsyncStorage.setItem("username", this.state.text);
           this.props.setUsername(this.state.text, res);
-          this.setState({
-            submittedUser: this.state.text,
-            text: ""
-          });
+          // this.setState({
+          //   submittedUser: this.state.text,
+          //   text: ""
+          // });
         }
       });
     }
@@ -80,16 +80,16 @@ export default class ProfileLogin extends React.Component {
     this.setState({ userData: this.props.userData });
   }
 
-  componentDidUpdate(prevProp, prevState) {
-    if (this.state.submittedUser !== prevState.submittedUser) {
-      this.setState({
-        userData: {
-          ...this.state.userData,
-          username: this.state.submittedUser
-        }
-      }); //this will replace the user temp with the name of the user that is submitted, then at the same time there should be a post reqest to the backend database.
-    }
-  }
+  // componentDidUpdate(prevProp, prevState) {
+  //   if (this.state.submittedUser !== prevState.submittedUser) {
+  //     this.setState({
+  //       userData: {
+  //         ...this.state.userData,
+  //         username: this.state.submittedUser
+  //       }
+  //     }); //this will replace the user temp with the name of the user that is submitted, then at the same time there should be a post reqest to the backend database.
+  //   }
+  // }
 
   render(props) {
     const { userData, newUser } = this.state;
