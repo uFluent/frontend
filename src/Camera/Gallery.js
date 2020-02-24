@@ -42,7 +42,7 @@ export default class Gallery extends React.Component {
 
   componentDidMount() {
     //This is causing a memory leak!!!!!
-    // const photoInfo = getPictureData(this.state.photoData.base64);
+    const photoInfo = getPictureData(this.state.photoData.base64);
     setTimeout(() => {
       const englishWord = "elephant";
       translateWord("elephant", this.props.userData.language).then(result => {
