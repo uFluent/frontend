@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Button from "react-native-button";
 // import styles from "./QuizSelector.styles";
@@ -16,6 +16,7 @@ export default function QuizSelector() {
     navigation.navigate("PictureMatch");
   };
   return (
+
     <View style={styles.alignCenter}>
       <SimpleAnimation
         delay={500}
@@ -61,6 +62,7 @@ export default function QuizSelector() {
           Word Match
         </AwesomeButtonCartman>
       </SimpleAnimation>
+
     </View>
   );
 }

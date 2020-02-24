@@ -28,52 +28,39 @@ export default class App extends React.Component {
   };
 
   setUsername = (setUsername, data) => {
-    console.log(setUsername, data, "<<<in the app setUsername");
     this.setState({ userData: data.user, userName: setUsername });
+  };
 
-    // this.setState({
-    //   userName: setUsername
-    //   // userData: {
-    //   //   username: setUsername,
-    //   //   avatarUrl: "https://picsum.photos/id/237/200/300",
-    //   //   language: "fr",
-    //   //   score: 100,
-    //   //   imageCount: 3
-    //   // }
-    // });
-
-    // this.setState({
-    //   userData: { ...this.state.userData, username: setUsername }
-    // }); //USE THIS WHEN WE ARE ABLE TO API REQUEST FROM BACKEND, RATHER THAN HAVE THE ABOVE
+  updatePicture = url => {
+    api
+      .patchUser(this.state.userName, this.state.userData.language, url)
+      .then(res => {
+        this.setState({
+          userData: { ...this.state.userData, avatarUrl: res.user.avatarUrl }
+        });
+      });
   };
 
   setLanguage = lang => {
-    this.setState({
-      userData: { ...this.state.userData, language: lang }
+    api.patchUser(this.state.userName, lang).then(res => {
+      this.setState({
+        userData: { ...this.state.userData, language: lang }
+      });
     });
   };
 
-  // getUserFromLocalStorage = async () => {
-  //   const username = await AsyncStorage.getItem("username");
-  //   if (username)
-  //     this.setState({
-  //       userName: username
-  //     });
-  // };
+
+  getUserFromLocalStorage = async () => {
+    const username = await AsyncStorage.getItem("username");
+    if (username)
+      this.setState({
+        userName: username
+      });
+  };
+
 
   componentDidMount() {
-    // this.getUserFromLocalStorage();
-    //hard code data in, should be api request
-    // this.setState({
-    //   // userData: { // IF YOU DONT WANT TO LOG IN ALL THE TIME ADD THIS IS
-    //   //   username: "bob123",
-    //   //   avatarUrl: "https://picsum.photos/id/237/200/300",
-    //   //   language: "fr",
-    //   //   score: 100,
-    //   //   imageCount: 3
-    //   // },
-    //   isLoading: false
-    // });
+    this.getUserFromLocalStorage();
   }
 
   // componentDidUpdate(prevProps, prevState) {
@@ -92,11 +79,19 @@ export default class App extends React.Component {
         }
       };
     });
+
+    api.patchLevel(this.state.userName, 1).then(res => {
+      console.log("success added one score");
+    });
   };
 
-  //We need: a loading screen that plays when you start the app
-  //Then it checks if there is user data stored in phone - if no, goes to profileLogin
-  //If yes, sends api request for userinfo, then when it gets it goes to home page
+  getUserData = async () => {
+    await api.getUser(this.state.userName).then(res => {
+      this.setState({
+        userData: res.user
+      });
+    });
+  };
 
   render() {
     const { isLoading, userData, userName } = this.state;
@@ -107,10 +102,13 @@ export default class App extends React.Component {
           setUsername={this.setUsername}
         />
       );
+    }
+    if (userData === "" && userName !== "") {
+      this.getUserData();
+      return <Text>Loading Data...</Text>;
     } else {
       return (
         <NavigationContainer>
-          {console.log(userData.language, "<<< checking in app")}
           <Stack.Navigator
             screenOptions={{
               headerStyle: {
@@ -138,7 +136,8 @@ export default class App extends React.Component {
               initialParams={{
                 userName: this.state.userName,
                 userData: this.state.userData,
-                setLanguage: this.setLanguage
+                setLanguage: this.setLanguage,
+                updatePicture: this.updatePicture
               }}
               options={{
                 headerLeft: null,

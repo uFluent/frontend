@@ -22,9 +22,10 @@ export default class PictureMatch extends Component {
     correctWord: null,
     translatedCorrectWord: null,
     incorrectWords: [],
-    language: "es",
+    language: this.props.userData.language,
     guess: null,
-    guessedWord: null
+    guessedWord: null,
+    disabledNext: false
   };
 
   componentDidMount() {
@@ -35,17 +36,18 @@ export default class PictureMatch extends Component {
     //Decided whether to get picture from phone album or backend
     const albumData = await MediaLibrary.getAlbumAsync("Expo");
     const numberOfPicturesInPhone = albumData.assetCount;
-    if (Math.random() > 0.5) {
+    if (Math.random() > (1 / numberOfPicturesInPhone) * 2) {
       //Get picture from phone
       const pictures = await MediaLibrary.getAssetsAsync({
         album: "-2075771444"
       });
       const pic =
         pictures.assets[Math.floor(Math.random() * pictures.assets.length)];
+      console.log(pic.uri);
       this.setState({ image: pic.uri, correctWord: null });
     } else {
       //Get picture from backend
-      const randomNum = Math.ceil(Math.random() * 10);
+      const randomNum = Math.ceil(Math.random() * 80);
       //Change number 10 on above line to match number of pictures we have in backend
       const pic = await getGenericPicture(randomNum);
       const imageUri = pic.pictureData;
@@ -61,7 +63,8 @@ export default class PictureMatch extends Component {
         image: imageUri,
         correctWord: correctWord,
         incorrectWords: newWords[0],
-        translatedCorrectWord: newWords[1]
+        translatedCorrectWord: newWords[1],
+        disabledNext: false
       });
     }
   };
@@ -96,7 +99,8 @@ export default class PictureMatch extends Component {
     this.setState({
       correctWord: correctWord,
       incorrectWords: newWords[0],
-      translatedCorrectWord: newWords[1]
+      translatedCorrectWord: newWords[1],
+      disabledNext: false
     });
   };
 
@@ -110,6 +114,7 @@ export default class PictureMatch extends Component {
   };
 
   nextWord = () => {
+    this.setState({ disabledNext: true });
     this.getPicture();
   };
 
@@ -142,7 +147,11 @@ export default class PictureMatch extends Component {
                     <Ionicons name="md-megaphone" size={30} />
                   </Button>
                 </View>
-                <Button style={styles.nextButton} onPress={this.nextWord}>
+                <Button
+                  style={styles.nextButton}
+                  onPress={this.nextWord}
+                  disabled={this.state.disabledNext}
+                >
                   Next
                 </Button>
               </View>

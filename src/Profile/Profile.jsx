@@ -40,25 +40,25 @@ export default class Profile extends React.Component {
         en: require(`./Flags/en.png`),
         no: require(`./Flags/no.png`)
       },
-      // userData: {
-      //   username: "bob123",
-      //   avatarUrl: "https://picsum.photos/id/237/200/300",
-      //   language: "fr",
-      //   score: 100,
-      //   imageCount: 3
-      // }
-      userData: ""
+      userData: "",
+      avatarUrl: {
+        0: "https://i.picsum.photos/id/1062/250/250.jpg",
+        1: "https://i.picsum.photos/id/1003/250/250.jpg",
+        2: "https://i.picsum.photos/id/1025/250/250.jpg",
+        3: "https://i.picsum.photos/id/1074/250/250.jpg",
+        4: "https://edaid-live.s3.amazonaws.com/filestore/images/manual/northcoders-appeal-view.png",
+        5: "https://purr.objects-us-east-1.dream.io/i/QlS3V.jpg"
+      }
     };
   }
 
   componentDidMount() {
-    console.log(this.props.route.params.userData);
     this.setState({
       userData: this.props.route.params.userData
     });
   }
 
-  render() {
+render() {
     const { DisplayFlag, userData } = this.state;
     const { userName } = this.props.route.params;
 
@@ -72,11 +72,14 @@ export default class Profile extends React.Component {
           distance={20}
           // friction={4}
         >
-          <Image
-            source={{ uri: userData.avatarUrl }}
-            style={styles.imageProfile}
-          />
+          <TouchableOpacity onPress={this.updatePicture}>
+            <Image
+              source={{ uri: userData.avatarUrl }}
+              style={styles.imageProfile}
+            />
+          </TouchableOpacity>
         </SimpleAnimation>
+
         <View>
           <SimpleAnimation
             delay={1000}
@@ -130,6 +133,7 @@ export default class Profile extends React.Component {
             </View>
           </SimpleAnimation>
         </View>
+
         <View>
           <SimpleAnimation
             delay={1000}
@@ -140,24 +144,24 @@ export default class Profile extends React.Component {
             distance={70}
           >
             <View style={styles.sections}>
-              <Text style={styles.text}>Score: {userData.score}</Text>
+              <Text style={styles.text}>Level: {userData.score}</Text>
             </View>
           </SimpleAnimation>
         </View>
-
-        <Text>{userData.language}</Text>
-
-        <Text>Language: {this.displayCountry()}</Text>
-        <Button onPress={this.updateLanguage} title="Update Profile!"></Button>
       </View>
     );
   }
 
-  updateLanguage = event => {
+  updatePicture = event => {
     event.preventDefault();
-    api.patchUser().then(res => {
-      console.log(res, "< res in profile");
+    let number = Math.floor(Math.random() * 6);
+    this.setState({
+      userData: {
+        ...this.state.userData,
+        avatarUrl: this.state.avatarUrl[number]
+      }
     });
+    this.props.route.params.updatePicture(this.state.avatarUrl[number]);
   };
 
   displayCountry = () => {
