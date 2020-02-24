@@ -13,6 +13,7 @@ import HeaderBar from "./src/Headers/HeaderBar";
 import Gallery from "./src/Camera/Gallery";
 import PictureMatch from "./src//Quiz/PictureMatch";
 import WordMatch from "./src/Quiz/WordMatch";
+import LoadingScreen from "./src/Loading";
 
 import ProfileLogin from "./src/Profile/ProfileLogin";
 const Stack = createStackNavigator();
@@ -55,23 +56,27 @@ export default class App extends React.Component {
           language: "fr",
           score: 0,
           imageCount: 3
-        }
+        },
+        isLoading: false
       });
+    else {
+      this.setState({ isLoading: false });
+    }
   };
 
   componentDidMount() {
     this.getUserFromLocalStorage();
     //hard code data in, should be api request
-    this.setState({
-      // userData: { // IF YOU DONT WANT TO LOG IN ALL THE TIME ADD THIS IS
-      //   username: "bob123",
-      //   avatarUrl: "https://picsum.photos/id/237/200/300",
-      //   language: "fr",
-      //   score: 100,
-      //   imageCount: 3
-      // },
-      isLoading: false
-    });
+    // this.setState({
+    //   // userData: { // IF YOU DONT WANT TO LOG IN ALL THE TIME ADD THIS IS
+    //   //   username: "bob123",
+    //   //   avatarUrl: "https://picsum.photos/id/237/200/300",
+    //   //   language: "fr",
+    //   //   score: 100,
+    //   //   imageCount: 3
+    //   // },
+    //   isLoading: false
+    // });
   }
 
   increaseScore = () => {
@@ -91,16 +96,15 @@ export default class App extends React.Component {
 
   render() {
     const { isLoading, userData } = this.state;
-    if (!userData) {
+    if (isLoading) {
+      return <Text>Loading...</Text>;
+    } else if (!userData) {
       return (
         <ProfileLogin
           userData={this.state.userData}
           setUsername={this.setUsername}
         />
       );
-    }
-    if (isLoading) {
-      return <Text>Loading...</Text>;
     } else {
       return (
         <NavigationContainer>
