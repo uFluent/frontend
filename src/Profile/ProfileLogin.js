@@ -82,7 +82,6 @@ export default class ProfileLogin extends React.Component {
 
   componentDidUpdate(prevProp, prevState) {
     if (this.state.submittedUser !== prevState.submittedUser) {
-      console.log("oh no");
       this.setState({
         userData: {
           ...this.state.userData,

@@ -18,5 +18,13 @@ export default StyleSheet.create({
     borderColor: "black",
     width: 90,
     height: 90
+  },
+  loadingScreen: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: winHeight,
+    width: winWidth,
+    backgroundColor: "#ace8dc"
   }
 });

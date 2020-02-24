@@ -12,7 +12,7 @@ export const translateWord = (wordToTranslate, languageToChangeTo) => {
       return responseJson.text[0];
     })
     .catch(error => {
-      console.error(error);
+      // console.error(error);
     });
 };
 
@@ -95,4 +95,6 @@ export const getGenericPicture = num => {
       console.log(err);
     });
 };
+
+
 

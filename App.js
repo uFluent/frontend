@@ -13,6 +13,7 @@ import HeaderBar from "./src/Headers/HeaderBar";
 import Gallery from "./src/Camera/Gallery";
 import PictureMatch from "./src//Quiz/PictureMatch";
 import WordMatch from "./src/Quiz/WordMatch";
+import LoadingScreen from "./src/Loading";
 
 import ProfileLogin from "./src/Profile/ProfileLogin";
 import * as api from "./api";
@@ -52,6 +53,7 @@ export default class App extends React.Component {
     });
   };
 
+
   // getUserFromLocalStorage = async () => {
   //   const username = await AsyncStorage.getItem("username");
   //   if (username)
@@ -60,19 +62,20 @@ export default class App extends React.Component {
   //     });
   // };
 
+
   componentDidMount() {
     // this.getUserFromLocalStorage();
     //hard code data in, should be api request
-    this.setState({
-      // userData: { // IF YOU DONT WANT TO LOG IN ALL THE TIME ADD THIS IS
-      //   username: "bob123",
-      //   avatarUrl: "https://picsum.photos/id/237/200/300",
-      //   language: "fr",
-      //   score: 100,
-      //   imageCount: 3
-      // },
-      isLoading: false
-    });
+    // this.setState({
+    //   // userData: { // IF YOU DONT WANT TO LOG IN ALL THE TIME ADD THIS IS
+    //   //   username: "bob123",
+    //   //   avatarUrl: "https://picsum.photos/id/237/200/300",
+    //   //   language: "fr",
+    //   //   score: 100,
+    //   //   imageCount: 3
+    //   // },
+    //   isLoading: false
+    // });
   }
 
   // componentDidUpdate(prevProps, prevState) {
@@ -106,9 +109,6 @@ export default class App extends React.Component {
           setUsername={this.setUsername}
         />
       );
-    }
-    if (isLoading) {
-      return <Text>Loading...</Text>;
     } else {
       return (
         <NavigationContainer>
@@ -151,24 +151,29 @@ export default class App extends React.Component {
             />
             <Stack.Screen
               name="Camera"
-              component={CameraPage}
               options={{
                 headerLeft: null,
                 headerTitle: props => (
                   <HeaderBar {...props} userData={this.state.userData} />
                 )
               }}
-            />
+            >
+              {props => (
+                <CameraPage {...props} userData={this.state.userData} />
+              )}
+            </Stack.Screen>
+
             <Stack.Screen
               name="Gallery"
-              component={Gallery}
               options={{
                 headerLeft: null,
                 headerTitle: props => (
                   <HeaderBar {...props} userData={this.state.userData} />
                 )
               }}
-            />
+            >
+              {props => <Gallery {...props} userData={this.state.userData} />}
+            </Stack.Screen>
             <Stack.Screen
               name="QuizSelector"
               component={QuizSelector}
@@ -198,14 +203,21 @@ export default class App extends React.Component {
             </Stack.Screen>
             <Stack.Screen
               name="WordMatch"
-              component={WordMatch}
               options={{
                 headerLeft: null,
                 headerTitle: props => (
                   <HeaderBar {...props} userData={this.state.userData} />
                 )
               }}
-            />
+            >
+              {props => (
+                <WordMatch
+                  {...props}
+                  userData={this.state.userData}
+                  increaseScore={this.increaseScore}
+                />
+              )}
+            </Stack.Screen>
           </Stack.Navigator>
         </NavigationContainer>
       );
