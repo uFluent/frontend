@@ -11,8 +11,10 @@ import {
   ScrollView,
   AppRegistry
 } from "react-native";
+
 import styles from "./ProfileLogin.style";
 import * as api from "../../api";
+
 
 export default class ProfileLogin extends React.Component {
   state = {
@@ -22,17 +24,19 @@ export default class ProfileLogin extends React.Component {
     newUser: true
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
     const regex = new RegExp("^[a-zA-Z0-9]+$");
     const word = this.state.text;
     if (!regex.test(word)) {
       Alert.alert("Invalid characters");
     } else {
+
       api.getUser(this.state.text).then(res => {
         if (res.status) {
           return Alert.alert(res.msg);
         } else {
+          await AsyncStorage.setItem("username", this.state.text);
           this.props.setUsername(this.state.text, res);
           this.setState({
             submittedUser: this.state.text,
@@ -40,6 +44,10 @@ export default class ProfileLogin extends React.Component {
           });
         }
       });
+
+      
+      
+
     }
   };
 
@@ -54,6 +62,7 @@ export default class ProfileLogin extends React.Component {
         if (res.status) {
           return Alert.alert(res.msg);
         } else {
+          await AsyncStorage.setItem("username", this.state.text);
           this.props.setUsername(this.state.text, res);
           this.setState({
             submittedUser: this.state.text,
@@ -77,13 +86,16 @@ export default class ProfileLogin extends React.Component {
   }
 
   componentDidUpdate(prevProp, prevState) {
-    if (this.state.submittedUser !== prevState.submittedUser)
+    if (this.state.submittedUser !== prevState.submittedUser) {
+      console.log("oh no");
       this.setState({
+
         userData: {
           ...this.state.userData,
           username: this.state.submittedUser
         }
       }); //this will replace the user temp with the name of the user that is submitted, then at the same time there should be a post reqest to the backend database.
+
   }
 
   render(props) {

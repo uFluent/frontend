@@ -3,15 +3,17 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { AsyncStorage } from "react-native";
+
 import QuizSelector from "./src/Quiz/QuizSelector";
 import Home from "./src/Home";
 import Profile from "./src/Profile/Profile";
 import { CameraPage } from "./src/Camera/Camera";
 import HeaderBar from "./src/Headers/HeaderBar";
-import QuizPicture from "./src/Quiz/Quiz.Picture";
 import Gallery from "./src/Camera/Gallery";
 import PictureMatch from "./src//Quiz/PictureMatch";
 import WordMatch from "./src/Quiz/WordMatch";
+
 import ProfileLogin from "./src/Profile/ProfileLogin";
 import * as api from "./api";
 const Stack = createStackNavigator();
@@ -23,6 +25,7 @@ export default class App extends React.Component {
     isLoading: true,
     userError: false
   };
+
 
   setUsername = (setUsername, data) => {
     console.log(setUsername, data, "<<<in the app setUsername");
@@ -38,6 +41,7 @@ export default class App extends React.Component {
     //   //   imageCount: 3
     //   // }
     // });
+
     // this.setState({
     //   userData: { ...this.state.userData, username: setUsername }
     // }); //USE THIS WHEN WE ARE ABLE TO API REQUEST FROM BACKEND, RATHER THAN HAVE THE ABOVE
@@ -49,7 +53,22 @@ export default class App extends React.Component {
     });
   };
 
+  getUserFromLocalStorage = async () => {
+    const username = await AsyncStorage.getItem("username");
+    if (username)
+      this.setState({
+        userData: {
+          username: username,
+          avatarUrl: "https://picsum.photos/id/237/200/300",
+          language: "fr",
+          score: 0,
+          imageCount: 3
+        }
+      });
+  };
+
   componentDidMount() {
+    this.getUserFromLocalStorage();
     //hard code data in, should be api request
     this.setState({
       // userData: { // IF YOU DONT WANT TO LOG IN ALL THE TIME ADD THIS IS
@@ -63,12 +82,29 @@ export default class App extends React.Component {
     });
   }
 
+
   // componentDidUpdate(prevProps, prevState) {
   //   const { userName } = this.state;
   //   if (userName !== prevState.userName) {
   //     api.getUser(userName).then(res => this.setState({ userData: res }));
   //   }
   // }
+
+  increaseScore = () => {
+    this.setState(currentState => {
+      return {
+        userData: {
+          ...currentState.userData,
+          score: currentState.userData.score + 1
+        }
+      };
+    });
+  };
+
+  //We need: a loading screen that plays when you start the app
+  //Then it checks if there is user data stored in phone - if no, goes to profileLogin
+  //If yes, sends api request for userinfo, then when it gets it goes to home page
+
 
   render() {
     const { isLoading, userData, userName } = this.state;
@@ -133,16 +169,6 @@ export default class App extends React.Component {
               }}
             />
             <Stack.Screen
-              name="QuizPicture"
-              component={QuizPicture}
-              options={{
-                headerLeft: null,
-                headerTitle: props => (
-                  <HeaderBar {...props} userData={this.state.userData} />
-                )
-              }}
-            />
-            <Stack.Screen
               name="Gallery"
               component={Gallery}
               options={{
@@ -164,14 +190,21 @@ export default class App extends React.Component {
             />
             <Stack.Screen
               name="PictureMatch"
-              component={PictureMatch}
               options={{
                 headerLeft: null,
                 headerTitle: props => (
                   <HeaderBar {...props} userData={this.state.userData} />
                 )
               }}
-            />
+            >
+              {props => (
+                <PictureMatch
+                  {...props}
+                  userData={this.state.userData}
+                  increaseScore={this.increaseScore}
+                />
+              )}
+            </Stack.Screen>
             <Stack.Screen
               name="WordMatch"
               component={WordMatch}

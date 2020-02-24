@@ -9,7 +9,6 @@ export const translateWord = (wordToTranslate, languageToChangeTo) => {
   )
     .then(response => response.json())
     .then(responseJson => {
-      console.log(responseJson);
       return responseJson.text[0];
     })
     .catch(error => {
@@ -18,15 +17,17 @@ export const translateWord = (wordToTranslate, languageToChangeTo) => {
 };
 
 export const sayWord = (word, language) => {
+  let variableRate = 0.6;
+  if (language === "en") variableRate = 1;
   Speech.speak(word, {
     language: language,
     pitch: 1,
-    rate: 1
+    rate: variableRate
   });
 };
 
 export const getPictureData = base64 => {
-  axios.post("url", { base64 }).then(results => {
+  return axios.post("url", { base64 }).then(results => {
     return results;
   });
 };
@@ -83,3 +84,15 @@ export const patchUser = (username, language) => {
 // avatarUrl: "https://picsum.photos/id/237/200/300",
 // score: 2,
 // img_id: 1
+
+export const getGenericPicture = num => {
+  return axios
+    .get(`https://ufluent.herokuapp.com/api/pictures/${num}`)
+    .then(result => {
+      return result.data.picture;
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+

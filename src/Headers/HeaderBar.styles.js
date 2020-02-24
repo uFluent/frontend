@@ -29,5 +29,12 @@ export default StyleSheet.create({
   cameraButton: {
     width: 80,
     paddingHorizontal: 27
+  },
+  profileButtons: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: winWidth / 2
   }
 });
