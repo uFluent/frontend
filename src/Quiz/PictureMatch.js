@@ -39,6 +39,7 @@ export default class PictureMatch extends Component {
       });
       const pic =
         pictures.assets[Math.floor(Math.random() * pictures.assets.length)];
+      console.log(pic.uri);
       this.setState({ image: pic.uri, correctWord: null });
     } else {
       //Get picture from backend

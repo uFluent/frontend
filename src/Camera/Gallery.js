@@ -12,6 +12,8 @@ import * as MediaLibrary from "expo-media-library";
 
 import { styleMaker } from "./Gallery.styles";
 
+// import ImageCompressor from "@trunkrs/react-native-image-compressor";
+
 export default class Gallery extends React.Component {
   state = {
     photoData: this.props.photoData,
@@ -40,9 +42,9 @@ export default class Gallery extends React.Component {
     sayWord(this.state.word, this.props.userData.language);
   };
 
-  componentDidMount() {
-    //This is causing a memory leak!!!!!
-    const photoInfo = getPictureData(this.state.photoData.base64);
+  sendImageData = async () => {
+    // const photoInfo = await getPictureData(this.state.photoData.base64);
+    // console.log(photoInfo);
     setTimeout(() => {
       const englishWord = "elephant";
       translateWord("elephant", this.props.userData.language).then(result => {
@@ -52,6 +54,10 @@ export default class Gallery extends React.Component {
         });
       });
     }, 3000);
+  };
+
+  componentDidMount() {
+    this.sendImageData();
   }
 
   componentDidUpdate(prevProps, prevState) {
