@@ -12,6 +12,10 @@ import { sayWord, getGenericPicture, translateWord } from "../../api";
 
 import { styleMaker } from "./Quiz.Styles";
 
+import styled from "../Styles";
+import LottieView from "lottie-react-native";
+// import * as Animatable from "react-native-animatable";
+
 export default class PictureMatch extends Component {
   state = {
     image: null,
@@ -165,6 +169,7 @@ export default class PictureMatch extends Component {
                   >
                     {word}
                   </Button>
+
                   {!this.state.guess && (
                     <View style={styles.speakWord}>
                       <Button
@@ -181,7 +186,14 @@ export default class PictureMatch extends Component {
         </View>
       );
     } else {
-      return <Text>Loading</Text>;
+      return (
+        <View style={styled.alignCenter}>
+          <LottieView
+            source={require("../animations/226-splashy-loader (1).json")}
+            autoPlay
+          />
+        </View>
+      );
     }
   }
 }

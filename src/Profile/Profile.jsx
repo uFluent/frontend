@@ -16,6 +16,7 @@ import styles from "./Profile.style";
 
 // import ModalDropdown from 'react-native-modal-dropdown';
 import ModalDropdown from "react-native-modal-dropdown";
+import { SimpleAnimation } from "react-native-simple-animations";
 
 const DEMO_OPTIONS_1 = ["option 1", "option 2", "option 3", "option 4"];
 const DEMO_OPTIONS_2 = [
@@ -63,47 +64,89 @@ export default class Profile extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Image
-          source={{ uri: userData.avatarUrl }}
-          style={styles.imageProfile}
-        />
-
-        <View style={styles.sections}>
-          <Text style={styles.text}>{userName}</Text>
-        </View>
-        <View style={styles.sections}>
-          <View style={styles.languageContainer}>
-            <Image
-              source={DisplayFlag[userData.language]}
-              style={{ width: 75, height: 50 }}
-            />
-            <ModalDropdown
-              ref="dropdown_2"
-              style={styles.dropdown_2}
-              textStyle={styles.dropdown_2_text}
-              dropdownStyle={styles.dropdown_2_dropdown}
-              options={DEMO_OPTIONS_2}
-              defaultValue={this.displayCountry()}
-              renderButtonText={rowData =>
-                this._dropdown_2_renderButtonText(rowData)
-              }
-              renderRow={this._dropdown_2_renderRow.bind(this)}
-              renderSeparator={(sectionID, rowID, adjacentRowHighlighted) =>
-                this._dropdown_2_renderSeparator(
-                  sectionID,
-                  rowID,
-                  adjacentRowHighlighted
-                )
-              }
-            ></ModalDropdown>
-          </View>
+        <SimpleAnimation
+          delay={1000}
+          duration={2000}
+          // direction="right"
+          staticType="zoom"
+          distance={20}
+          // friction={4}
+        >
+          <Image
+            source={{ uri: userData.avatarUrl }}
+            style={styles.imageProfile}
+          />
+        </SimpleAnimation>
+        <View>
+          <SimpleAnimation
+            delay={1000}
+            duration={5000}
+            direction="right"
+            staticType="bounce"
+            distance={20}
+            friction={4}
+          >
+            <View style={styles.sections}>
+              <Text style={styles.text}>{userName}</Text>
+            </View>
+          </SimpleAnimation>
         </View>
 
-        <View style={styles.sections}>
-          <Text style={styles.text}>Score: {userData.score}</Text>
+        <View>
+          <SimpleAnimation
+            delay={1000}
+            duration={3000}
+            friction={4}
+            movementType="spring"
+            direction="right"
+            distance={70}
+          >
+            <View style={styles.sections}>
+              <View style={styles.languageContainer}>
+                <Image
+                  source={DisplayFlag[userData.language]}
+                  style={{ width: 75, height: 50 }}
+                />
+                <ModalDropdown
+                  ref="dropdown_2"
+                  style={styles.dropdown_2}
+                  textStyle={styles.dropdown_2_text}
+                  dropdownStyle={styles.dropdown_2_dropdown}
+                  options={DEMO_OPTIONS_2}
+                  defaultValue={this.displayCountry()}
+                  renderButtonText={rowData =>
+                    this._dropdown_2_renderButtonText(rowData)
+                  }
+                  renderRow={this._dropdown_2_renderRow.bind(this)}
+                  renderSeparator={(sectionID, rowID, adjacentRowHighlighted) =>
+                    this._dropdown_2_renderSeparator(
+                      sectionID,
+                      rowID,
+                      adjacentRowHighlighted
+                    )
+                  }
+                ></ModalDropdown>
+              </View>
+            </View>
+          </SimpleAnimation>
+        </View>
+        <View>
+          <SimpleAnimation
+            delay={1000}
+            duration={3000}
+            friction={4}
+            movementType="spring"
+            direction="up"
+            distance={70}
+          >
+            <View style={styles.sections}>
+              <Text style={styles.text}>Score: {userData.score}</Text>
+            </View>
+          </SimpleAnimation>
         </View>
 
         <Text>{userData.language}</Text>
+
         <Text>Language: {this.displayCountry()}</Text>
         <Button onPress={this.updateLanguage} title="Update Profile!"></Button>
       </View>

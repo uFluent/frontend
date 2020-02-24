@@ -6,7 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { AsyncStorage } from "react-native";
 
 import QuizSelector from "./src/Quiz/QuizSelector";
-import Home from "./src/Home";
+import Home from "./src/Home/Home";
 import Profile from "./src/Profile/Profile";
 import { CameraPage } from "./src/Camera/Camera";
 import HeaderBar from "./src/Headers/HeaderBar";
@@ -53,7 +53,6 @@ export default class App extends React.Component {
     });
   };
 
-
   // getUserFromLocalStorage = async () => {
   //   const username = await AsyncStorage.getItem("username");
   //   if (username)
@@ -61,7 +60,6 @@ export default class App extends React.Component {
   //       userName: username
   //     });
   // };
-
 
   componentDidMount() {
     // this.getUserFromLocalStorage();
