@@ -26,7 +26,6 @@ export default class App extends React.Component {
     userError: false
   };
 
-
   setUsername = (setUsername, data) => {
     console.log(setUsername, data, "<<<in the app setUsername");
     this.setState({ userData: data.user, userName: setUsername });
@@ -53,22 +52,16 @@ export default class App extends React.Component {
     });
   };
 
-  getUserFromLocalStorage = async () => {
-    const username = await AsyncStorage.getItem("username");
-    if (username)
-      this.setState({
-        userData: {
-          username: username,
-          avatarUrl: "https://picsum.photos/id/237/200/300",
-          language: "fr",
-          score: 0,
-          imageCount: 3
-        }
-      });
-  };
+  // getUserFromLocalStorage = async () => {
+  //   const username = await AsyncStorage.getItem("username");
+  //   if (username)
+  //     this.setState({
+  //       userName: username
+  //     });
+  // };
 
   componentDidMount() {
-    this.getUserFromLocalStorage();
+    // this.getUserFromLocalStorage();
     //hard code data in, should be api request
     this.setState({
       // userData: { // IF YOU DONT WANT TO LOG IN ALL THE TIME ADD THIS IS
@@ -81,7 +74,6 @@ export default class App extends React.Component {
       isLoading: false
     });
   }
-
 
   // componentDidUpdate(prevProps, prevState) {
   //   const { userName } = this.state;
@@ -104,7 +96,6 @@ export default class App extends React.Component {
   //We need: a loading screen that plays when you start the app
   //Then it checks if there is user data stored in phone - if no, goes to profileLogin
   //If yes, sends api request for userinfo, then when it gets it goes to home page
-
 
   render() {
     const { isLoading, userData, userName } = this.state;
