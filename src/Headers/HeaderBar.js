@@ -16,6 +16,7 @@ export default props => {
     navigation.navigate(targetPath);
   };
   const DisplayFlag = {
+    hola: { file: require(`../Flags/fr.png`) },
     fr: { file: require(`../Flags/fr.png`) },
     es: {
       file: require(`../Flags/es.png`)
@@ -36,17 +37,7 @@ export default props => {
           style={[styles.homeButton, colorStyle(props.children === "Home")]}
         />
       </Button>
-      {/* <Button onPress={() => handlePress("Camera")}>
-        <Ionicons
-          name="md-camera"
-          size={30}
-          style={[
-            styles.homeButton,
-            styles.cameraButton,
-            colorStyle(props.children === "Camera")
-          ]}
-        />
-      </Button> */}
+      
       <View style={styles.profileButtons}>
         <Text>Level: {props.userData.score}</Text>
         <Button onPress={() => handlePress("Profile")}>

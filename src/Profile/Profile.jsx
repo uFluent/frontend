@@ -7,8 +7,12 @@ import {
   Image,
   TouchableOpacity,
   TouchableHighlight,
-  ScrollView
+  ScrollView,
+  Button
 } from "react-native";
+
+import * as api from "../../api";
+import styles from "./Profile.style";
 
 // import ModalDropdown from 'react-native-modal-dropdown';
 import ModalDropdown from "react-native-modal-dropdown";
@@ -35,70 +39,91 @@ export default class Profile extends React.Component {
         en: require(`./Flags/en.png`),
         no: require(`./Flags/no.png`)
       },
-      userData: {
-        username: "bob123",
-        avatarUrl: "https://picsum.photos/id/237/200/300",
-        language: "fr",
-        score: 100,
-        imageCount: 3
-      }
+      // userData: {
+      //   username: "bob123",
+      //   avatarUrl: "https://picsum.photos/id/237/200/300",
+      //   language: "fr",
+      //   score: 100,
+      //   imageCount: 3
+      // }
+      userData: ""
     };
   }
 
   componentDidMount() {
-    this.setState({ userData: this.props.route.params.userData });
+    console.log(this.props.route.params.userData);
+    this.setState({
+      userData: this.props.route.params.userData
+    });
   }
+
   render() {
     const { DisplayFlag, userData } = this.state;
+    const { userName } = this.props.route.params;
 
     return (
       <View style={styles.container}>
         <Image
           source={{ uri: userData.avatarUrl }}
-          style={{ width: 150, height: 150 }}
+          style={styles.imageProfile}
         />
-        <Text>{userData.username}</Text>
+
+        <View style={styles.sections}>
+          <Text style={styles.text}>{userName}</Text>
+        </View>
+        <View style={styles.sections}>
+          <View style={styles.languageContainer}>
+            <Image
+              source={DisplayFlag[userData.language]}
+              style={{ width: 75, height: 50 }}
+            />
+            <ModalDropdown
+              ref="dropdown_2"
+              style={styles.dropdown_2}
+              textStyle={styles.dropdown_2_text}
+              dropdownStyle={styles.dropdown_2_dropdown}
+              options={DEMO_OPTIONS_2}
+              defaultValue={this.displayCountry()}
+              renderButtonText={rowData =>
+                this._dropdown_2_renderButtonText(rowData)
+              }
+              renderRow={this._dropdown_2_renderRow.bind(this)}
+              renderSeparator={(sectionID, rowID, adjacentRowHighlighted) =>
+                this._dropdown_2_renderSeparator(
+                  sectionID,
+                  rowID,
+                  adjacentRowHighlighted
+                )
+              }
+            ></ModalDropdown>
+          </View>
+        </View>
+
+        <View style={styles.sections}>
+          <Text style={styles.text}>Score: {userData.score}</Text>
+        </View>
+
+        <Text>{userData.language}</Text>
         <Text>Language: {this.displayCountry()}</Text>
-
-        <TouchableOpacity onPress={() => alert("image clicked")}>
-          <Image
-            source={DisplayFlag[userData.language]}
-            style={{ width: 75, height: 50 }}
-          />
-        </TouchableOpacity>
-        <ModalDropdown
-          ref="dropdown_2"
-          style={styles.dropdown_2}
-          textStyle={styles.dropdown_2_text}
-          dropdownStyle={styles.dropdown_2_dropdown}
-          options={DEMO_OPTIONS_2}
-          defaultValue={this.displayCountry()}
-          renderButtonText={rowData =>
-            this._dropdown_2_renderButtonText(rowData)
-          }
-          renderRow={this._dropdown_2_renderRow.bind(this)}
-          renderSeparator={(sectionID, rowID, adjacentRowHighlighted) =>
-            this._dropdown_2_renderSeparator(
-              sectionID,
-              rowID,
-              adjacentRowHighlighted
-            )
-          }
-        ></ModalDropdown>
-
-        <Text>Score: {userData.score}</Text>
-        <Text>{this.state.userData.language}</Text>
+        <Button onPress={this.updateLanguage} title="Update Profile!"></Button>
       </View>
     );
   }
 
+  updateLanguage = event => {
+    event.preventDefault();
+    api.patchUser().then(res => {
+      console.log(res, "< res in profile");
+    });
+  };
+
   displayCountry = () => {
-    const { userData } = this.state;
+    const { userData } = this.props.route.params;
     if (userData.language === "fr") return "French";
     if (userData.language === "no") return "Norwegian";
     if (userData.language === "en") return "English";
     if (userData.language === "es") return "Spanish";
-    return "error";
+    return "Country";
   };
 
   _dropdown_2_renderButtonText(rowData) {
@@ -108,16 +133,13 @@ export default class Profile extends React.Component {
         userData: { ...this.state.userData, language: code }
       },
       () => {
-        this.props.route.params.setLanguage(this.state.userData.language);
+        this.props.route.params.setLanguage(code);
       }
     );
     return `${country}`;
   }
 
   _dropdown_2_renderRow(rowData, rowID, highlighted) {
-    let icon = highlighted
-      ? require("./Flags/fr.png")
-      : require("./Flags/no.png");
     let evenRow = rowID % 2;
     return (
       <TouchableHighlight underlayColor="cornflowerblue">
@@ -153,76 +175,3 @@ export default class Profile extends React.Component {
     return <View style={styles.dropdown_2_separator} key={key} />;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  row: {
-    flex: 1,
-    flexDirection: "row"
-  },
-  cell: {
-    flex: 1,
-    borderWidth: StyleSheet.hairlineWidth
-  },
-  scrollView: {
-    flex: 1
-  },
-  contentContainer: {
-    height: 500,
-    paddingVertical: 100,
-    paddingLeft: 20
-  },
-  textButton: {
-    color: "deepskyblue",
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: "deepskyblue",
-    margin: 2
-  },
-
-  dropdown_2: {
-    alignSelf: "flex-end",
-    width: 150,
-    marginTop: 32,
-    right: 8,
-    borderWidth: 0,
-    borderRadius: 3,
-    backgroundColor: "cornflowerblue"
-  },
-  dropdown_2_text: {
-    marginVertical: 10,
-    marginHorizontal: 6,
-    fontSize: 18,
-    color: "white",
-    textAlign: "center",
-    textAlignVertical: "center"
-  },
-  dropdown_2_dropdown: {
-    width: 150,
-    height: 300,
-    borderColor: "cornflowerblue",
-    borderWidth: 2,
-    borderRadius: 3
-  },
-  dropdown_2_row: {
-    flexDirection: "row",
-    height: 40,
-    alignItems: "center"
-  },
-  dropdown_2_image: {
-    marginLeft: 4,
-    width: 30,
-    height: 30
-  },
-  dropdown_2_row_text: {
-    marginHorizontal: 4,
-    fontSize: 16,
-    color: "navy",
-    textAlignVertical: "center"
-  },
-  dropdown_2_separator: {
-    height: 1,
-    backgroundColor: "cornflowerblue"
-  }
-});
