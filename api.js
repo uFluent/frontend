@@ -42,3 +42,21 @@ export const getGenericPicture = num => {
       console.log(err);
     });
 };
+
+export const postUsername = name => {
+  return axios
+    .post(`https://ufluent.herokuapp.com/api/users/`, {
+      username: name,
+      language: "en"
+    })
+    .then(result => {
+      console.log(result);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+export const getUserData = name => {};
+
+export const patchUserData = (language, avatar_url, score, img_id) => {};

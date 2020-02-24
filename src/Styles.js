@@ -20,10 +20,9 @@ export default StyleSheet.create({
     height: 90
   },
   loadingScreen: {
-    flex: 1,
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#f4511e",
     height: winHeight,
     width: winWidth,
     backgroundColor: "#ace8dc"

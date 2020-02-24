@@ -33,6 +33,8 @@ export default class ProfileLogin extends React.Component {
       this.setState({ submittedUser: this.state.text, text: "" });
       //Save username to local storage
       await AsyncStorage.setItem("username", this.state.text);
+      //Do a post request to backend
+      postUsername(this.state.text);
     }
   };
 

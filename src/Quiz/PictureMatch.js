@@ -46,7 +46,7 @@ export default class PictureMatch extends Component {
       const pic = await getGenericPicture(randomNum);
       const imageUri = pic.pictureData;
       const correctWord = pic.word;
-      const num = this.props.userData.score;
+      let num = this.props.userData.score;
       if (num > 3) num = 3;
       const newWords = await getListOfWords(
         correctWord,
