@@ -59,21 +59,18 @@ export const postUser = username => {
   });
 };
 
-export const patchUser = (username, language) => {
-  //GET A NETWORK REQUEST FAILED, issue with backend?
-  return fetch(`http://ufluent.herokuapp.com/api/users/test123`, {
+export const patchUser = (username, language, avatar) => {
+  return fetch(`http://ufluent.herokuapp.com/api/users/${username}/`, {
     method: "PATCH",
     body: JSON.stringify({
-      avatarUrl: "https://picsum.photos/id/237/200/300",
-      language: "fr"
+      avatarUrl: avatar,
+      language: language
     })
   })
     .then(function(res) {
-      console.log(res, "<<<res??");
       return res.json();
     })
     .then(responseJson => {
-      console.log(responseJson, "<< res JSON");
       return responseJson;
     })
     .catch(error => {
@@ -85,6 +82,25 @@ export const patchUser = (username, language) => {
 // score: 2,
 // img_id: 1
 
+export const patchLevel = (username, level) => {
+  return fetch(`http://ufluent.herokuapp.com/api/users/${username}/`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      score: level
+    })
+  })
+    .then(function(res) {
+      return res.json();
+    })
+    .then(responseJson => {
+      return responseJson;
+    })
+    .catch(error => {
+      console.log(error);
+      console.log("in the error");
+    });
+};
+
 export const getGenericPicture = num => {
   return axios
     .get(`https://ufluent.herokuapp.com/api/pictures/${num}`)
@@ -95,6 +111,3 @@ export const getGenericPicture = num => {
       console.log(err);
     });
 };
-
-
-
