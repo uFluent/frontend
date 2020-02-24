@@ -13,32 +13,39 @@ import Gallery from "./src/Camera/Gallery";
 import PictureMatch from "./src//Quiz/PictureMatch";
 import WordMatch from "./src/Quiz/WordMatch";
 import ProfileLogin from "./src/Profile/ProfileLogin";
+import * as api from "./api";
 const Stack = createStackNavigator();
 
 export default class App extends React.Component {
   state = {
+    userName: "",
     userData: "",
-    isLoading: true
+    isLoading: true,
+    userError: false
   };
 
-  setUsername = setUsername => {
-    this.setState({
-      userData: {
-        username: setUsername,
-        avatarUrl: "https://picsum.photos/id/237/200/300",
-        language: "fr",
-        score: 100,
-        imageCount: 3
-      }
-    });
+  setUsername = (setUsername, data) => {
+    console.log(setUsername, data, "<<<in the app setUsername");
+    this.setState({ userData: data.user, userName: setUsername });
+
+    // this.setState({
+    //   userName: setUsername
+    //   // userData: {
+    //   //   username: setUsername,
+    //   //   avatarUrl: "https://picsum.photos/id/237/200/300",
+    //   //   language: "fr",
+    //   //   score: 100,
+    //   //   imageCount: 3
+    //   // }
+    // });
     // this.setState({
     //   userData: { ...this.state.userData, username: setUsername }
     // }); //USE THIS WHEN WE ARE ABLE TO API REQUEST FROM BACKEND, RATHER THAN HAVE THE ABOVE
   };
 
-  setLanguage = language => {
+  setLanguage = lang => {
     this.setState({
-      userData: { ...this.state.userData, language: language }
+      userData: { ...this.state.userData, language: lang }
     });
   };
 
@@ -56,9 +63,16 @@ export default class App extends React.Component {
     });
   }
 
+  // componentDidUpdate(prevProps, prevState) {
+  //   const { userName } = this.state;
+  //   if (userName !== prevState.userName) {
+  //     api.getUser(userName).then(res => this.setState({ userData: res }));
+  //   }
+  // }
+
   render() {
-    const { isLoading, userData } = this.state;
-    if (!userData) {
+    const { isLoading, userData, userName } = this.state;
+    if (!userName) {
       return (
         <ProfileLogin
           userData={this.state.userData}
@@ -71,6 +85,7 @@ export default class App extends React.Component {
     } else {
       return (
         <NavigationContainer>
+          {console.log(userData.language, "<<< checking in app")}
           <Stack.Navigator
             screenOptions={{
               headerStyle: {
@@ -96,6 +111,7 @@ export default class App extends React.Component {
               name="Profile"
               component={Profile}
               initialParams={{
+                userName: this.state.userName,
                 userData: this.state.userData,
                 setLanguage: this.setLanguage
               }}

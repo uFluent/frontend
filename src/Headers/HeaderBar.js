@@ -16,6 +16,7 @@ export default props => {
     navigation.navigate(targetPath);
   };
   const DisplayFlag = {
+    hola: { file: require(`../Flags/fr.png`) },
     fr: { file: require(`../Flags/fr.png`) },
     es: {
       file: require(`../Flags/es.png`)
@@ -48,7 +49,7 @@ export default props => {
         />
       </Button>
       <Button>
-        <Text>Level: {props.userData.score}</Text>
+        <Text>Lvl: {props.userData.score}</Text>
       </Button>
       <Button onPress={() => handlePress("Profile")}>
         <Image
