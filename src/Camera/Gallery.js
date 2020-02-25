@@ -9,6 +9,7 @@ import { AsyncStorage } from "react-native";
 import { getPictureData, sayWord, translateWord } from "../../api";
 
 import * as MediaLibrary from "expo-media-library";
+import * as ImageManipulator from "expo-image-manipulator";
 
 import { styleMaker } from "./Gallery.styles";
 
@@ -44,21 +45,38 @@ export default class Gallery extends React.Component {
   };
 
   speakWord = () => {
-    sayWord(this.state.word, this.props.userData.language);
+    sayWord(this.state.word.split("_").join(" "), this.props.userData.language);
   };
 
   sendImageData = async () => {
     // const photoInfo = await getPictureData(this.state.photoData.base64);
     // console.log(photoInfo);
-    setTimeout(() => {
-      const englishWord = "elephant";
-      translateWord("elephant", this.props.userData.language).then(result => {
-        this.setState({
-          word: result,
-          englishWord: englishWord
-        });
+    const manipResult = await ImageManipulator.manipulateAsync(
+      this.state.photoData.uri,
+      [{ resize: { width: 224, height: 224 } }],
+      { format: "jpeg", base64: true }
+    );
+    const photoData = await getPictureData(manipResult.base64);
+    console.log(photoData, "<<<<<<");
+    const englishWord = photoData;
+    translateWord(
+      englishWord.split("_").join(" "),
+      this.props.userData.language
+    ).then(result => {
+      this.setState({
+        word: result || "nothing",
+        englishWord: englishWord
       });
-    }, 3000);
+    });
+    // setTimeout(() => {
+    //   const englishWord = "elephant";
+    //   translateWord("elephant", this.props.userData.language).then(result => {
+    //     this.setState({
+    //       word: result,
+    //       englishWord: englishWord
+    //     });
+    //   });
+    // }, 3000);
   };
 
   componentDidMount() {

@@ -4,6 +4,7 @@ const { width: winWidth, height: winHeight } = Dimensions.get("window");
 
 export default StyleSheet.create({
   container: {
+    display: "flex",
     flex: 1,
     alignItems: "center",
     // justifyContent: "center",
@@ -34,6 +35,16 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#edff8f"
+  },
+  levelBar: {
+    backgroundColor: "lightgreen",
+    borderRadius: 22,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+    height: 61,
+    zIndex: -1,
+    position: "absolute",
+    alignSelf: "flex-start"
   },
   text: { fontSize: 40, padding: 30 },
   row: {

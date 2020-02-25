@@ -28,7 +28,10 @@ export default class App extends React.Component {
   };
 
   setUsername = (setUsername, data) => {
-    this.setState({ userData: data.user, userName: setUsername });
+    this.setState({
+      userData: data.user,
+      userName: setUsername
+    });
   };
 
   updatePicture = url => {
@@ -36,7 +39,10 @@ export default class App extends React.Component {
       .patchUser(this.state.userName, this.state.userData.language, url)
       .then(res => {
         this.setState({
-          userData: { ...this.state.userData, avatarUrl: res.user.avatarUrl }
+          userData: {
+            ...this.state.userData,
+            avatarUrl: res.user.avatarUrl
+          }
         });
       });
   };
@@ -59,6 +65,10 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.getUserFromLocalStorage();
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
   }
 
   // componentDidUpdate(prevProps, prevState) {
