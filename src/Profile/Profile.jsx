@@ -61,6 +61,9 @@ export default class Profile extends React.Component {
   render() {
     const { DisplayFlag, userData } = this.state;
     const { userName } = this.props.route.params;
+    let score = 0;
+    if (userData.score) score = (userData.score % 10) * 0.1;
+    console.log(score);
 
     return (
       <View style={styles.container}>
@@ -144,6 +147,7 @@ export default class Profile extends React.Component {
             distance={70}
           >
             <View style={styles.sections}>
+              <View style={[styles.levelBar, { width: 300 * score }]}></View>
               <Text style={styles.text}>
                 Level: {Math.ceil(userData.score / 10)}
               </Text>

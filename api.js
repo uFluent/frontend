@@ -18,8 +18,8 @@ export const translateWord = (wordToTranslate, languageToChangeTo) => {
 
 export const sayWord = (word, language) => {
   console.log("say");
-  let variableRate = 0.6;
-  if (language === "en") variableRate = 1;
+  let variableRate = 1;
+  if (language === "es") variableRate = 0.6;
   Speech.speak(word, {
     language: language,
     pitch: 1,
@@ -28,12 +28,13 @@ export const sayWord = (word, language) => {
 };
 
 export const getPictureData = base64 => {
-  let img = new FormData();
-  img.append("file", { uri: base64 });
   return axios
-    .post("https://ufluent.herokuapp.com/api/pictures/", { data: img })
+    .post("https://ufluent.herokuapp.com/api/pictures/", { data: base64 })
     .then(results => {
-      console.log(results);
+      return results.data.outcome;
+    })
+    .catch(err => {
+      console.log(err);
     });
 };
 
