@@ -9,10 +9,14 @@ export const styleMaker = state => {
   }
 
   let feedbackColour = "green";
-  if (state.guess === "incorrect") feedbackColour = "red";
+  if (state.guess === "incorrect") feedbackColour = "red" ;
 
   return StyleSheet.create({
     screen: {
+      height: winHeight
+      // backgroundColor: "#fdcd3b"
+    },
+    selection: {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -40,7 +44,10 @@ export const styleMaker = state => {
       minWidth: 200,
       opacity: pictureOpacity,
       zIndex: -10,
-      position: "absolute"
+      position: "absolute",
+      borderRadius: 20,
+      borderColor: "black",
+      borderWidth: 4
     },
     options: {
       display: "flex",
@@ -56,18 +63,19 @@ export const styleMaker = state => {
       justifyContent: "space-between",
       width: winWidth / 3,
       height: 40,
-      backgroundColor: "grey",
-      marginTop: 10
+      // backgroundColor: "grey",
+      marginTop: 10,
+      margin: 20
     },
     wordOptionButton: {
       width: winWidth / 3,
       height: 40
     },
     correctGuess: {
-      backgroundColor: "green"
+      // backgroundColor: "green"
     },
     incorrectGuess: {
-      backgroundColor: "orange"
+      // backgroundColor: "orange"
     },
     otherGuess: { opacity: 0.5 },
     guessConfirmationText: {
@@ -76,7 +84,7 @@ export const styleMaker = state => {
     },
     speakWord: {
       marginLeft: 20,
-      backgroundColor: "orange",
+      // backgroundColor: "orange",
       width: 40,
       height: 40
     }
