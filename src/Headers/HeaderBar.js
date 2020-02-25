@@ -17,7 +17,6 @@ export default props => {
     navigation.navigate(targetPath);
   };
   const DisplayFlag = {
-    hola: { file: require(`../Flags/fr.png`) },
     fr: { file: require(`../Flags/fr.png`) },
     es: {
       file: require(`../Flags/es.png`)
@@ -25,8 +24,8 @@ export default props => {
     en: {
       file: require(`../Flags/en.png`)
     },
-    no: {
-      file: require(`../Flags/no.png`)
+    de: {
+      file: require(`../Flags/de.png`)
     }
   };
   return (

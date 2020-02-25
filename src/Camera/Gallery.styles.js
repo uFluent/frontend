@@ -5,17 +5,23 @@ const { width: winWidth, height: winHeight } = Dimensions.get("window");
 export const styleMaker = (saved, word) =>
   //create consts that align with saved and word that change the look of the save button
   {
-    let savedButtonColor = "rgba(0, 0, 0, 0.5)";
-    if (saved) savedButtonColor = "rgba(0, 255, 0, 0.5)";
-    if (!word) savedButtonColor = "rgba(255, 0, 0, 0.5)";
+    let savedButtonColor = "#F05E23";
+    if (saved) savedButtonColor = "rgba(0, 255, 0, 1)";
+    if (!word) savedButtonColor = "rgba(255, 0, 0, 1)";
     return StyleSheet.create({
+      loadingScreen: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      },
       preview: {
         height: winHeight - 250,
         width: winWidth - 70,
         position: "absolute",
         margin: 35,
-        borderWidth: 3,
-        borderColor: "yellow",
+        borderWidth: 5,
+        borderRadius: 20,
+        borderColor: "white",
         left: 0,
         top: 20,
         right: 0,
@@ -31,11 +37,16 @@ export const styleMaker = (saved, word) =>
         alignItems: "center"
       },
       saveButton: {
-        height: 50,
-        width: 100,
-        color: "white",
-        padding: 10,
-        paddingLeft: 14,
+        height: 65,
+        width: 65,
+        padding: 15,
+        paddingLeft: 20,
+        marginTop: 5,
+        alignItems: "center",
+        borderRadius: 45,
+        borderBottomRightRadius: 0,
+        borderTopRightRadius: 0,
+        borderTopLeftRadius: 0,
         zIndex: 5,
         backgroundColor: savedButtonColor
       },
@@ -45,18 +56,23 @@ export const styleMaker = (saved, word) =>
         justifyContent: "space-evenly",
         alignItems: "center",
         height: 50,
-        width: 100,
+        width: 65,
+        borderRadius: 45,
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
+        borderBottomLeftRadius: 0,
         zIndex: 5,
         backgroundColor: "rgba(0, 0, 150, 0.5)",
         borderRadius: 4
       },
       cameraIcons: { color: "white" },
       lowerText: {
-        width: winWidth,
+        width: winWidth - 5,
         height: 100,
         top: winHeight - 240,
-        backgroundColor: "green",
+        backgroundColor: "#E2A4C6",
         zIndex: 10,
+        borderRadius: 30,
         display: "flex",
         justifyContent: "space-evenly",
         alignItems: "center",

@@ -8,7 +8,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: "center",
     // justifyContent: "center",
-    backgroundColor: "#bae1ff"
+    backgroundColor: "#4ef2ed" //"#bae1ff"
   },
   languageContainer: {
     alignContent: "center",
@@ -17,12 +17,13 @@ export default StyleSheet.create({
     justifyContent: "center"
   },
   imageProfile: {
-    width: 210,
-    height: 210,
+    width: 250,
+    height: 250,
     marginTop: 40,
+    marginBottom: 20,
     borderRadius: 60,
-    borderColor: "#ffb3ba",
-    borderWidth: 4
+    borderColor: "#ff9668",
+    borderWidth: 7
   },
   sections: {
     margin: 10,
@@ -33,7 +34,7 @@ export default StyleSheet.create({
     height: 65,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#ffffba"
+    backgroundColor: "#edff8f"
   },
   levelBar: {
     backgroundColor: "lightgreen",
@@ -72,11 +73,11 @@ export default StyleSheet.create({
   dropdown_2: {
     width: 120,
     height: 65,
-    left: 52,
+    left: 60,
     borderWidth: 0,
     borderTopRightRadius: 25,
     borderBottomRightRadius: 25,
-    backgroundColor: "#ffb3ba",
+    backgroundColor: "#ffac88",
     borderColor: "#ffb3ba",
     borderWidth: 1,
     justifyContent: "center"
