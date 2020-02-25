@@ -79,6 +79,35 @@ export const styleMaker = state => {
       backgroundColor: "orange",
       width: 40,
       height: 40
+    },
+    questionContainer: {
+      width: winWidth - 10,
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center"
+    },
+    question: {
+      color: "black",
+      fontSize: 60,
+      opacity: pictureOpacity
+    },
+    pictureOption: {
+      width: 140,
+      height: 140,
+      backgroundColor: "green",
+      zIndex: 10
+    },
+    pictureOptions: {
+      backgroundColor: "blue",
+      width: winWidth,
+      height: winHeight * 0.5,
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "space-around",
+      alignContent: "space-between",
+      alignItems: "center"
     }
   });
 };

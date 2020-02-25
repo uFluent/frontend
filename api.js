@@ -29,12 +29,12 @@ export const sayWord = (word, language) => {
 
 export const getPictureData = base64 => {
   return axios
-    .post("https://ufluent.herokuapp.com/api/pictures/", { data: base64 })
+    .post("https://ufluent.herokuapp.com/api/pictures/", {
+      data: base64,
+      fast: true
+    })
     .then(results => {
       return results.data.outcome;
-    })
-    .catch(err => {
-      console.log(err);
     });
 };
 

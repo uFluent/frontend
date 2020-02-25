@@ -6,9 +6,9 @@ import Button from "react-native-button";
 import * as MediaLibrary from "expo-media-library";
 import { Ionicons } from "@expo/vector-icons";
 
-import { getListOfWords } from "./Words";
+import { getListOfWords, words } from "./Words";
 
-import { sayWord, getGenericPicture } from "../../api";
+import { sayWord, getGenericPicture, translateWord } from "../../api";
 
 import { styleMaker } from "./Quiz.Styles";
 
@@ -18,95 +18,94 @@ import LottieView from "lottie-react-native";
 export default class PictureMatch extends Component {
   state = {
     currentPage: {
-      image: null,
+      question: null,
       answer: null,
-      translatedAnswer: null,
-      words: null
+      translatedQuestion: null,
+      pictures: null
     },
     nextPage: {
-      image: null,
+      question: null,
       answer: null,
-      translatedAnswer: null,
-      words: null
+      translatedQuestion: null,
+      pictures: null
     },
-    guessedWord: null,
+    guessedPicture: null,
     language: this.props.userData.language,
     guess: null,
     disabledNext: false
   };
 
   async componentDidMount() {
-    await this.getPicture("currentPage");
-    await this.getWords("currentPage");
+    await this.getQuestion("currentPage");
+    await this.getPictures("currentPage");
     this.prepareNextPage();
   }
 
-  getPicture = async page => {
-    //Decided whether to get picture from phone album or backend
-    const albumData = await MediaLibrary.getAlbumAsync("Expo");
-    const numberOfPicturesInPhone = albumData.assetCount;
-    if (Math.random() > (1 / numberOfPicturesInPhone) * 2) {
-      //Get picture from phone
-      const pictures = await MediaLibrary.getAssetsAsync({
-        album: "-2075771444"
-      });
-      const pic =
-        pictures.assets[Math.floor(Math.random() * pictures.assets.length)];
-      //Get word
-      const correctWord = await AsyncStorage.getItem(
-        "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FcameraApp-33d6ed69-a607-41a5-9687-1eb6229ce0d9/Camera/" +
-          pic.uri.slice(32)
-      );
-      //Set state
-      this.setState(
-        {
-          [page]: {
-            ...this.state[page],
-            image: pic.uri,
-            answer: correctWord
-          }
-        },
-        () => {
-          return "done";
-        }
-      );
-    } else {
-      //Get picture and word from backend
-      const randomNum = Math.ceil(Math.random() * 80);
-      const pic = await getGenericPicture(randomNum).catch(err => {
-        this.prepareNextPage();
-      });
-      const imageUri = pic.pictureData;
-      const correctWord = pic.word;
-      this.setState(
-        {
-          [page]: {
-            ...this.state[page],
-            image: imageUri,
-            answer: correctWord
-          }
-        },
-        () => {
-          return "done";
-        }
-      );
-    }
-  };
-
-  getWords = async page => {
-    let num = Math.ceil(this.props.userData.score / 10);
-    if (num > 2) num = 2;
-    const newWords = await getListOfWords(
-      this.state[page].answer,
-      num + 2,
+  getQuestion = async page => {
+    const questionWord = words[Math.floor(Math.random() * words.length)];
+    const translatedQuestion = await translateWord(
+      questionWord,
       this.state.language
     );
     this.setState(
       {
         [page]: {
           ...this.state[page],
-          words: newWords[0],
-          translatedAnswer: newWords[1]
+          question: questionWord,
+          answer: questionWord,
+          translatedQuestion: translatedQuestion
+        }
+      },
+      () => {
+        return "done";
+      }
+    );
+  };
+
+  getPictures = async page => {
+    let num = Math.ceil(this.props.userData.score / 10);
+    if (num > 3) num = 3;
+    const picArray = [];
+    console.log(this.state[page].question);
+    //push correct pic into array
+    const correctUri = await getGenericPicture(
+      words.indexOf(this.state[page].question) + 1
+    );
+
+    picArray.push(correctUri.pictureData);
+    console.log(picArray);
+    //push more pics into array
+    for (let i = 0; i < num; i++) {
+      const uri = await getGenericPicture(Math.ceil(Math.random() * 80)).catch(
+        err => {
+          console.log("error here");
+        }
+      );
+      if (!picArray.includes(uri.pictureData)) picArray.push(uri.pictureData);
+      else {
+        const uri = await getGenericPicture(
+          Math.ceil(Math.random() * 80)
+        ).catch(err => {
+          console.log("error here");
+        });
+        if (!picArray.includes(uri.pictureData)) picArray.push(uri.pictureData);
+      }
+    }
+    //set pictures to array of the uris
+    // if (num > 2) num = 2;
+    // const newWords = await getListOfWords(
+    //   this.state[page].answer,
+    //   num + 2,
+    //   "en"
+    // );
+    this.setState(
+      {
+        [page]: {
+          ...this.state[page],
+          pictures: picArray.sort(function() {
+            return 0.5 - Math.random();
+          }),
+          answer: correctUri.pictureData
         },
         disabledNext: false
       },
@@ -116,12 +115,12 @@ export default class PictureMatch extends Component {
     );
   };
 
-  guessWord = word => {
-    if (word === this.state.currentPage.translatedAnswer) {
+  guessPicture = picture => {
+    if (picture === this.state.currentPage.answer) {
       this.setState({ guess: "correct" });
       this.props.increaseScore();
     } else {
-      this.setState({ guess: "incorrect", guessedWord: word });
+      this.setState({ guess: "incorrect", guessedPicture: picture });
     }
   };
 
@@ -135,44 +134,43 @@ export default class PictureMatch extends Component {
   };
 
   prepareNextPage = async () => {
-    await this.getPicture("nextPage");
-    await this.getWords("nextPage");
+    await this.getQuestion("nextPage");
+    await this.getPictures("nextPage");
     return "prepared";
   };
 
   render() {
     const styles = styleMaker(this.state);
-    // console.log(this.state);
+    console.log(this.state);
 
     let feedback = "Great!";
     if (this.state.guess === "incorrect") {
       feedback = "Not quite!";
     }
 
-    if (this.state.currentPage.words) {
+    if (this.state.currentPage.pictures) {
       return (
         <View style={styles.screen}>
-          <Text>Picture Match</Text>
-          <View style={styles.pictureContainer}>
-            <Image
-              source={{ uri: this.state.currentPage.image }}
-              style={styles.picture}
-            />
+          <Text>Word Match</Text>
+          <View style={styles.questionContainer}>
+            <Text style={styles.question}>
+              {this.state.currentPage.translatedQuestion}
+            </Text>
+            <View style={styles.speakWord}>
+              <Button
+                onPress={() =>
+                  sayWord(
+                    this.state.currentPage.translatedQuestion,
+                    this.state.language
+                  )
+                }
+              >
+                <Ionicons name="md-megaphone" size={30} />
+              </Button>
+            </View>
             {this.state.guess !== null && (
               <View style={styles.pictureOverlay}>
                 <Text style={styles.guessConfirmationText}>{feedback}</Text>
-                <View style={styles.speakWord}>
-                  <Button
-                    onPress={() =>
-                      sayWord(
-                        this.state.currentPage.translatedAnswer,
-                        this.state.language
-                      )
-                    }
-                  >
-                    <Ionicons name="md-megaphone" size={30} />
-                  </Button>
-                </View>
                 <Button
                   style={styles.nextButton}
                   onPress={this.nextWord}
@@ -183,36 +181,32 @@ export default class PictureMatch extends Component {
               </View>
             )}
           </View>
-          <View style={styles.options}>
-            {this.state.currentPage.words.map(word => {
+          <View style={styles.pictureOptions}>
+            {this.state.currentPage.pictures.map(picture => {
               return (
                 <View
+                  key={picture}
                   style={
                     !this.state.guess
-                      ? styles.wordOption
-                      : this.state.currentPage.translatedAnswer === word
-                      ? { ...styles.wordOption, ...styles.correctGuess }
-                      : this.state.guessedWord === word
-                      ? { ...styles.wordOption, ...styles.incorrectGuess }
-                      : { ...styles.wordOption, ...styles.otherGuess }
+                      ? styles.pictureOption
+                      : this.state.currentPage.answer === picture
+                      ? { ...styles.pictureOption, ...styles.correctGuess }
+                      : this.state.guessedPicture === picture
+                      ? { ...styles.pictureOption, ...styles.incorrectGuess }
+                      : { ...styles.pictureOption, ...styles.otherGuess }
                   }
-                  key={word}
                 >
                   <Button
-                    onPress={() => this.guessWord(word)}
-                    disabled={this.state.guess !== null}
-                    style={styles.wordOptionButton}
+                    onPress={() => this.guessPicture(picture)}
+                    style={{ width: 140, height: 140 }}
                   >
-                    {word}
+                    <Image
+                      source={{
+                        uri: picture
+                      }}
+                      style={{ width: 140, height: 140 }}
+                    ></Image>
                   </Button>
-
-                  {!this.state.guess && (
-                    <View style={styles.speakWord}>
-                      <Button onPress={() => (word, this.state.language)}>
-                        <Ionicons name="md-megaphone" size={30} />
-                      </Button>
-                    </View>
-                  )}
                 </View>
               );
             })}
