@@ -61,7 +61,7 @@ export default class PictureMatch extends Component {
     //Decided whether to get picture from phone album or backend
     const albumData = await MediaLibrary.getAlbumAsync("Expo");
     const numberOfPicturesInPhone = albumData.assetCount;
-    if (Math.random() > (1 / numberOfPicturesInPhone) * 2) {
+    if (Math.random() > 8 / numberOfPicturesInPhone) {
       //Get picture from phone
       const pictures = await MediaLibrary.getAssetsAsync({
         album: "-2075771444"
@@ -203,12 +203,14 @@ export default class PictureMatch extends Component {
                     <Text style={styles.guessConfirmationText}>{feedback}</Text>
                     <View style={styles.speakWord}>
                       <Button
+
                         onPress={() =>
                           sayWord(
                             this.state.currentPage.translatedAnswer,
                             this.state.language
                           )
                         }
+
                       >
                         <Ionicons name="md-megaphone" size={30} />
                       </Button>
