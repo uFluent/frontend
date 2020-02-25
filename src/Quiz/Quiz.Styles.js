@@ -59,6 +59,10 @@ export const styleMaker = state => {
       backgroundColor: "grey",
       marginTop: 10
     },
+    wordOptionButton: {
+      width: winWidth / 3,
+      height: 40
+    },
     correctGuess: {
       backgroundColor: "green"
     },
