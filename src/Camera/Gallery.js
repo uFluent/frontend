@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, TouchableOpacity } from "react-native";
 
 import Button from "react-native-button";
 import { Ionicons } from "@expo/vector-icons";
@@ -12,6 +12,11 @@ import * as MediaLibrary from "expo-media-library";
 import * as ImageManipulator from "expo-image-manipulator";
 
 import { styleMaker } from "./Gallery.styles";
+
+import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";
+
+import { SimpleAnimation } from "react-native-simple-animations";
+import LoadingDots from "react-native-loading-dots";
 
 // import ImageCompressor from "@trunkrs/react-native-image-compressor";
 
@@ -98,7 +103,7 @@ export default class Gallery extends React.Component {
         <View style={styles.topButtons}>
           <Button onPress={this.props.returnToCamera}>
             <View style={styles.cameraButton}>
-              <Ionicons name="md-camera" size={30} style={styles.cameraIcons} />
+              {/* <Ionicons name="md-camera" size={30} style={styles.cameraIcons} /> */}
               <Ionicons
                 name="md-return-left"
                 size={30}
@@ -106,21 +111,58 @@ export default class Gallery extends React.Component {
               />
             </View>
           </Button>
-          <View style={styles.saveButton}>
-            <Button onPress={() => this.savePhoto(this.state.photoData.uri)}>
-              <Ionicons name="md-save" size={30} />
-            </Button>
-          </View>
+
+          {this.state.word ? (
+            <SimpleAnimation
+              delay={100}
+              duration={1000}
+              direction="right"
+              staticType="bounce"
+              distance={60}
+              // friction={4}
+            >
+              <View style={styles.saveButton}>
+                <Button
+                  onPress={() => this.savePhoto(this.state.photoData.uri)}
+                >
+                  <Ionicons name="md-save" size={30} />
+                </Button>
+              </View>
+            </SimpleAnimation>
+          ) : (
+            <Text>{""}</Text>
+          )}
         </View>
         <View style={styles.lowerText}>
-          <Text style={{ fontSize: this.state.fontSize }}>
-            {this.state.word}
-          </Text>
-          <Button onPress={this.speakWord}>
-            <View style={styles.speakButton}>
-              <Ionicons name="md-megaphone" size={30} />
-            </View>
-          </Button>
+          <View style={styles.loadingScreen}>
+            {!this.state.word ? (
+              <LoadingDots />
+            ) : (
+              <Text style={{ fontSize: this.state.fontSize }}>
+                {`${this.state.word || "..."}`.toUpperCase()}
+              </Text>
+            )}
+          </View>
+          <View style={styles.speakButton}>
+            <AwesomeButtonCartman
+              type="secondary"
+              style={{
+                marginTop: 10
+              }}
+              size="small"
+              borderRadius={(20, 50)}
+              height={70}
+              textSize={30}
+              width={70}
+              backgroundColor="#edff8f"
+              borderColor="#ffb3ba"
+              backgroundDarker="#ff9668"
+              raiseLevel={5}
+              onPress={this.speakWord}
+            >
+              <Ionicons name="md-volume-high" size={45} />
+            </AwesomeButtonCartman>
+          </View>
         </View>
       </React.Fragment>
     );

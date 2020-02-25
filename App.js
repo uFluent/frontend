@@ -89,7 +89,7 @@ export default class App extends React.Component {
     });
 
     api.patchLevel(this.state.userName, 1).then(res => {
-      console.log("success added one score");
+      console.log(res, "<< res in app.js");
     });
   };
 

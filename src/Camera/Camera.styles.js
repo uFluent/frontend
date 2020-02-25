@@ -13,7 +13,7 @@ export default StyleSheet.create({
     bottom: 0
   },
   background: {
-    backgroundColor: "#f4511e",
+    backgroundColor: "#FFDF00",
     height: winHeight,
     width: winWidth
   },
@@ -33,7 +33,7 @@ export default StyleSheet.create({
     height: 100,
     borderWidth: 2,
     borderRadius: 50,
-    borderColor: "rgb(0, 210, 46)",
+    borderColor: "#7bc043",
     backgroundColor: "rgb(43, 128, 62)",
     display: "flex",
     flexDirection: "column",

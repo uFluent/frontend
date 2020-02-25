@@ -13,6 +13,7 @@ import {
 
 import * as api from "../../api";
 import styles from "./Profile.style";
+import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";
 
 // import ModalDropdown from 'react-native-modal-dropdown';
 import ModalDropdown from "react-native-modal-dropdown";
@@ -23,7 +24,7 @@ const DEMO_OPTIONS_2 = [
   { country: "English", code: "en" },
   { country: "Spanish", code: "es" },
   { country: "French", code: "fr" },
-  { country: "Norwegian", code: "no" }
+  { country: "German", code: "de" }
 ];
 
 export default class Profile extends React.Component {
@@ -38,7 +39,7 @@ export default class Profile extends React.Component {
         fr: require(`./Flags/fr.png`),
         es: require(`./Flags/es.png`),
         en: require(`./Flags/en.png`),
-        no: require(`./Flags/no.png`)
+        de: require(`./Flags/de.png`)
       },
       userData: "",
       avatarUrl: {
@@ -70,10 +71,10 @@ export default class Profile extends React.Component {
         <SimpleAnimation
           delay={1000}
           duration={2000}
-          // direction="right"
+          direction="right"
           staticType="zoom"
           distance={20}
-          // friction={4}
+          friction={4}
         >
           <TouchableOpacity onPress={this.updatePicture}>
             <Image
@@ -85,73 +86,130 @@ export default class Profile extends React.Component {
 
         <View>
           <SimpleAnimation
-            delay={1000}
+            delay={600}
             duration={5000}
             direction="right"
             staticType="bounce"
             distance={20}
             friction={4}
           >
-            <View style={styles.sections}>
+            <AwesomeButtonCartman
+              type="secondary"
+              style={{
+                marginTop: 10
+              }}
+              size="small"
+              borderRadius={(20, 50)}
+              height={65}
+              textSize={30}
+              width={300}
+              backgroundColor="#edff8f"
+              borderColor="#ffb3ba"
+              backgroundDarker="#ff9668"
+              raiseLevel={4}
+            >
+              {/* <View style={styles.sections}> */}
               <Text style={styles.text}>{userName}</Text>
-            </View>
+              {/* </View> */}
+            </AwesomeButtonCartman>
           </SimpleAnimation>
         </View>
 
         <View>
           <SimpleAnimation
-            delay={1000}
+            delay={400}
             duration={3000}
             friction={4}
             movementType="spring"
             direction="right"
             distance={70}
           >
-            <View style={styles.sections}>
-              <View style={styles.languageContainer}>
-                <Image
-                  source={DisplayFlag[userData.language]}
-                  style={{ width: 75, height: 50 }}
-                />
-                <ModalDropdown
-                  ref="dropdown_2"
-                  style={styles.dropdown_2}
-                  textStyle={styles.dropdown_2_text}
-                  dropdownStyle={styles.dropdown_2_dropdown}
-                  options={DEMO_OPTIONS_2}
-                  defaultValue={this.displayCountry()}
-                  renderButtonText={rowData =>
-                    this._dropdown_2_renderButtonText(rowData)
-                  }
-                  renderRow={this._dropdown_2_renderRow.bind(this)}
-                  renderSeparator={(sectionID, rowID, adjacentRowHighlighted) =>
-                    this._dropdown_2_renderSeparator(
+            <AwesomeButtonCartman
+              type="secondary"
+              style={{
+                marginTop: 10
+              }}
+              size="small"
+              borderRadius={(20, 50)}
+              height={65}
+              textSize={30}
+              width={300}
+              backgroundColor="#edff8f"
+              borderColor="#ffb3ba"
+              backgroundDarker="#ff9668"
+              raiseLevel={4}
+            >
+              <View style={styles.sections}>
+                <View style={styles.languageContainer}>
+                  <Image
+                    source={DisplayFlag[userData.language]}
+                    style={{ width: 75, height: 50 }}
+                  />
+
+                  <ModalDropdown
+                    ref="dropdown_2"
+                    style={styles.dropdown_2}
+                    textStyle={styles.dropdown_2_text}
+                    dropdownStyle={styles.dropdown_2_dropdown}
+                    options={DEMO_OPTIONS_2}
+                    defaultValue={this.displayCountry()}
+                    renderButtonText={rowData =>
+                      this._dropdown_2_renderButtonText(rowData)
+                    }
+                    renderRow={this._dropdown_2_renderRow.bind(this)}
+                    renderSeparator={(
                       sectionID,
                       rowID,
                       adjacentRowHighlighted
-                    )
-                  }
-                ></ModalDropdown>
+                    ) =>
+                      this._dropdown_2_renderSeparator(
+                        sectionID,
+                        rowID,
+                        adjacentRowHighlighted
+                      )
+                    }
+                  ></ModalDropdown>
+                </View>
               </View>
-            </View>
+            </AwesomeButtonCartman>
           </SimpleAnimation>
         </View>
 
         <View>
           <SimpleAnimation
-            delay={1000}
+            delay={200}
             duration={3000}
             friction={4}
             movementType="spring"
             direction="up"
             distance={70}
           >
+
+            <AwesomeButtonCartman
+              type="secondary"
+              style={{
+                marginTop: 10
+              }}
+              size="small"
+              borderRadius={(20, 50)}
+              height={65}
+              textSize={30}
+              width={300}
+              backgroundColor="#edff8f"
+              borderColor="#ffb3ba"
+              backgroundDarker="#ff9668"
+              raiseLevel={4}
+            >
+       
+         
             <View style={styles.sections}>
               <View style={[styles.levelBar, { width: 300 * score }]}></View>
               <Text style={styles.text}>
                 Level: {Math.ceil(userData.score / 10)}
               </Text>
             </View>
+   </AwesomeButtonCartman>
+
           </SimpleAnimation>
         </View>
       </View>
@@ -173,7 +231,7 @@ export default class Profile extends React.Component {
   displayCountry = () => {
     const { userData } = this.props.route.params;
     if (userData.language === "fr") return "French";
-    if (userData.language === "no") return "Norwegian";
+    if (userData.language === "de") return "German";
     if (userData.language === "en") return "English";
     if (userData.language === "es") return "Spanish";
     return "Country";
