@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, Image } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacityBase,
+  TouchableHighlightBase
+} from "react-native";
 import { AsyncStorage } from "react-native";
 import Button from "react-native-button";
 
@@ -14,6 +20,11 @@ import { styleMaker } from "./Quiz.Styles";
 
 import styled from "../Styles";
 import LottieView from "lottie-react-native";
+
+import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";
+import { SimpleAnimation } from "react-native-simple-animations";
+import * as Font from "expo-font";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default class PictureMatch extends Component {
   state = {
@@ -32,13 +43,18 @@ export default class PictureMatch extends Component {
     guessedWord: null,
     language: this.props.userData.language,
     guess: null,
-    disabledNext: false
+    disabledNext: false,
+    fontLoaded: false
   };
 
   async componentDidMount() {
     await this.getPicture("currentPage");
     await this.getWords("currentPage");
     this.prepareNextPage();
+    await Font.loadAsync({
+      "Mansalva-Regular": require("../../assets/fonts/Mansalva-Regular.ttf")
+    });
+    return this.setState({ fontLoaded: true });
   }
 
   getPicture = async page => {
@@ -145,6 +161,7 @@ export default class PictureMatch extends Component {
     // console.log(this.state);
 
     let feedback = "Great!";
+
     if (this.state.guess === "incorrect") {
       feedback = "Not quite!";
     }
@@ -152,71 +169,153 @@ export default class PictureMatch extends Component {
     if (this.state.currentPage.words) {
       return (
         <View style={styles.screen}>
-          <Text>Picture Match</Text>
-          <View style={styles.pictureContainer}>
-            <Image
-              source={{ uri: this.state.currentPage.image }}
-              style={styles.picture}
-            />
-            {this.state.guess !== null && (
-              <View style={styles.pictureOverlay}>
-                <Text style={styles.guessConfirmationText}>{feedback}</Text>
-                <View style={styles.speakWord}>
-                  <Button
-                    onPress={() =>
-                      sayWord(
-                        this.state.currentPage.translatedAnswer,
-                        this.state.language
-                      )
-                    }
-                  >
-                    <Ionicons name="md-megaphone" size={30} />
-                  </Button>
-                </View>
-                <Button
-                  style={styles.nextButton}
-                  onPress={this.nextWord}
-                  disabled={this.state.disabledNext}
+          <LinearGradient
+            colors={["#fdcd3b", "#ffed4b"]}
+            style={{ height: 700 }}
+          >
+            <View style={styles.selection}>
+              {this.state.fontLoaded ? (
+                <Text
+                  style={{
+                    fontFamily: "Mansalva-Regular",
+                    fontSize: 30
+                  }}
                 >
-                  Next
-                </Button>
-              </View>
-            )}
-          </View>
-          <View style={styles.options}>
-            {this.state.currentPage.words.map(word => {
-              return (
-                <View
-                  style={
-                    !this.state.guess
-                      ? styles.wordOption
-                      : this.state.currentPage.translatedAnswer === word
-                      ? { ...styles.wordOption, ...styles.correctGuess }
-                      : this.state.guessedWord === word
-                      ? { ...styles.wordOption, ...styles.incorrectGuess }
-                      : { ...styles.wordOption, ...styles.otherGuess }
-                  }
-                  key={word}
+                  Picture Match
+                </Text>
+              ) : null}
+              <View style={styles.pictureContainer}>
+                <SimpleAnimation
+                  delay={500}
+                  duration={1000}
+                  // direction="right"
+                  staticType="bounce"
+                  distance={20}
+                  friction={4}
                 >
-                  <Button
-                    onPress={() => this.guessWord(word)}
-                    disabled={this.state.guess !== null}
-                    style={styles.wordOptionButton}
-                  >
-                    {word}
-                  </Button>
-
-                  {!this.state.guess && (
+                  <Image
+                    source={{ uri: this.state.currentPage.image }}
+                    style={styles.picture}
+                  />
+                </SimpleAnimation>
+                {this.state.guess !== null && (
+                  <View style={styles.pictureOverlay}>
+                    <Text style={styles.guessConfirmationText}>{feedback}</Text>
                     <View style={styles.speakWord}>
-                      <Button onPress={() => (word, this.state.language)}>
+                      <Button
+                        onPress={() =>
+                          sayWord(
+                            this.state.currentPage.translatedAnswer,
+                            this.state.language
+                          )
+                        }
+                      >
                         <Ionicons name="md-megaphone" size={30} />
                       </Button>
                     </View>
-                  )}
-                </View>
-              );
-            })}
-          </View>
+                    {this.state.guess === "correct" ? (
+                      <LottieView
+                        source={require("../animations/5785-checkmark.json")}
+                        autoPlay
+                      ></LottieView>
+                    ) : (
+                      <LottieView
+                        source={require("../animations/4053-crying-smoothymon.json")}
+                        autoPlay
+                      ></LottieView>
+                    )}
+                    <AwesomeButtonCartman
+                      type="secondary"
+                      size="small"
+                      height={50}
+                      textSize={15}
+                      style={styles.nextButton}
+                      onPress={this.nextWord}
+                      disabled={this.state.disabledNext}
+                    >
+                      Next
+                    </AwesomeButtonCartman>
+                  </View>
+                )}
+              </View>
+              <View style={styles.options}>
+                {this.state.currentPage.words.map(word => {
+                  return (
+                    <View
+                      style={
+                        !this.state.guess
+                          ? styles.wordOption
+                          : this.state.currentPage.translatedAnswer === word
+                          ? { ...styles.wordOption, ...styles.correctGuess }
+                          : this.state.guessedWord === word
+                          ? { ...styles.wordOption, ...styles.incorrectGuess }
+                          : { ...styles.wordOption, ...styles.otherGuess }
+                      }
+                      key={word}
+                    >
+                      <SimpleAnimation
+                        delay={500}
+                        duration={2000}
+                        // direction="right"
+                        staticType="zoom"
+                        distance={20}
+                        // friction={4}
+                      >
+                        <AwesomeButtonCartman
+                          type="primary"
+                          size="small"
+                          borderRadius={(50, 20)}
+                          height={50}
+                          textSize={15}
+                          backgroundColor={
+                            !this.state.guess
+                              ? "#00b8c4"
+                              : this.state.currentPage.translatedAnswer === word
+                              ? "green"
+                              : this.state.guessedWord === word
+                              ? "red"
+                              : null
+                          }
+                          onPress={() => this.guessWord(word)}
+                          disabled={this.state.guess !== null}
+                          style={styles.wordOptionButton}
+                        >
+                          {word}
+                        </AwesomeButtonCartman>
+                      </SimpleAnimation>
+                      {!this.state.guess && (
+                        <View style={styles.speakWord}>
+                          <SimpleAnimation
+                            delay={500}
+                            duration={2000}
+                            // direction="right"
+                            staticType="zoom"
+                            distance={20}
+                            // friction={4}
+                          >
+                            <AwesomeButtonCartman
+                              type="secondary"
+                              size="small"
+                              borderRadius={(20, 50)}
+                              height={50}
+                              width={40}
+                              onPress={() => sayWord(word, this.state.language)}
+                            >
+                              <Ionicons
+                                name="md-megaphone"
+                                size={25}
+                                color="yellow"
+                              />
+                            </AwesomeButtonCartman>
+                          </SimpleAnimation>
+                        </View>
+                      )}
+                    </View>
+                  );
+                })}
+              </View>
+            </View>
+          </LinearGradient>
         </View>
       );
     } else {
