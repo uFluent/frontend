@@ -18,8 +18,8 @@ export const translateWord = (wordToTranslate, languageToChangeTo) => {
 
 export const sayWord = (word, language) => {
   console.log("say");
-  let variableRate = 0.6;
-  if (language === "en") variableRate = 1;
+  let variableRate = 1;
+  if (language === "es") variableRate = 0.6;
   Speech.speak(word, {
     language: language,
     pitch: 1,

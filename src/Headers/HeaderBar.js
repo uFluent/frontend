@@ -40,7 +40,15 @@ export default props => {
       </Button>
 
       <View style={styles.profileButtons}>
-        <View style={[styles.levelIndicator]}>
+        <View
+          style={[
+            styles.levelIndicator,
+            {
+              backgroundColor: `rgb(${200 - props.userData.score}, ${100 +
+                props.userData.score}, 0)`
+            }
+          ]}
+        >
           <Text style={{ fontSize: 25 }}>
             {Math.ceil(props.userData.score / 10)}
           </Text>
