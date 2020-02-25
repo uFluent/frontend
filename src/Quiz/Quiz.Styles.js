@@ -59,6 +59,10 @@ export const styleMaker = state => {
       backgroundColor: "grey",
       marginTop: 10
     },
+    wordOptionButton: {
+      width: winWidth / 3,
+      height: 40
+    },
     correctGuess: {
       backgroundColor: "green"
     },
@@ -71,9 +75,10 @@ export const styleMaker = state => {
       color: feedbackColour
     },
     speakWord: {
+      marginLeft: 20,
       backgroundColor: "orange",
-      width: 30,
-      height: 30
+      width: 40,
+      height: 40
     }
   });
 };

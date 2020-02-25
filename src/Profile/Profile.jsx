@@ -58,7 +58,7 @@ export default class Profile extends React.Component {
     });
   }
 
-render() {
+  render() {
     const { DisplayFlag, userData } = this.state;
     const { userName } = this.props.route.params;
 
@@ -144,7 +144,9 @@ render() {
             distance={70}
           >
             <View style={styles.sections}>
-              <Text style={styles.text}>Level: {userData.score}</Text>
+              <Text style={styles.text}>
+                Level: {Math.ceil(userData.score / 10)}
+              </Text>
             </View>
           </SimpleAnimation>
         </View>

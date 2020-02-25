@@ -11,7 +11,7 @@ import Profile from "./src/Profile/Profile";
 import { CameraPage } from "./src/Camera/Camera";
 import HeaderBar from "./src/Headers/HeaderBar";
 import Gallery from "./src/Camera/Gallery";
-import PictureMatch from "./src//Quiz/PictureMatch";
+import PictureMatch from "./src//Quiz/PictureMatch2";
 import WordMatch from "./src/Quiz/WordMatch";
 import LoadingScreen from "./src/Loading";
 
@@ -49,7 +49,6 @@ export default class App extends React.Component {
     });
   };
 
-
   getUserFromLocalStorage = async () => {
     const username = await AsyncStorage.getItem("username");
     if (username)
@@ -57,7 +56,6 @@ export default class App extends React.Component {
         userName: username
       });
   };
-
 
   componentDidMount() {
     this.getUserFromLocalStorage();

@@ -44,7 +44,9 @@ export default class PictureMatch extends Component {
       const pic =
         pictures.assets[Math.floor(Math.random() * pictures.assets.length)];
       console.log(pic.uri);
-      this.setState({ image: pic.uri, correctWord: null });
+      this.setState({ image: pic.uri, correctWord: null }, () =>
+        this.getWord()
+      );
     } else {
       //Get picture from backend
       const randomNum = Math.ceil(Math.random() * 80);
@@ -52,7 +54,7 @@ export default class PictureMatch extends Component {
       const pic = await getGenericPicture(randomNum);
       const imageUri = pic.pictureData;
       const correctWord = pic.word;
-      let num = this.props.userData.score;
+      let num = Math.ceil(this.props.userData.score / 10);
       if (num > 3) num = 3;
       const newWords = await getListOfWords(
         correctWord,
@@ -70,9 +72,10 @@ export default class PictureMatch extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.image !== prevState.image && !this.state.correctWord) {
-      this.getWord();
-    }
+    // if (this.state.image !== prevState.image && !this.state.correctWord) {
+    //   this.getWord();
+    // }
+    console.log(prevState.image, this.state.image);
     if (
       this.state.correctWord !== prevState.correctWord &&
       this.state.incorrectWords[0] !== prevState.incorrectWords[0]
@@ -87,7 +90,7 @@ export default class PictureMatch extends Component {
         this.state.image.slice(32)
     );
     //The name of the directory keeps changing somehow! ^^^
-    let num = this.props.userData.score;
+    let num = Math.ceil(this.props.userData.score / 10);
     if (num > 3) num = 3;
     const newWords = await getListOfWords(
       correctWord,
@@ -105,6 +108,7 @@ export default class PictureMatch extends Component {
   };
 
   guessWord = word => {
+    console.log("press");
     if (word === this.state.translatedCorrectWord) {
       this.setState({ guess: "correct" });
       this.props.increaseScore();
@@ -120,6 +124,7 @@ export default class PictureMatch extends Component {
 
   render() {
     const styles = styleMaker(this.state);
+    console.log(this.state);
 
     let feedback = "Great!";
     if (this.state.guess === "incorrect") {
@@ -175,6 +180,7 @@ export default class PictureMatch extends Component {
                   <Button
                     onPress={() => this.guessWord(word)}
                     disabled={this.state.guess !== null}
+                    style={styles.wordOptionButton}
                   >
                     {word}
                   </Button>
