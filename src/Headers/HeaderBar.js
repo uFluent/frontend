@@ -37,13 +37,15 @@ export default props => {
           style={[styles.homeButton, colorStyle(props.children === "Home")]}
         />
       </Button>
-      
+
       <View style={styles.profileButtons}>
-        <Text>Level: {props.userData.score}</Text>
+        <View style={styles.levelIndicator}>
+          <Text style={{ fontSize: 25 }}>{props.userData.score}</Text>
+        </View>
         <Button onPress={() => handlePress("Profile")}>
           <Image
             source={DisplayFlag[props.userData.language].file}
-            style={{ width: 50, height: 40 }}
+            style={styles.flagButton}
           />
         </Button>
         <Button onPress={() => handlePress("Profile")}>

@@ -35,6 +35,24 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: winWidth / 2
+    width: winWidth / 2.5
+  },
+  flagButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 5,
+    borderColor: "black",
+    borderWidth: 1
+  },
+  levelIndicator: {
+    width: 40,
+    height: 40,
+    borderRadius: 5,
+    borderColor: "black",
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
