@@ -54,7 +54,7 @@ export default class PictureMatch extends Component {
       const pic = await getGenericPicture(randomNum);
       const imageUri = pic.pictureData;
       const correctWord = pic.word;
-      let num = this.props.userData.score;
+      let num = Math.ceil(this.props.userData.score / 10);
       if (num > 3) num = 3;
       const newWords = await getListOfWords(
         correctWord,
@@ -90,7 +90,7 @@ export default class PictureMatch extends Component {
         this.state.image.slice(32)
     );
     //The name of the directory keeps changing somehow! ^^^
-    let num = this.props.userData.score;
+    let num = Math.ceil(this.props.userData.score / 10);
     if (num > 3) num = 3;
     const newWords = await getListOfWords(
       correctWord,

@@ -17,6 +17,7 @@ export const translateWord = (wordToTranslate, languageToChangeTo) => {
 };
 
 export const sayWord = (word, language) => {
+  console.log("say");
   let variableRate = 0.6;
   if (language === "en") variableRate = 1;
   Speech.speak(word, {
@@ -110,8 +111,5 @@ export const getGenericPicture = num => {
     .get(`https://ufluent.herokuapp.com/api/pictures/${num}`)
     .then(result => {
       return result.data.picture;
-    })
-    .catch(err => {
-      console.log(err);
     });
 };

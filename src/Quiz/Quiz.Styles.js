@@ -75,9 +75,10 @@ export const styleMaker = state => {
       color: feedbackColour
     },
     speakWord: {
+      marginLeft: 20,
       backgroundColor: "orange",
-      width: 30,
-      height: 30
+      width: 40,
+      height: 40
     }
   });
 };

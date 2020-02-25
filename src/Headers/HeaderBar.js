@@ -11,6 +11,7 @@ export default props => {
     if (currentPage) return { backgroundColor: "white", color: "#d9bde3" };
     else return { backgroundColor: "#d9bde3", color: "white" };
   };
+
   const navigation = useNavigation();
   const handlePress = targetPath => {
     navigation.navigate(targetPath);
@@ -39,8 +40,10 @@ export default props => {
       </Button>
 
       <View style={styles.profileButtons}>
-        <View style={styles.levelIndicator}>
-          <Text style={{ fontSize: 25 }}>{props.userData.score}</Text>
+        <View style={[styles.levelIndicator]}>
+          <Text style={{ fontSize: 25 }}>
+            {Math.ceil(props.userData.score / 10)}
+          </Text>
         </View>
         <Button onPress={() => handlePress("Profile")}>
           <Image

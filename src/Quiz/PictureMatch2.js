@@ -8,7 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { getListOfWords } from "./Words";
 
-import { sayWord, getGenericPicture, translateWord } from "../../api";
+import { sayWord, getGenericPicture } from "../../api";
 
 import { styleMaker } from "./Quiz.Styles";
 
@@ -73,7 +73,9 @@ export default class PictureMatch extends Component {
     } else {
       //Get picture and word from backend
       const randomNum = Math.ceil(Math.random() * 80);
-      const pic = await getGenericPicture(randomNum);
+      const pic = await getGenericPicture(randomNum).catch(err => {
+        this.prepareNextPage();
+      });
       const imageUri = pic.pictureData;
       const correctWord = pic.word;
       this.setState(
@@ -92,14 +94,13 @@ export default class PictureMatch extends Component {
   };
 
   getWords = async page => {
-    let num = this.props.userData.score;
+    let num = Math.ceil(this.props.userData.score / 10);
     if (num > 2) num = 2;
     const newWords = await getListOfWords(
       this.state[page].answer,
       num + 2,
       this.state.language
     );
-    console.log(newWords);
     this.setState(
       {
         [page]: {
@@ -116,7 +117,6 @@ export default class PictureMatch extends Component {
   };
 
   guessWord = word => {
-    console.log("press");
     if (word === this.state.currentPage.translatedAnswer) {
       this.setState({ guess: "correct" });
       this.props.increaseScore();
@@ -142,7 +142,7 @@ export default class PictureMatch extends Component {
 
   render() {
     const styles = styleMaker(this.state);
-    console.log(this.state);
+    // console.log(this.state);
 
     let feedback = "Great!";
     if (this.state.guess === "incorrect") {
@@ -208,9 +208,7 @@ export default class PictureMatch extends Component {
 
                   {!this.state.guess && (
                     <View style={styles.speakWord}>
-                      <Button
-                        onPress={() => sayWord(word, this.state.language)}
-                      >
+                      <Button onPress={() => (word, this.state.language)}>
                         <Ionicons name="md-megaphone" size={30} />
                       </Button>
                     </View>
