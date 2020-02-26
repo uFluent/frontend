@@ -9,11 +9,13 @@ export const styleMaker = state => {
   }
 
   let feedbackColour = "green";
-  if (state.guess === "incorrect") feedbackColour = "red" ;
+  if (state.guess === "incorrect") feedbackColour = "red";
 
   return StyleSheet.create({
     screen: {
-      height: winHeight
+      height: winHeight,
+      backgroundColor: "#F3ECE4"
+
       // backgroundColor: "#fdcd3b"
     },
     selection: {
@@ -30,7 +32,7 @@ export const styleMaker = state => {
       position: "relative"
     },
     pictureOverlay: {
-      height: 200,
+      height: 170,
       width: 200,
       position: "absolute",
       display: "flex",
@@ -80,7 +82,8 @@ export const styleMaker = state => {
     otherGuess: { opacity: 0.5 },
     guessConfirmationText: {
       fontSize: 40,
-      color: feedbackColour
+      color: feedbackColour,
+      marginBottom: 260
     },
     speakWord: {
       marginLeft: 20,

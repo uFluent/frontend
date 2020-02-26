@@ -8,8 +8,8 @@ import styles from "./HeaderBar.styles";
 
 export default props => {
   const colorStyle = currentPage => {
-    if (currentPage) return { backgroundColor: "white", color: "#d9bde3" };
-    else return { backgroundColor: "#d9bde3", color: "white" };
+    if (currentPage) return { backgroundColor: "white", color: "black" };
+    else return { backgroundColor: "black", color: "white" };
   };
 
   const navigation = useNavigation();

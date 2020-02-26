@@ -7,7 +7,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#f4511e",
+    backgroundColor: "yellow",
     flexDirection: "column-reverse"
   },
   logoText: {
