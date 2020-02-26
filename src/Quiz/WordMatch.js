@@ -215,7 +215,7 @@ export default class PictureMatch extends Component {
                         }
                       : {
                           ...styles.pictureOption,
-                          ...styles.otherGuess
+                          ...styles.otherGuessPicture
                         }
                   }
                 >

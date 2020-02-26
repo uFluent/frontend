@@ -113,7 +113,7 @@ export default class App extends React.Component {
     }
     if (userData === "" && userName !== "") {
       this.getUserData();
-      return <Text>Loading Data...</Text>;
+      return <LoadingScreen></LoadingScreen>;
     } else {
       return (
         <NavigationContainer>

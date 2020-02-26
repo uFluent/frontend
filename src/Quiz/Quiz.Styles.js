@@ -71,7 +71,6 @@ export const styleMaker = state => {
       width: winWidth / 3,
       height: 40
     },
-
     otherGuess: { opacity: 0.5 },
     guessConfirmationText: {
       fontSize: 40,
@@ -110,6 +109,7 @@ export const styleMaker = state => {
     incorrectGuess: {
       borderColor: "orange"
     },
+    otherGuessPicture: { opacity: 0.2 },
     pictureOptions: {
       width: winWidth,
       height: winHeight * 0.5,
