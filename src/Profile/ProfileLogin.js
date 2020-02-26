@@ -78,9 +78,9 @@ export default class ProfileLogin extends React.Component {
     }));
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({ userData: this.props.userData });
-    Font.loadAsync({
+    await Font.loadAsync({
       "Mansalva-Regular": require("../../assets/fonts/Mansalva-Regular.ttf")
     });
     return this.setState({ fontLoaded: true });
