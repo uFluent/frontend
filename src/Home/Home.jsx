@@ -66,7 +66,7 @@ export default class Home extends Component {
                 <Text
                   style={{
                     fontFamily: "Mansalva-Regular",
-                    color: "#FFFFF",
+                    color: "white",
                     fontSize: 80
                   }}
                 >
@@ -86,7 +86,7 @@ export default class Home extends Component {
                 <Text
                   style={{
                     fontFamily: "Mansalva-Regular",
-                    color: "#FFFFF",
+                    color: "white",
                     fontSize: 80
                   }}
                 >
