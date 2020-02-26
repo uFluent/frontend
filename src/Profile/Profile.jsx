@@ -48,6 +48,8 @@ export default class Profile extends React.Component {
       dropdown_4_defaultValue: "loading...",
       dropdown_6_icon_heart: true,
       themeNumber: 0,
+      fontLoaded: false,
+      font: "serif",
       DisplayFlag: {
         fr: require(`./Flags/fr.png`),
         es: require(`./Flags/es.png`),
@@ -67,11 +69,13 @@ export default class Profile extends React.Component {
   }
 
   async componentDidMount() {
-    this.setState({
-      userData: this.props.route.params.userData
-    });
     await Font.loadAsync({
       "Baloo-Regular": require("../../assets/fonts/Baloo-Regular.ttf")
+    });
+    this.setState({
+      userData: this.props.route.params.userData,
+      fontLoaded: true,
+      font: "Baloo-Regular"
     });
   }
 
@@ -125,7 +129,7 @@ export default class Profile extends React.Component {
               backgroundDarker={themeArray[themeNumber].backgroundDark}
               raiseLevel={10}
             >
-              <Text style={[styles.text, { fontFamily: "Baloo-Regular" }]}>
+              <Text style={[styles.text, { fontFamily: this.state.font }]}>
                 {userName}
               </Text>
             </AwesomeButtonCartman>
@@ -168,7 +172,7 @@ export default class Profile extends React.Component {
                   style={styles.dropdown_2}
                   textStyle={[
                     styles.dropdown_2_text,
-                    { fontFamily: "Baloo-Regular" }
+                    { fontFamily: this.state.font }
                   ]}
                   dropdownStyle={styles.dropdown_2_dropdown}
                   options={languageOptions}
@@ -219,7 +223,7 @@ export default class Profile extends React.Component {
               <View style={styles.sections}>
                 <View style={[styles.levelBar, { width: 320 * score }]}></View>
 
-                <Text style={[styles.text, { fontFamily: "Baloo-Regular" }]}>
+                <Text style={[styles.text, { fontFamily: this.state.font }]}>
                   Level: {Math.ceil(userData.score / 10)}
                 </Text>
               </View>
