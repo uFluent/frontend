@@ -32,13 +32,25 @@ export default class PictureMatch extends Component {
     guessedPicture: null,
     language: this.props.userData.language,
     guess: null,
-    disabledNext: false
+    disabledNext: false,
+    fontSize: 50
   };
 
   async componentDidMount() {
     await this.getQuestion("currentPage");
     await this.getPictures("currentPage");
     this.prepareNextPage();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.state.currentPage.translatedQuestion !==
+      prevState.currentPage.translatedQuestion
+    ) {
+      this.setState({
+        fontSize: 50 - this.state.currentPage.translatedQuestion.length
+      });
+    }
   }
 
   getQuestion = async page => {
@@ -91,13 +103,7 @@ export default class PictureMatch extends Component {
         if (!picArray.includes(uri.pictureData)) picArray.push(uri.pictureData);
       }
     }
-    //set pictures to array of the uris
-    // if (num > 2) num = 2;
-    // const newWords = await getListOfWords(
-    //   this.state[page].answer,
-    //   num + 2,
-    //   "en"
-    // );
+
     this.setState(
       {
         [page]: {
@@ -120,13 +126,20 @@ export default class PictureMatch extends Component {
       this.setState({ guess: "correct" });
       this.props.increaseScore();
     } else {
-      this.setState({ guess: "incorrect", guessedPicture: picture });
+      this.setState({
+        guess: "incorrect",
+        guessedPicture: picture
+      });
     }
   };
 
   nextWord = () => {
     this.setState(
-      { disabledNext: true, currentPage: this.state.nextPage, guess: null },
+      {
+        disabledNext: true,
+        currentPage: this.state.nextPage,
+        guess: null
+      },
       () => {
         this.prepareNextPage();
       }
@@ -151,25 +164,26 @@ export default class PictureMatch extends Component {
     if (this.state.currentPage.pictures) {
       return (
         <View style={styles.screen}>
-          <Text>Word Match</Text>
           <View style={styles.questionContainer}>
-            <Text style={styles.question}>
+            <Text style={[styles.question, { fontSize: this.state.fontSize }]}>
               {this.state.currentPage.translatedQuestion}
             </Text>
-            <View style={styles.speakWord}>
-              <Button
-                onPress={() =>
-                  sayWord(
-                    this.state.currentPage.translatedQuestion,
-                    this.state.language
-                  )
-                }
-              >
-                <Ionicons name="md-megaphone" size={30} />
-              </Button>
-            </View>
+            {this.state.guess === null && (
+              <View style={styles.speakWord}>
+                <Button
+                  onPress={() =>
+                    sayWord(
+                      this.state.currentPage.translatedQuestion,
+                      this.state.language
+                    )
+                  }
+                >
+                  <Ionicons name="md-megaphone" size={30} />
+                </Button>
+              </View>
+            )}
             {this.state.guess !== null && (
-              <View style={styles.pictureOverlay}>
+              <View style={styles.wordOverlay}>
                 <Text style={styles.guessConfirmationText}>{feedback}</Text>
                 <Button
                   style={styles.nextButton}
@@ -190,15 +204,25 @@ export default class PictureMatch extends Component {
                     !this.state.guess
                       ? styles.pictureOption
                       : this.state.currentPage.answer === picture
-                      ? { ...styles.pictureOption, ...styles.correctGuess }
+                      ? {
+                          ...styles.pictureOption,
+                          ...styles.correctGuess
+                        }
                       : this.state.guessedPicture === picture
-                      ? { ...styles.pictureOption, ...styles.incorrectGuess }
-                      : { ...styles.pictureOption, ...styles.otherGuess }
+                      ? {
+                          ...styles.pictureOption,
+                          ...styles.incorrectGuess
+                        }
+                      : {
+                          ...styles.pictureOption,
+                          ...styles.otherGuess
+                        }
                   }
                 >
                   <Button
                     onPress={() => this.guessPicture(picture)}
                     style={{ width: 140, height: 140 }}
+                    disabled={this.state.guess !== null}
                   >
                     <Image
                       source={{
