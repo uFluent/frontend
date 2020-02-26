@@ -7,8 +7,9 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "yellow",
-    flexDirection: "column-reverse"
+    backgroundColor: "lightblue",
+    flexDirection: "column-reverse",
+    position: "relative"
   },
   logoText: {
     fontSize: 70,

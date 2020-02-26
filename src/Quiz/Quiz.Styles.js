@@ -15,15 +15,13 @@ export const styleMaker = state => {
     screen: {
       height: winHeight,
       backgroundColor: "#F3ECE4"
-
-      // backgroundColor: "#fdcd3b"
     },
     selection: {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "space-evenly",
-      height: winHeight * 0.8
+      height: winHeight * 0.9
     },
     title: {},
     pictureContainer: {
@@ -56,7 +54,7 @@ export const styleMaker = state => {
       flexDirection: "column",
       alignItems: "center",
       width: winWidth,
-      height: winHeight * 0.3
+      height: winHeight * 0.4
     },
     wordOption: {
       display: "flex",
@@ -67,7 +65,8 @@ export const styleMaker = state => {
       height: 40,
       // backgroundColor: "grey",
       marginTop: 10,
-      margin: 20
+      margin: 20,
+      marginLeft: -50
     },
     wordOptionButton: {
       width: winWidth / 3,
@@ -80,7 +79,7 @@ export const styleMaker = state => {
       marginBottom: 260
     },
     speakWord: {
-      marginLeft: 20,
+      marginLeft: 50,
       // backgroundColor: "orange",
       width: 40,
       height: 40

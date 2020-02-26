@@ -7,19 +7,20 @@ export default StyleSheet.create({
     display: "flex",
     flex: 1,
     alignItems: "center",
-    // justifyContent: "center",
-    backgroundColor: "#bff199" //"#bae1ff"
+    backgroundColor: "#bff199",
+    height: winHeight * 0.7
   },
   languageContainer: {
     alignContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "space-between",
+    width: 300
   },
   imageProfile: {
     width: 250,
     height: 250,
-    marginTop: 40,
+    marginTop: 20,
     marginBottom: 20,
     borderRadius: 60,
     borderColor: "white",
@@ -73,7 +74,7 @@ export default StyleSheet.create({
   dropdown_2: {
     width: 120,
     height: 65,
-    left: 60,
+    left: 0,
     borderWidth: 0,
     borderTopRightRadius: 25,
     borderBottomRightRadius: 25,

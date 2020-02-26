@@ -4,6 +4,8 @@ import * as Speech from "expo-speech";
 import axios from "axios";
 
 export const translateWord = (wordToTranslate, languageToChangeTo) => {
+  // if (wordToTranslate === "nothing recognised") return "Oops! Try again!";
+  // else
   return fetch(
     `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200221T160402Z.f59e589640b65d4b.800e13bd0a0f63c412a70eaabe374b29b4df230b&text=${wordToTranslate}&lang=${languageToChangeTo}&format=plain`
   )
