@@ -7,7 +7,7 @@ export default StyleSheet.create({
     height: winHeight,
     width: winWidth - 15,
     position: "relative",
-    left: 10,
+    left: 8,
     top: 25,
     right: 10,
     borderRadius: 10,

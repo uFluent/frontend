@@ -178,7 +178,7 @@ export default class PictureMatch extends Component {
                     )
                   }
                 >
-                  <Ionicons name="md-megaphone" size={30} />
+                  <Ionicons name="md-volume-high" size={30} />
                 </Button>
               </View>
             )}

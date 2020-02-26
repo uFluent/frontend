@@ -67,7 +67,8 @@ export const styleMaker = state => {
       height: 40,
       // backgroundColor: "grey",
       marginTop: 10,
-      margin: 20
+      margin: 20,
+      marginLeft: -50
     },
     wordOptionButton: {
       width: winWidth / 3,
@@ -80,7 +81,7 @@ export const styleMaker = state => {
       marginBottom: 260
     },
     speakWord: {
-      marginLeft: 20,
+      marginLeft: 50,
       // backgroundColor: "orange",
       width: 40,
       height: 40
