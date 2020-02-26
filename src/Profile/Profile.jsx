@@ -15,16 +15,27 @@ import * as api from "../../api";
 import styles from "./Profile.style";
 import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";
 
-// import ModalDropdown from 'react-native-modal-dropdown';
 import ModalDropdown from "react-native-modal-dropdown";
 import { SimpleAnimation } from "react-native-simple-animations";
 
-const DEMO_OPTIONS_1 = ["option 1", "option 2", "option 3", "option 4"];
-const DEMO_OPTIONS_2 = [
-  { country: "English", code: "en" },
-  { country: "Spanish", code: "es" },
-  { country: "French", code: "fr" },
-  { country: "German", code: "de" }
+const languageOptions = [
+  { country: "ENGLISH", code: "en" },
+  { country: "SPANISH", code: "es" },
+  { country: "FRENCH", code: "fr" },
+  { country: "GERMAN", code: "de" }
+];
+
+const themeArray = [
+  {
+    borderColor: "white",
+    backgroundColor: "rgb(255,159,157)",
+    backgroundDark: "rgb(32, 140, 42)"
+  },
+  {
+    borderColor: "green",
+    backgroundColor: "red",
+    backgroundDark: "blue"
+  }
 ];
 
 export default class Profile extends React.Component {
@@ -35,6 +46,7 @@ export default class Profile extends React.Component {
       dropdown_4_options: null,
       dropdown_4_defaultValue: "loading...",
       dropdown_6_icon_heart: true,
+      themeNumber: 0,
       DisplayFlag: {
         fr: require(`./Flags/fr.png`),
         es: require(`./Flags/es.png`),
@@ -62,6 +74,7 @@ export default class Profile extends React.Component {
   render() {
     const { DisplayFlag, userData } = this.state;
     const { userName } = this.props.route.params;
+    const { themeNumber } = this.state;
     let score = 0;
     if (userData.score) score = (userData.score % 10) * 0.1;
     console.log(score);
@@ -103,14 +116,13 @@ export default class Profile extends React.Component {
               height={65}
               textSize={30}
               width={300}
-              backgroundColor="#edff8f"
-              borderColor="#ffb3ba"
-              backgroundDarker="#ff9668"
-              raiseLevel={4}
+              borderWidth={3}
+              backgroundColor={themeArray[themeNumber].backgroundColor}
+              borderColor={themeArray[themeNumber].borderColor}
+              backgroundDarker={themeArray[themeNumber].backgroundDark}
+              raiseLevel={10}
             >
-              {/* <View style={styles.sections}> */}
               <Text style={styles.text}>{userName}</Text>
-              {/* </View> */}
             </AwesomeButtonCartman>
           </SimpleAnimation>
         </View>
@@ -127,49 +139,46 @@ export default class Profile extends React.Component {
             <AwesomeButtonCartman
               type="secondary"
               style={{
-                marginTop: 10
+                marginTop: 20
               }}
               size="small"
               borderRadius={(20, 50)}
               height={65}
               textSize={30}
               width={300}
-              backgroundColor="#edff8f"
-              borderColor="#ffb3ba"
-              backgroundDarker="#ff9668"
-              raiseLevel={4}
+              borderWidth={3}
+              backgroundColor={themeArray[themeNumber].backgroundColor}
+              borderColor={themeArray[themeNumber].borderColor}
+              backgroundDarker={themeArray[themeNumber].backgroundDark}
+              raiseLevel={10}
             >
-              <View style={styles.sections}>
-                <View style={styles.languageContainer}>
-                  <Image
-                    source={DisplayFlag[userData.language]}
-                    style={{ width: 75, height: 50 }}
-                  />
+              {/* <View style={styles.sections}> */}
+              <View style={styles.languageContainer}>
+                <Image
+                  source={DisplayFlag[userData.language]}
+                  style={{ width: 75, height: 50 }}
+                />
 
-                  <ModalDropdown
-                    ref="dropdown_2"
-                    style={styles.dropdown_2}
-                    textStyle={styles.dropdown_2_text}
-                    dropdownStyle={styles.dropdown_2_dropdown}
-                    options={DEMO_OPTIONS_2}
-                    defaultValue={this.displayCountry()}
-                    renderButtonText={rowData =>
-                      this._dropdown_2_renderButtonText(rowData)
-                    }
-                    renderRow={this._dropdown_2_renderRow.bind(this)}
-                    renderSeparator={(
+                <ModalDropdown
+                  ref="dropdown_2"
+                  style={styles.dropdown_2}
+                  textStyle={styles.dropdown_2_text}
+                  dropdownStyle={styles.dropdown_2_dropdown}
+                  options={languageOptions}
+                  defaultValue={this.displayCountry()}
+                  renderButtonText={rowData =>
+                    this._dropdown_2_renderButtonText(rowData)
+                  }
+                  renderRow={this._dropdown_2_renderRow.bind(this)}
+                  renderSeparator={(sectionID, rowID, adjacentRowHighlighted) =>
+                    this._dropdown_2_renderSeparator(
                       sectionID,
                       rowID,
                       adjacentRowHighlighted
-                    ) =>
-                      this._dropdown_2_renderSeparator(
-                        sectionID,
-                        rowID,
-                        adjacentRowHighlighted
-                      )
-                    }
-                  ></ModalDropdown>
-                </View>
+                    )
+                  }
+                ></ModalDropdown>
+                {/* </View> */}
               </View>
             </AwesomeButtonCartman>
           </SimpleAnimation>
@@ -184,37 +193,36 @@ export default class Profile extends React.Component {
             direction="up"
             distance={70}
           >
-
             <AwesomeButtonCartman
               type="secondary"
               style={{
-                marginTop: 10
+                marginTop: 20
               }}
               size="small"
               borderRadius={(20, 50)}
               height={65}
               textSize={30}
               width={300}
-              backgroundColor="#edff8f"
-              borderColor="#ffb3ba"
-              backgroundDarker="#ff9668"
-              raiseLevel={4}
+              borderWidth={3}
+              backgroundColor={themeArray[themeNumber].backgroundColor}
+              borderColor={themeArray[themeNumber].borderColor}
+              backgroundDarker={themeArray[themeNumber].backgroundDark}
+              raiseLevel={10}
             >
-       
-         
-            <View style={styles.sections}>
-              <View style={[styles.levelBar, { width: 300 * score }]}></View>
-              <Text style={styles.text}>
-                Level: {Math.ceil(userData.score / 10)}
-              </Text>
-            </View>
-   </AwesomeButtonCartman>
-
+              <View style={styles.sections}>
+                <View style={[styles.levelBar, { width: 320 * score }]}></View>
+                <Text style={styles.text}>
+                  Level: {Math.ceil(userData.score / 10)}
+                </Text>
+              </View>
+            </AwesomeButtonCartman>
           </SimpleAnimation>
         </View>
       </View>
     );
   }
+
+  updateTheme = number => {};
 
   updatePicture = event => {
     event.preventDefault();
@@ -226,14 +234,15 @@ export default class Profile extends React.Component {
       }
     });
     this.props.route.params.updatePicture(this.state.avatarUrl[number]);
+    this.updateTheme(number);
   };
 
   displayCountry = () => {
     const { userData } = this.props.route.params;
-    if (userData.language === "fr") return "French";
-    if (userData.language === "de") return "German";
-    if (userData.language === "en") return "English";
-    if (userData.language === "es") return "Spanish";
+    if (userData.language === "fr") return "FRENCH";
+    if (userData.language === "de") return "GERMAN";
+    if (userData.language === "en") return "ENGLISH";
+    if (userData.language === "es") return "SPANISH";
     return "Country";
   };
 
@@ -273,7 +282,7 @@ export default class Profile extends React.Component {
               highlighted && { color: "mediumaquamarine" }
             ]}
           >
-            {`${rowData.country} (${rowData.code})`}
+            {`${rowData.country}`}
           </Text>
         </View>
       </TouchableHighlight>
@@ -281,7 +290,7 @@ export default class Profile extends React.Component {
   }
 
   _dropdown_2_renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
-    if (rowID == DEMO_OPTIONS_1.length - 1) return;
+    if (rowID == languageOptions.length - 1) return;
     let key = `spr_${rowID}`;
     return <View style={styles.dropdown_2_separator} key={key} />;
   }

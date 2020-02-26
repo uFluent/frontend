@@ -2,7 +2,7 @@ import React from "react";
 import { View, Image, Text, TouchableOpacity } from "react-native";
 
 import Button from "react-native-button";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
 import { AsyncStorage } from "react-native";
 
@@ -56,9 +56,10 @@ export default class Gallery extends React.Component {
       [{ resize: { width: 224, height: 224 } }],
       { format: "jpeg", base64: true }
     );
-    const photoData = await getPictureData(manipResult.base64);
-    console.log(photoData, "<<<<<<");
-    const englishWord = photoData;
+    // const photoData = await getPictureData(manipResult.base64);
+    // console.log(photoData, "<<<<<<");
+    // const englishWord = photoData;
+    const englishWord = "electric_toothbrush";
     translateWord(
       englishWord.split("_").join(" "),
       this.props.userData.language
@@ -85,7 +86,7 @@ export default class Gallery extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.word !== prevState.word) {
-      this.setState({ fontSize: 50 - this.state.word.length });
+      this.setState({ fontSize: 50 - this.state.word.length * 1.5 });
     }
   }
 
@@ -106,7 +107,7 @@ export default class Gallery extends React.Component {
               {/* <Ionicons name="md-camera" size={30} style={styles.cameraIcons} /> */}
               <Ionicons
                 name="md-return-left"
-                size={30}
+                size={40}
                 style={styles.cameraIcons}
               />
             </View>
@@ -121,11 +122,23 @@ export default class Gallery extends React.Component {
               distance={60}
               // friction={4}
             >
-              <View style={styles.saveButton}>
+              <View>
                 <Button
                   onPress={() => this.savePhoto(this.state.photoData.uri)}
                 >
-                  <Ionicons name="md-save" size={30} />
+                  {this.state.saved ? (
+                    <FontAwesome
+                      style={styles.saveButton}
+                      name="heart"
+                      size={35}
+                    />
+                  ) : (
+                    <Ionicons
+                      name="md-save"
+                      style={styles.saveButton}
+                      size={40}
+                    />
+                  )}
                 </Button>
               </View>
             </SimpleAnimation>
@@ -138,31 +151,39 @@ export default class Gallery extends React.Component {
             {!this.state.word ? (
               <LoadingDots />
             ) : (
-              <Text style={{ fontSize: this.state.fontSize }}>
+              <Text
+                style={{
+                  fontSize: this.state.fontSize,
+                  color: "black"
+                }}
+              >
                 {`${this.state.word || "..."}`.toUpperCase()}
               </Text>
             )}
           </View>
-          <View style={styles.speakButton}>
-            <AwesomeButtonCartman
-              type="secondary"
-              style={{
-                marginTop: 10
-              }}
-              size="small"
-              borderRadius={(20, 50)}
-              height={70}
-              textSize={30}
-              width={70}
-              backgroundColor="#edff8f"
-              borderColor="#ffb3ba"
-              backgroundDarker="#ff9668"
-              raiseLevel={5}
-              onPress={this.speakWord}
-            >
-              <Ionicons name="md-volume-high" size={45} />
-            </AwesomeButtonCartman>
-          </View>
+
+          {this.state.word ? (
+            <View style={styles.speakButton}>
+              <AwesomeButtonCartman
+                type="secondary"
+                style={{
+                  marginTop: 10
+                }}
+                size="small"
+                borderRadius={(20, 50)}
+                height={70}
+                textSize={30}
+                width={70}
+                backgroundColor="rgb(250,224,6)"
+                borderColor="white"
+                backgroundDarker="rgb(255,128,0)"
+                raiseLevel={7}
+                onPress={this.speakWord}
+              >
+                <Ionicons name="md-volume-high" size={45} />
+              </AwesomeButtonCartman>
+            </View>
+          ) : null}
         </View>
       </React.Fragment>
     );

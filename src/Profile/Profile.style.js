@@ -8,7 +8,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: "center",
     // justifyContent: "center",
-    backgroundColor: "#4ef2ed" //"#bae1ff"
+    backgroundColor: "#bff199" //"#bae1ff"
   },
   languageContainer: {
     alignContent: "center",
@@ -22,19 +22,19 @@ export default StyleSheet.create({
     marginTop: 40,
     marginBottom: 20,
     borderRadius: 60,
-    borderColor: "#ff9668",
+    borderColor: "white",
     borderWidth: 7
   },
   sections: {
     margin: 10,
-    width: 300,
+    width: 325,
     borderRadius: 25,
-    borderColor: "#ffb3ba",
+    borderColor: "white",
     borderWidth: 2,
     height: 65,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#edff8f"
+    backgroundColor: "rgb(255,159,157)"
   },
   levelBar: {
     backgroundColor: "lightgreen",
@@ -46,7 +46,7 @@ export default StyleSheet.create({
     position: "absolute",
     alignSelf: "flex-start"
   },
-  text: { fontSize: 40, padding: 30 },
+  text: { fontSize: 40, padding: 30, color: "black" },
   row: {
     flex: 1,
     flexDirection: "row"
@@ -77,7 +77,7 @@ export default StyleSheet.create({
     borderWidth: 0,
     borderTopRightRadius: 25,
     borderBottomRightRadius: 25,
-    backgroundColor: "#ffac88",
+    backgroundColor: "rgb(255,66,66)",
     borderColor: "#ffb3ba",
     borderWidth: 1,
     justifyContent: "center"
@@ -86,7 +86,7 @@ export default StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 6,
     fontSize: 18,
-    color: "black",
+    color: "white",
     textAlign: "center",
     textAlignVertical: "center"
   },
