@@ -14,6 +14,7 @@ import {
 import * as api from "../../api";
 import styles from "./Profile.style";
 import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";
+import * as Font from "expo-font";
 
 import ModalDropdown from "react-native-modal-dropdown";
 import { SimpleAnimation } from "react-native-simple-animations";
@@ -47,6 +48,8 @@ export default class Profile extends React.Component {
       dropdown_4_defaultValue: "loading...",
       dropdown_6_icon_heart: true,
       themeNumber: 0,
+      fontLoaded: false,
+      font: "serif",
       DisplayFlag: {
         fr: require(`./Flags/fr.png`),
         es: require(`./Flags/es.png`),
@@ -65,9 +68,14 @@ export default class Profile extends React.Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await Font.loadAsync({
+      "Baloo-Regular": require("../../assets/fonts/Baloo-Regular.ttf")
+    });
     this.setState({
-      userData: this.props.route.params.userData
+      userData: this.props.route.params.userData,
+      fontLoaded: true,
+      font: "Baloo-Regular"
     });
   }
 
@@ -77,7 +85,6 @@ export default class Profile extends React.Component {
     const { themeNumber } = this.state;
     let score = 0;
     if (userData.score) score = (userData.score % 10) * 0.1;
-    console.log(score);
 
     return (
       <View style={styles.container}>
@@ -122,7 +129,9 @@ export default class Profile extends React.Component {
               backgroundDarker={themeArray[themeNumber].backgroundDark}
               raiseLevel={10}
             >
-              <Text style={styles.text}>{userName}</Text>
+              <Text style={[styles.text, { fontFamily: this.state.font }]}>
+                {userName}
+              </Text>
             </AwesomeButtonCartman>
           </SimpleAnimation>
         </View>
@@ -152,17 +161,19 @@ export default class Profile extends React.Component {
               backgroundDarker={themeArray[themeNumber].backgroundDark}
               raiseLevel={10}
             >
-              {/* <View style={styles.sections}> */}
               <View style={styles.languageContainer}>
                 <Image
                   source={DisplayFlag[userData.language]}
-                  style={{ width: 75, height: 50 }}
+                  style={{ width: 75, height: 50, left: 60 }}
                 />
 
                 <ModalDropdown
                   ref="dropdown_2"
                   style={styles.dropdown_2}
-                  textStyle={styles.dropdown_2_text}
+                  textStyle={[
+                    styles.dropdown_2_text,
+                    { fontFamily: this.state.font }
+                  ]}
                   dropdownStyle={styles.dropdown_2_dropdown}
                   options={languageOptions}
                   defaultValue={this.displayCountry()}
@@ -210,10 +221,9 @@ export default class Profile extends React.Component {
               raiseLevel={10}
             >
               <View style={styles.sections}>
-
                 <View style={[styles.levelBar, { width: 320 * score }]}></View>
 
-                <Text style={styles.text}>
+                <Text style={[styles.text, { fontFamily: this.state.font }]}>
                   Level: {Math.ceil(userData.score / 10)}
                 </Text>
               </View>

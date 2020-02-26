@@ -191,6 +191,7 @@ export default class PictureMatch extends Component {
                   distance={20}
                   // friction={4}
                 >
+
                   <AwesomeButtonCartman
                     type="secondary"
                     size="large"
@@ -218,12 +219,13 @@ export default class PictureMatch extends Component {
                         this.state.currentPage.translatedQuestion.slice(1)}
                     </Text>
                     <Ionicons
-                      name="md-megaphone"
+                      name="md-volume-high"
                       size={30}
                       style={{ marginLeft: 10 }}
                     />
                   </AwesomeButtonCartman>
                 </SimpleAnimation>
+
               </View>
             )}
             {this.state.guess !== null && (

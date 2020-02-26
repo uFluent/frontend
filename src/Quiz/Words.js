@@ -84,7 +84,10 @@ export const words = [
 ];
 
 export const getListOfWords = async (correctWord, number, language) => {
-  const translatedCorrectWord = await translateWord(correctWord, language);
+  const translatedCorrectWord = await translateWord(
+    correctWord.split("_").join(" "),
+    language
+  );
   const newList = [];
   newList.push(translatedCorrectWord);
   for (let i = 1; i < number; i++) {

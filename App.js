@@ -65,7 +65,7 @@ export default class App extends React.Component {
       });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.getUserFromLocalStorage();
   }
 
@@ -90,9 +90,7 @@ export default class App extends React.Component {
       };
     });
 
-    api.patchLevel(this.state.userName, 1).then(res => {
-      console.log(res, "<< res in app.js");
-    });
+    api.patchLevel(this.state.userName, 1).then(res => {});
   };
 
   getUserData = async () => {
@@ -124,16 +122,15 @@ export default class App extends React.Component {
           />
         </View>
       );
-
     } else {
       return (
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
               headerStyle: {
-                backgroundColor: "black"
+                backgroundColor: "#454547"
               },
-              headerTintColor: "#fff",
+
               headerTitleStyle: {
                 fontWeight: "bold"
               }

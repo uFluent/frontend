@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
-import Button from "react-native-button";
-import * as MediaLibrary from "expo-media-library";
-import { useNavigation } from "@react-navigation/native";
+import { View, Text, ActivityIndicator, Image, Dimensions } from "react-native";
 import styles from "../Styles";
 import * as Animatable from "react-native-animatable";
 import HomeButtons from "./HomeButtons";
 import { SimpleAnimation } from "react-native-simple-animations";
 import * as Font from "expo-font";
 import LottieView from "lottie-react-native";
+
+const { width: winWidth, height: winHeight } = Dimensions.get("window");
 
 export default class Home extends Component {
   constructor() {
@@ -25,6 +24,17 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.alignCenter}>
+        <Image
+          source={require("./background.png")}
+          style={{
+            width: winWidth + 30,
+            height: 270,
+            zIndex: -1,
+            position: "absolute",
+            flex: 1,
+            top: 60
+          }}
+        ></Image>
         <SimpleAnimation
           delay={500}
           duration={5000}
@@ -37,7 +47,7 @@ export default class Home extends Component {
         </SimpleAnimation>
 
         <View>
-          <View
+          {/* <View
             style={{
               width: 400,
               height: 350,
@@ -50,9 +60,11 @@ export default class Home extends Component {
               source={require("../animations/2523-loading.json")}
               autoPlay
               loop={false}
-              speed={2}
-            /> */}
-          </View>
+
+              speed={1}
+            />
+          </View> */}
+
           <View style={{ flexDirection: "row" }}>
             <SimpleAnimation
               delay={1000}

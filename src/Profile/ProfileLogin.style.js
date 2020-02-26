@@ -33,7 +33,8 @@ export default StyleSheet.create({
     backgroundColor: "#D9FFDF",
     color: "black",
     borderRadius: 25,
-    padding: 15
+    padding: 15,
+    borderWidth: 1
   },
 
   textInput: {
@@ -62,7 +63,8 @@ export default StyleSheet.create({
     borderTopRightRadius: 20,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    borderWidth: 1
   },
   toggleText: {
     color: "grey",

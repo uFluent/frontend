@@ -61,7 +61,8 @@ export default class PictureMatch extends Component {
   getPicture = async page => {
     //Decided whether to get picture from phone album or backend
     const albumData = await MediaLibrary.getAlbumAsync("Expo");
-    const numberOfPicturesInPhone = albumData.assetCount;
+    let numberOfPicturesInPhone = 0;
+    if (albumData) numberOfPicturesInPhone = albumData.assetCount;
     if (Math.random() > 8 / numberOfPicturesInPhone) {
       //Get picture from phone
       const pictures = await MediaLibrary.getAssetsAsync({
@@ -164,7 +165,6 @@ export default class PictureMatch extends Component {
 
   render() {
     const styles = styleMaker(this.state);
-    // console.log(this.state);
 
     let feedback = "Great!";
 
@@ -175,19 +175,9 @@ export default class PictureMatch extends Component {
     if (this.state.currentPage.words) {
       return (
         <View style={styles.screen}>
-          {/* <LinearGradient
-            colors={["#F3ECE4", "#FFF"]}
-            style={{ height: 700 }}
-          > */}
+
           <View style={styles.selection}>
-            {this.state.fontLoaded ? (
-              <Text
-                style={{
-                  fontFamily: "Mansalva-Regular",
-                  fontSize: 30
-                }}
-              ></Text>
-            ) : null}
+
             <View style={styles.pictureContainer}>
               <SimpleAnimation
                 delay={500}
@@ -224,8 +214,10 @@ export default class PictureMatch extends Component {
                     size="small"
                     height={50}
                     textSize={15}
+
                     textColor="white"
                     backgroundColor="orange"
+
                     style={styles.nextButton}
                     onPress={this.nextWord}
                     disabled={this.state.disabledNext}
@@ -259,10 +251,12 @@ export default class PictureMatch extends Component {
                       // friction={4}
                     >
                       <AwesomeButtonCartman
+
                         type="secondary"
                         size="small"
                         borderRadius={10}
                         height={50}
+
                         textSize={15}
                         backgroundColor={
                           !this.state.guess
@@ -275,9 +269,11 @@ export default class PictureMatch extends Component {
                         }
                         onPress={() => this.guessWord(word)}
                         disabled={this.state.guess !== null}
+
                         // style={styles.wordOptionButton}
                       >
                         {word.charAt(0).toUpperCase() + word.slice(1)}
+
                       </AwesomeButtonCartman>
                     </SimpleAnimation>
                     {!this.state.guess && (
@@ -285,10 +281,10 @@ export default class PictureMatch extends Component {
                         <SimpleAnimation
                           delay={500}
                           duration={2000}
-                          // direction="right"
+
                           staticType="zoom"
                           distance={20}
-                          // friction={4}
+
                         >
                           <AwesomeButtonCartman
                             type="secondary"
@@ -299,7 +295,9 @@ export default class PictureMatch extends Component {
                             onPress={() => sayWord(word, this.state.language)}
                           >
                             <Ionicons
-                              name="md-megaphone"
+
+                              name="md-volume-high"
+
                               size={25}
                               color="yellow"
                             />

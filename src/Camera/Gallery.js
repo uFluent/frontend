@@ -30,7 +30,11 @@ export default class Gallery extends React.Component {
   };
 
   savePhoto = async uri => {
-    if (!this.state.saved && this.state.word) {
+    if (
+      !this.state.saved &&
+      this.state.word &&
+      this.state.word !== "Oops! Try again!"
+    ) {
       const asset = await MediaLibrary.createAssetAsync(uri);
       MediaLibrary.createAlbumAsync("Expo", asset, false);
       this.storeData(uri, this.state.word);
@@ -49,35 +53,29 @@ export default class Gallery extends React.Component {
   };
 
   sendImageData = async () => {
-    // const photoInfo = await getPictureData(this.state.photoData.base64);
-    // console.log(photoInfo);
     const manipResult = await ImageManipulator.manipulateAsync(
       this.state.photoData.uri,
       [{ resize: { width: 224, height: 224 } }],
       { format: "jpeg", base64: true }
     );
-    // const photoData = await getPictureData(manipResult.base64);
-    // console.log(photoData, "<<<<<<");
-    // const englishWord = photoData;
-    const englishWord = "electric_toothbrush";
+    const photoData = await getPictureData(manipResult.base64);
+    console.log(photoData, "<<<<<<");
+    const englishWord = photoData;
     translateWord(
       englishWord.split("_").join(" "),
       this.props.userData.language
     ).then(result => {
-      this.setState({
-        word: result || "nothing",
-        englishWord: englishWord
-      });
+      if (englishWord !== "nothing recognised")
+        this.setState({
+          word: result || "nothing",
+          englishWord: englishWord
+        });
+      else
+        this.setState({
+          word: "Oops! Try again!",
+          englishWord: "Oops! Try again!"
+        });
     });
-    // setTimeout(() => {
-    //   const englishWord = "elephant";
-    //   translateWord("elephant", this.props.userData.language).then(result => {
-    //     this.setState({
-    //       word: result,
-    //       englishWord: englishWord
-    //     });
-    //   });
-    // }, 3000);
   };
 
   componentDidMount() {
@@ -86,12 +84,11 @@ export default class Gallery extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.word !== prevState.word) {
-      this.setState({ fontSize: 50 - this.state.word.length * 1.5 });
+      this.setState({ fontSize: 55 - this.state.word.length * 1.5 });
     }
   }
 
   render() {
-    console.log(this.props.userData);
     const styles = styleMaker(this.state.saved, this.state.word);
     return (
       <React.Fragment>
@@ -104,7 +101,6 @@ export default class Gallery extends React.Component {
         <View style={styles.topButtons}>
           <Button onPress={this.props.returnToCamera}>
             <View style={styles.cameraButton}>
-              {/* <Ionicons name="md-camera" size={30} style={styles.cameraIcons} /> */}
               <Ionicons
                 name="md-return-left"
                 size={40}
@@ -113,14 +109,13 @@ export default class Gallery extends React.Component {
             </View>
           </Button>
 
-          {this.state.word ? (
+          {this.state.word && this.state.word !== "Oops! Try again!" ? (
             <SimpleAnimation
               delay={100}
               duration={1000}
               direction="right"
               staticType="bounce"
               distance={60}
-              // friction={4}
             >
               <View>
                 <Button
@@ -162,7 +157,7 @@ export default class Gallery extends React.Component {
             )}
           </View>
 
-          {this.state.word ? (
+          {this.state.word && this.state.word !== "Oops! Try again!" ? (
             <View style={styles.speakButton}>
               <AwesomeButtonCartman
                 type="secondary"
