@@ -21,12 +21,13 @@ export default function HomeButtons() {
         type="primary"
         size="large"
         style={{
-         
           marginTop: 100
         }}
         borderRadius={(20, 50)}
         height={100}
         textSize={30}
+        textColor="white"
+        backgroundColor="red"
       >
         Games
       </AwesomeButtonCartman>
@@ -34,12 +35,14 @@ export default function HomeButtons() {
         onPress={goToCamera}
         type="secondary"
         style={{
-          marginTop:50
+          marginTop: 50
         }}
         size="large"
         borderRadius={(20, 50)}
         height={100}
         textSize={30}
+        textColor="white"
+        backgroundColor="purple"
       >
         Camera
       </AwesomeButtonCartman>

@@ -40,18 +40,18 @@ export default class Home extends Component {
           <View
             style={{
               width: 400,
-              height: 400,
+              height: 350,
               position: "absolute",
               marginLeft: -80,
-              marginTop: -100
+              marginTop: -105
             }}
           >
-            <LottieView
-              source={require("../animations/lf30_editor_ay5BMu.json")}
+            {/* <LottieView
+              source={require("../animations/2523-loading.json")}
               autoPlay
               loop={false}
-              speed={1}
-            />
+              speed={2}
+            /> */}
           </View>
           <View style={{ flexDirection: "row" }}>
             <SimpleAnimation
@@ -66,7 +66,7 @@ export default class Home extends Component {
                 <Text
                   style={{
                     fontFamily: "Mansalva-Regular",
-                    color: "#FFFFF",
+
                     fontSize: 80
                   }}
                 >
@@ -86,7 +86,7 @@ export default class Home extends Component {
                 <Text
                   style={{
                     fontFamily: "Mansalva-Regular",
-                    color: "#FFFFF",
+
                     fontSize: 80
                   }}
                 >

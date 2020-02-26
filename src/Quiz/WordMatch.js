@@ -14,6 +14,8 @@ import { styleMaker } from "./Quiz.Styles";
 
 import styled from "../Styles";
 import LottieView from "lottie-react-native";
+import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";
+import { SimpleAnimation } from "react-native-simple-animations";
 
 export default class PictureMatch extends Component {
   state = {
@@ -165,73 +167,143 @@ export default class PictureMatch extends Component {
       return (
         <View style={styles.screen}>
           <View style={styles.questionContainer}>
-            <Text style={[styles.question, { fontSize: this.state.fontSize }]}>
-              {this.state.currentPage.translatedQuestion}
-            </Text>
+            {/* <SimpleAnimation
+              delay={500}
+              duration={2000}
+              // direction="right"
+              staticType="bounce"
+              distance={20}
+              // friction={4}
+            >
+              <Text
+                style={[styles.question, { fontSize: this.state.fontSize }]}
+              >
+                {this.state.currentPage.translatedQuestion}
+              </Text>
+            </SimpleAnimation> */}
             {this.state.guess === null && (
-              <View style={styles.speakWord}>
-                <Button
-                  onPress={() =>
-                    sayWord(
-                      this.state.currentPage.translatedQuestion,
-                      this.state.language
-                    )
-                  }
+              <View>
+                <SimpleAnimation
+                  delay={500}
+                  duration={2000}
+                  // direction="right"
+                  staticType="bounce"
+                  distance={20}
+                  // friction={4}
                 >
-                  <Ionicons name="md-megaphone" size={30} />
-                </Button>
+                  <AwesomeButtonCartman
+                    type="secondary"
+                    size="large"
+                    borderRadius={20}
+                    height={70}
+                    width={325}
+                    textColor="white"
+                    backgroundColor="green"
+                    onPress={() =>
+                      sayWord(
+                        this.state.currentPage.translatedQuestion,
+                        this.state.language
+                      )
+                    }
+                  >
+                    <Text
+                      style={[
+                        styles.question,
+                        { fontSize: this.state.fontSize }
+                      ]}
+                    >
+                      {this.state.currentPage.translatedQuestion
+                        .charAt(0)
+                        .toUpperCase() +
+                        this.state.currentPage.translatedQuestion.slice(1)}
+                    </Text>
+                    <Ionicons
+                      name="md-megaphone"
+                      size={30}
+                      style={{ marginLeft: 10 }}
+                    />
+                  </AwesomeButtonCartman>
+                </SimpleAnimation>
               </View>
             )}
             {this.state.guess !== null && (
               <View style={styles.wordOverlay}>
-                <Text style={styles.guessConfirmationText}>{feedback}</Text>
-                <Button
+                <Text style={styles.guessConfirmationText2}>{feedback}</Text>
+                {this.state.guess === "correct" ? (
+                  <LottieView
+                    source={require("../animations/4052-smoothymon-typing.json")}
+                    autoPlay
+                    style={{ marginBottom: -20, width: 100 }}
+                  ></LottieView>
+                ) : (
+                  <LottieView
+                    source={require("../animations/4053-crying-smoothymon.json")}
+                    autoPlay
+                    style={{ marginBottom: -20, width: 100 }}
+                  ></LottieView>
+                )}
+                <AwesomeButtonCartman
+                  type="secondary"
+                  size="small"
+                  height={50}
+                  textSize={15}
+                  textColor="white"
+                  backgroundColor="orange"
                   style={styles.nextButton}
                   onPress={this.nextWord}
                   disabled={this.state.disabledNext}
                 >
                   Next
-                </Button>
+                </AwesomeButtonCartman>
               </View>
             )}
           </View>
           <View style={styles.pictureOptions}>
             {this.state.currentPage.pictures.map(picture => {
               return (
-                <View
-                  key={picture}
-                  style={
-                    !this.state.guess
-                      ? styles.pictureOption
-                      : this.state.currentPage.answer === picture
-                      ? {
-                          ...styles.pictureOption,
-                          ...styles.correctGuess
-                        }
-                      : this.state.guessedPicture === picture
-                      ? {
-                          ...styles.pictureOption,
-                          ...styles.incorrectGuess
-                        }
-                      : {
-                          ...styles.pictureOption,
-                          ...styles.otherGuessPicture
-                        }
-                  }
+                <SimpleAnimation
+                  delay={500}
+                  duration={2000}
+                  // direction="right"
+                  staticType="zoom"
+                  distance={20}
+                  // friction={4}
                 >
-                  <Button
-                    onPress={() => this.guessPicture(picture)}
-                    style={{ width: 140, height: 140 }}
-                    disabled={this.state.guess !== null}
+                  <View
+                    key={picture}
+                    style={
+                      !this.state.guess
+                        ? styles.pictureOption
+                        : this.state.currentPage.answer === picture
+                        ? {
+                            ...styles.pictureOption,
+                            ...styles.correctGuess
+                          }
+                        : this.state.guessedPicture === picture
+                        ? {
+                            ...styles.pictureOption,
+                            ...styles.incorrectGuess
+                          }
+                        : {
+                            ...styles.pictureOption,
+                            ...styles.otherGuessPicture
+                          }
+                    }
                   >
-                    <Image
-                      source={{
-                        uri: picture
-                      }}
+                    <Button
+                      onPress={() => this.guessPicture(picture)}
                       style={{ width: 140, height: 140 }}
-                    ></Image>
-                  </Button>
-                </View>
+                      disabled={this.state.guess !== null}
+                    >
+                      <Image
+                        source={{
+                          uri: picture
+                        }}
+                        style={{ width: 140, height: 140, borderRadius: 17 }}
+                      ></Image>
+                    </Button>
+                  </View>
+                </SimpleAnimation>
               );
             })}
           </View>
@@ -241,7 +313,7 @@ export default class PictureMatch extends Component {
       return (
         <View style={styled.alignCenter}>
           <LottieView
-            source={require("../animations/226-splashy-loader (1).json")}
+            source={require("../animations/2523-loading.json")}
             autoPlay
           />
         </View>

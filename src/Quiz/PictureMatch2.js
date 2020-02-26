@@ -179,137 +179,139 @@ export default class PictureMatch extends Component {
             colors={["#F3ECE4", "#FFF"]}
             style={{ height: 700 }}
           > */}
-            <View style={styles.selection}>
-              {this.state.fontLoaded ? (
-                <Text
-                  style={{
-                    fontFamily: "Mansalva-Regular",
-                    fontSize: 30
-                  }}
-                ></Text>
-              ) : null}
-              <View style={styles.pictureContainer}>
-                <SimpleAnimation
-                  delay={500}
-                  duration={1000}
-                  // direction="right"
-                  staticType="bounce"
-                  distance={20}
-                  friction={4}
-                >
-                  <Image
-                    source={{ uri: this.state.currentPage.image }}
-                    style={styles.picture}
-                  />
-                </SimpleAnimation>
-                {this.state.guess !== null && (
-                  <View style={styles.pictureOverlay}>
-                    <Text style={styles.guessConfirmationText}>{feedback}</Text>
+          <View style={styles.selection}>
+            {this.state.fontLoaded ? (
+              <Text
+                style={{
+                  fontFamily: "Mansalva-Regular",
+                  fontSize: 30
+                }}
+              ></Text>
+            ) : null}
+            <View style={styles.pictureContainer}>
+              <SimpleAnimation
+                delay={500}
+                duration={1000}
+                // direction="right"
+                staticType="bounce"
+                distance={20}
+                friction={4}
+              >
+                <Image
+                  source={{ uri: this.state.currentPage.image }}
+                  style={styles.picture}
+                />
+              </SimpleAnimation>
+              {this.state.guess !== null && (
+                <View style={styles.pictureOverlay}>
+                  <Text style={styles.guessConfirmationText}>{feedback}</Text>
 
-                    {this.state.guess === "correct" ? (
-                      <LottieView
-                        source={require("../animations/4052-smoothymon-typing.json")}
-                        autoPlay
-                        style={{ marginBottom: 15 }}
-                      ></LottieView>
-                    ) : (
-                      <LottieView
-                        source={require("../animations/4053-crying-smoothymon.json")}
-                        autoPlay
-                        style={{ marginBottom: 10 }}
-                      ></LottieView>
-                    )}
-                    <AwesomeButtonCartman
-                      type="secondary"
-                      size="small"
-                      height={50}
-                      textSize={15}
-                      style={styles.nextButton}
-                      onPress={this.nextWord}
-                      disabled={this.state.disabledNext}
-                    >
-                      Next
-                    </AwesomeButtonCartman>
-                  </View>
-                )}
-              </View>
-              <View style={styles.options}>
-                {this.state.currentPage.words.map(word => {
-                  return (
-                    <View
-                      style={
-                        !this.state.guess
-                          ? styles.wordOption
-                          : this.state.currentPage.translatedAnswer === word
-                          ? { ...styles.wordOption, ...styles.correctGuess }
-                          : this.state.guessedWord === word
-                          ? { ...styles.wordOption, ...styles.incorrectGuess }
-                          : { ...styles.wordOption, ...styles.otherGuess }
-                      }
-                      key={word}
-                    >
-                      <SimpleAnimation
-                        delay={500}
-                        duration={2000}
-                        // direction="right"
-                        staticType="zoom"
-                        distance={20}
-                        // friction={4}
-                      >
-                        <AwesomeButtonCartman
-                          type="primary"
-                          size="small"
-                          borderRadius={(50, 20)}
-                          height={50}
-                          textSize={15}
-                          backgroundColor={
-                            !this.state.guess
-                              ? "#00b8c4"
-                              : this.state.currentPage.translatedAnswer === word
-                              ? "green"
-                              : this.state.guessedWord === word
-                              ? "red"
-                              : null
-                          }
-                          onPress={() => this.guessWord(word)}
-                          disabled={this.state.guess !== null}
-                          style={styles.wordOptionButton}
-                        >
-                          {word}
-                        </AwesomeButtonCartman>
-                      </SimpleAnimation>
-                      {!this.state.guess && (
-                        <View style={styles.speakWord}>
-                          <SimpleAnimation
-                            delay={500}
-                            duration={2000}
-                            // direction="right"
-                            staticType="zoom"
-                            distance={20}
-                            // friction={4}
-                          >
-                            <AwesomeButtonCartman
-                              type="secondary"
-                              size="small"
-                              borderRadius={(20, 50)}
-                              height={50}
-                              width={40}
-                              onPress={() => sayWord(word, this.state.language)}
-                            >
-                              <Ionicons
-                                name="md-megaphone"
-                                size={25}
-                                color="yellow"
-                              />
-                            </AwesomeButtonCartman>
-                          </SimpleAnimation>
-                        </View>
-                      )}
-                    </View>
-                  );
-                })}
-              </View>
+                  {this.state.guess === "correct" ? (
+                    <LottieView
+                      source={require("../animations/4052-smoothymon-typing.json")}
+                      autoPlay
+                      style={{ marginBottom: 15 }}
+                    ></LottieView>
+                  ) : (
+                    <LottieView
+                      source={require("../animations/4053-crying-smoothymon.json")}
+                      autoPlay
+                      style={{ marginBottom: 10 }}
+                    ></LottieView>
+                  )}
+                  <AwesomeButtonCartman
+                    type="secondary"
+                    size="small"
+                    height={50}
+                    textSize={15}
+                    textColor="white"
+                    backgroundColor="orange"
+                    style={styles.nextButton}
+                    onPress={this.nextWord}
+                    disabled={this.state.disabledNext}
+                  >
+                    Next
+                  </AwesomeButtonCartman>
+                </View>
+              )}
             </View>
+            <View style={styles.options}>
+              {this.state.currentPage.words.map(word => {
+                return (
+                  <View
+                    style={
+                      !this.state.guess
+                        ? styles.wordOption
+                        : this.state.currentPage.translatedAnswer === word
+                        ? { ...styles.wordOption, ...styles.correctGuess }
+                        : this.state.guessedWord === word
+                        ? { ...styles.wordOption, ...styles.incorrectGuess }
+                        : { ...styles.wordOption, ...styles.otherGuess }
+                    }
+                    key={word}
+                  >
+                    <SimpleAnimation
+                      delay={500}
+                      duration={2000}
+                      // direction="right"
+                      staticType="zoom"
+                      distance={20}
+                      // friction={4}
+                    >
+                      <AwesomeButtonCartman
+                        type="secondary"
+                        size="small"
+                        borderRadius={10}
+                        height={50}
+                        textSize={15}
+                        backgroundColor={
+                          !this.state.guess
+                            ? "#00b8c4"
+                            : this.state.currentPage.translatedAnswer === word
+                            ? "green"
+                            : this.state.guessedWord === word
+                            ? "red"
+                            : null
+                        }
+                        onPress={() => this.guessWord(word)}
+                        disabled={this.state.guess !== null}
+                        // style={styles.wordOptionButton}
+                      >
+                        {word.charAt(0).toUpperCase() + word.slice(1)}
+                      </AwesomeButtonCartman>
+                    </SimpleAnimation>
+                    {!this.state.guess && (
+                      <View style={styles.speakWord}>
+                        <SimpleAnimation
+                          delay={500}
+                          duration={2000}
+                          // direction="right"
+                          staticType="zoom"
+                          distance={20}
+                          // friction={4}
+                        >
+                          <AwesomeButtonCartman
+                            type="secondary"
+                            size="small"
+                            borderRadius={(20, 50)}
+                            height={50}
+                            width={40}
+                            onPress={() => sayWord(word, this.state.language)}
+                          >
+                            <Ionicons
+                              name="md-megaphone"
+                              size={25}
+                              color="yellow"
+                            />
+                          </AwesomeButtonCartman>
+                        </SimpleAnimation>
+                      </View>
+                    )}
+                  </View>
+                );
+              })}
+            </View>
+          </View>
           {/* </LinearGradient> */}
         </View>
       );
@@ -317,7 +319,7 @@ export default class PictureMatch extends Component {
       return (
         <View style={styled.alignCenter}>
           <LottieView
-            source={require("../animations/226-splashy-loader (1).json")}
+            source={require("../animations/2523-loading.json")}
             autoPlay
           />
         </View>
