@@ -115,6 +115,7 @@ export default class App extends React.Component {
     }
     if (userData === "" && userName !== "") {
       this.getUserData();
+
       return (
         <View style={styled.alignCenter}>
           <LottieView
@@ -123,6 +124,7 @@ export default class App extends React.Component {
           />
         </View>
       );
+
     } else {
       return (
         <NavigationContainer>

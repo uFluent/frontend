@@ -143,7 +143,12 @@ export default class PictureMatch extends Component {
 
   nextWord = () => {
     this.setState(
-      { disabledNext: true, currentPage: this.state.nextPage, guess: null },
+      {
+        disabledNext: true,
+        currentPage: this.state.nextPage,
+        guess: null,
+        guessedWord: null
+      },
       () => {
         this.prepareNextPage();
       }
@@ -203,14 +208,12 @@ export default class PictureMatch extends Component {
                     <Text style={styles.guessConfirmationText}>{feedback}</Text>
                     <View style={styles.speakWord}>
                       <Button
-
                         onPress={() =>
                           sayWord(
                             this.state.currentPage.translatedAnswer,
                             this.state.language
                           )
                         }
-
                       >
                         <Ionicons name="md-megaphone" size={30} />
                       </Button>
