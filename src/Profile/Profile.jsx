@@ -48,7 +48,7 @@ export default class Profile extends React.Component {
         2: "https://i.picsum.photos/id/1025/250/250.jpg",
         3: "https://i.picsum.photos/id/1074/250/250.jpg",
         4: "https://edaid-live.s3.amazonaws.com/filestore/images/manual/northcoders-appeal-view.png",
-        5: "https://purr.objects-us-east-1.dream.io/i/QlS3V.jpg"
+        5: "https://www.simplethingcalledlife.com/wp-content/uploads/2015/03/animals-in-hats-3-550x640.jpg"
       }
     };
   }
@@ -184,7 +184,6 @@ export default class Profile extends React.Component {
             direction="up"
             distance={70}
           >
-
             <AwesomeButtonCartman
               type="secondary"
               style={{
@@ -200,16 +199,13 @@ export default class Profile extends React.Component {
               backgroundDarker="#ff9668"
               raiseLevel={4}
             >
-       
-         
-            <View style={styles.sections}>
-              <View style={[styles.levelBar, { width: 300 * score }]}></View>
-              <Text style={styles.text}>
-                Level: {Math.ceil(userData.score / 10)}
-              </Text>
-            </View>
-   </AwesomeButtonCartman>
-
+              <View style={styles.sections}>
+                <View style={[styles.levelBar, { width: 300 * score }]}></View>
+                <Text style={styles.text}>
+                  Level: {Math.ceil(userData.score / 10)}
+                </Text>
+              </View>
+            </AwesomeButtonCartman>
           </SimpleAnimation>
         </View>
       </View>
