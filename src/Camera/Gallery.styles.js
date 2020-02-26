@@ -5,9 +5,9 @@ const { width: winWidth, height: winHeight } = Dimensions.get("window");
 export const styleMaker = (saved, word) =>
   //create consts that align with saved and word that change the look of the save button
   {
-    let savedButtonColor = "#F05E23";
-    if (saved) savedButtonColor = "rgba(0, 255, 0, 1)";
-    if (!word) savedButtonColor = "rgba(255, 0, 0, 1)";
+    let savedButtonColor = "white";
+    if (saved) savedButtonColor = "rgb(253,1,23)";
+    if (!word) savedButtonColor = "rgb(255, 0, 0)";
     return StyleSheet.create({
       loadingScreen: {
         display: "flex",
@@ -15,11 +15,11 @@ export const styleMaker = (saved, word) =>
         justifyContent: "center"
       },
       preview: {
-        height: winHeight - 250,
-        width: winWidth - 70,
+        height: winHeight - 240,
+        width: winWidth - 55,
         position: "absolute",
-        margin: 35,
-        borderWidth: 5,
+        margin: 30,
+        borderWidth: 8,
         borderRadius: 20,
         borderColor: "white",
         left: 0,
@@ -37,42 +37,46 @@ export const styleMaker = (saved, word) =>
         alignItems: "center"
       },
       saveButton: {
-        height: 65,
+        backgroundColor: "purple",
+        color: savedButtonColor,
+        height: 58,
         width: 65,
-        padding: 15,
+        paddingTop: 15,
         paddingLeft: 20,
         marginTop: 5,
         alignItems: "center",
-        borderRadius: 45,
+        borderRadius: 30,
         borderBottomRightRadius: 0,
         borderTopRightRadius: 0,
         borderTopLeftRadius: 0,
-        zIndex: 5,
-        backgroundColor: savedButtonColor
+        zIndex: 5
       },
       cameraButton: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        height: 50,
+        backgroundColor: "purple",
+        color: savedButtonColor,
+        height: 58,
         width: 65,
-        borderRadius: 45,
-        borderTopLeftRadius: 0,
-        borderTopRightRadius: 0,
-        borderBottomLeftRadius: 0,
-        zIndex: 5,
-        backgroundColor: "rgba(0, 0, 150, 0.5)",
-        borderRadius: 4
-      },
-      cameraIcons: { color: "white" },
-      lowerText: {
-        width: winWidth - 5,
-        height: 100,
-        top: winHeight - 240,
-        backgroundColor: "#E2A4C6",
-        zIndex: 10,
+        paddingTop: 15,
+        paddingRight: 10,
+        marginTop: 5,
+        alignItems: "center",
         borderRadius: 30,
+        borderBottomLeftRadius: 0,
+        borderTopRightRadius: 0,
+        borderTopLeftRadius: 0,
+        zIndex: 5
+      },
+      cameraIcons: {
+        color: "white"
+      },
+      lowerText: {
+        width: winWidth,
+        height: 130,
+        top: winHeight - 260,
+        backgroundColor: "rgb(250,224,6)", //"rgb(0, 157, 237)",
+        zIndex: -10,
+        borderColor: "white",
+        borderTopWidth: 10,
         display: "flex",
         justifyContent: "space-evenly",
         alignItems: "center",
@@ -85,7 +89,7 @@ export const styleMaker = (saved, word) =>
         width: 50,
         height: 50,
         borderRadius: 50,
-        backgroundColor: "rgba(0, 0, 0, 0.3)",
+
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around"

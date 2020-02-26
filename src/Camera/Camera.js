@@ -11,6 +11,7 @@ import * as MediaLibrary from "expo-media-library";
 import Gallery from "./Gallery";
 
 import styles from "./Camera.styles";
+import { SimpleAnimation } from "react-native-simple-animations";
 
 export class CameraPage extends React.Component {
   camera = null;
@@ -67,11 +68,14 @@ export class CameraPage extends React.Component {
     if (!this.state.viewPhoto)
       return (
         <React.Fragment>
+          {console.log(this.props, "<<<")}
           <View style={styles.background}>
-            <Camera
-              style={styles.preview}
-              ref={camera => (this.camera = camera)}
-            />
+            <View style={styles.preview}>
+              <Camera
+                style={styles.cameraStyle}
+                ref={camera => (this.camera = camera)}
+              />
+            </View>
           </View>
 
           <Toolbar

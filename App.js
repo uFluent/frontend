@@ -14,9 +14,11 @@ import Gallery from "./src/Camera/Gallery";
 import PictureMatch from "./src//Quiz/PictureMatch2";
 import WordMatch from "./src/Quiz/WordMatch";
 import LoadingScreen from "./src/Loading";
+import LottieView from "lottie-react-native";
 
 import ProfileLogin from "./src/Profile/ProfileLogin";
 import * as api from "./api";
+import styled from "./src/Styles";
 const Stack = createStackNavigator();
 
 export default class App extends React.Component {
@@ -113,7 +115,16 @@ export default class App extends React.Component {
     }
     if (userData === "" && userName !== "") {
       this.getUserData();
-      return <LoadingScreen></LoadingScreen>;
+
+      return (
+        <View style={styled.alignCenter}>
+          <LottieView
+            source={require("./src/animations/226-splashy-loader (1).json")}
+            autoPlay
+          />
+        </View>
+      );
+
     } else {
       return (
         <NavigationContainer>
