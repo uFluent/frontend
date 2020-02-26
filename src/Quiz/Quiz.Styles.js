@@ -14,7 +14,11 @@ export const styleMaker = state => {
   return StyleSheet.create({
     screen: {
       height: winHeight,
-      backgroundColor: "#F3ECE4"
+
+      backgroundColor: "yellow"
+
+      // backgroundColor: "#fdcd3b"
+
     },
     selection: {
       display: "flex",
@@ -78,6 +82,11 @@ export const styleMaker = state => {
       color: feedbackColour,
       marginBottom: 260
     },
+    guessConfirmationText2: {
+      fontSize: 40,
+      color: feedbackColour,
+      marginBottom: -30
+    },
     speakWord: {
       marginLeft: 50,
       // backgroundColor: "orange",
@@ -93,7 +102,7 @@ export const styleMaker = state => {
       alignItems: "center"
     },
     question: {
-      color: "black",
+      color: "white",
       fontSize: 60,
       opacity: pictureOpacity
     },
@@ -103,7 +112,8 @@ export const styleMaker = state => {
       zIndex: 10,
       borderStyle: "solid",
       borderWidth: 2,
-      borderColor: "black"
+      borderColor: "black",
+      borderRadius: 20
     },
     correctGuess: {
       borderColor: "green"

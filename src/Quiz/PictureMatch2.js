@@ -175,7 +175,9 @@ export default class PictureMatch extends Component {
     if (this.state.currentPage.words) {
       return (
         <View style={styles.screen}>
+
           <View style={styles.selection}>
+
             <View style={styles.pictureContainer}>
               <SimpleAnimation
                 delay={500}
@@ -212,6 +214,10 @@ export default class PictureMatch extends Component {
                     size="small"
                     height={50}
                     textSize={15}
+
+                    textColor="white"
+                    backgroundColor="orange"
+
                     style={styles.nextButton}
                     onPress={this.nextWord}
                     disabled={this.state.disabledNext}
@@ -245,11 +251,12 @@ export default class PictureMatch extends Component {
                       // friction={4}
                     >
                       <AwesomeButtonCartman
-                        type="primary"
+
+                        type="secondary"
                         size="small"
-                        borderRadius={(50, 20)}
+                        borderRadius={10}
                         height={50}
-                        width={170}
+
                         textSize={15}
                         backgroundColor={
                           !this.state.guess
@@ -262,9 +269,11 @@ export default class PictureMatch extends Component {
                         }
                         onPress={() => this.guessWord(word)}
                         disabled={this.state.guess !== null}
-                        style={styles.wordOptionButton}
+
+                        // style={styles.wordOptionButton}
                       >
-                        {word}
+                        {word.charAt(0).toUpperCase() + word.slice(1)}
+
                       </AwesomeButtonCartman>
                     </SimpleAnimation>
                     {!this.state.guess && (
@@ -272,8 +281,10 @@ export default class PictureMatch extends Component {
                         <SimpleAnimation
                           delay={500}
                           duration={2000}
+
                           staticType="zoom"
                           distance={20}
+
                         >
                           <AwesomeButtonCartman
                             type="secondary"
@@ -284,7 +295,9 @@ export default class PictureMatch extends Component {
                             onPress={() => sayWord(word, this.state.language)}
                           >
                             <Ionicons
+
                               name="md-volume-high"
+
                               size={25}
                               color="yellow"
                             />
@@ -304,7 +317,7 @@ export default class PictureMatch extends Component {
       return (
         <View style={styled.alignCenter}>
           <LottieView
-            source={require("../animations/226-splashy-loader (1).json")}
+            source={require("../animations/2523-loading.json")}
             autoPlay
           />
         </View>

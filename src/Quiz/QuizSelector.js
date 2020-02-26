@@ -16,7 +16,6 @@ export default function QuizSelector() {
     navigation.navigate("PictureMatch");
   };
   return (
-
     <View style={styles.alignCenter}>
       <SimpleAnimation
         delay={500}
@@ -36,6 +35,8 @@ export default function QuizSelector() {
           borderRadius={(20, 50)}
           height={100}
           textSize={30}
+          textColor="white"
+          backgroundColor="blue"
         >
           Picture Match
         </AwesomeButtonCartman>
@@ -58,11 +59,12 @@ export default function QuizSelector() {
           borderRadius={(20, 50)}
           height={100}
           textSize={30}
+          textColor="white"
+          backgroundColor="green"
         >
           Word Match
         </AwesomeButtonCartman>
       </SimpleAnimation>
-
     </View>
   );
 }
