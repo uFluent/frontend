@@ -40,11 +40,7 @@ export default props => {
       </Button>
 
       <View>
-        <Text
-          style={{ fontFamily: "Baloo-Regular", fontSize: 30, color: "pink" }}
-        >
-          {"uFluent"}
-        </Text>
+        <Text style={styles.headerText}>{"uFluent"}</Text>
       </View>
 
       <View style={styles.profileButtons}>
