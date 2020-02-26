@@ -152,11 +152,10 @@ export default class Profile extends React.Component {
               backgroundDarker={themeArray[themeNumber].backgroundDark}
               raiseLevel={10}
             >
-              {/* <View style={styles.sections}> */}
               <View style={styles.languageContainer}>
                 <Image
                   source={DisplayFlag[userData.language]}
-                  style={{ width: 75, height: 50 }}
+                  style={{ width: 75, height: 50, left: 60 }}
                 />
 
                 <ModalDropdown
@@ -210,7 +209,6 @@ export default class Profile extends React.Component {
               raiseLevel={10}
             >
               <View style={styles.sections}>
-
                 <View style={[styles.levelBar, { width: 320 * score }]}></View>
 
                 <Text style={styles.text}>
