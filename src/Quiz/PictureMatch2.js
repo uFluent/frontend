@@ -4,7 +4,8 @@ import {
   Text,
   Image,
   TouchableOpacityBase,
-  TouchableHighlightBase
+  TouchableHighlightBase,
+  ImageBackground
 } from "react-native";
 import { AsyncStorage } from "react-native";
 import Button from "react-native-button";
@@ -174,10 +175,10 @@ export default class PictureMatch extends Component {
     if (this.state.currentPage.words) {
       return (
         <View style={styles.screen}>
-          <LinearGradient
-            colors={["#fdcd3b", "#ffed4b"]}
+          {/* <LinearGradient
+            colors={["#F3ECE4", "#FFF"]}
             style={{ height: 700 }}
-          >
+          > */}
             <View style={styles.selection}>
               {this.state.fontLoaded ? (
                 <Text
@@ -185,9 +186,7 @@ export default class PictureMatch extends Component {
                     fontFamily: "Mansalva-Regular",
                     fontSize: 30
                   }}
-                >
-                  Picture Match
-                </Text>
+                ></Text>
               ) : null}
               <View style={styles.pictureContainer}>
                 <SimpleAnimation
@@ -206,27 +205,18 @@ export default class PictureMatch extends Component {
                 {this.state.guess !== null && (
                   <View style={styles.pictureOverlay}>
                     <Text style={styles.guessConfirmationText}>{feedback}</Text>
-                    <View style={styles.speakWord}>
-                      <Button
-                        onPress={() =>
-                          sayWord(
-                            this.state.currentPage.translatedAnswer,
-                            this.state.language
-                          )
-                        }
-                      >
-                        <Ionicons name="md-megaphone" size={30} />
-                      </Button>
-                    </View>
+
                     {this.state.guess === "correct" ? (
                       <LottieView
-                        source={require("../animations/5785-checkmark.json")}
+                        source={require("../animations/4052-smoothymon-typing.json")}
                         autoPlay
+                        style={{ marginBottom: 15 }}
                       ></LottieView>
                     ) : (
                       <LottieView
                         source={require("../animations/4053-crying-smoothymon.json")}
                         autoPlay
+                        style={{ marginBottom: 10 }}
                       ></LottieView>
                     )}
                     <AwesomeButtonCartman
@@ -320,7 +310,7 @@ export default class PictureMatch extends Component {
                 })}
               </View>
             </View>
-          </LinearGradient>
+          {/* </LinearGradient> */}
         </View>
       );
     } else {

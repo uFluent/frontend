@@ -8,7 +8,7 @@ import * as Animatable from "react-native-animatable";
 import HomeButtons from "./HomeButtons";
 import { SimpleAnimation } from "react-native-simple-animations";
 import * as Font from "expo-font";
-// import LottieView from "lottie-react-native";
+import LottieView from "lottie-react-native";
 
 export default class Home extends Component {
   constructor() {
@@ -35,53 +35,66 @@ export default class Home extends Component {
         >
           <HomeButtons></HomeButtons>
         </SimpleAnimation>
-        <View style={{ flexDirection: "row" }}>
-          {/* <LottieView
-            source={require("../animations/72-favourite-app-icon.json")}
-            autoPlay
-          style={{}}
-            
-          /> */}
-          <SimpleAnimation
-            delay={1000}
-            duration={3000}
-            friction={2}
-            movementType="slide"
-            direction="left"
-            distance={70}
+
+        <View>
+          <View
+            style={{
+              width: 400,
+              height: 400,
+              position: "absolute",
+              marginLeft: -80,
+              marginTop: -100
+            }}
           >
-            {this.state.fontLoaded ? (
-              <Text
-                style={{
-                  fontFamily: "Mansalva-Regular",
-                  // fontWeight: "bold",
-                  fontSize: 80
-                }}
-              >
-                u
-              </Text>
-            ) : null}
-          </SimpleAnimation>
-          <SimpleAnimation
-            delay={1500}
-            duration={3000}
-            friction={2}
-            movementType="spring"
-            direction="up"
-            distance={70}
-          >
-            {this.state.fontLoaded ? (
-              <Text
-                style={{
-                  fontFamily: "Mansalva-Regular",
-                  // fontWeight: "bold",
-                  fontSize: 80
-                }}
-              >
-                Fluent
-              </Text>
-            ) : null}
-          </SimpleAnimation>
+            <LottieView
+              source={require("../animations/lf30_editor_ay5BMu.json")}
+              autoPlay
+              loop={false}
+              speed={1}
+            />
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <SimpleAnimation
+              delay={1000}
+              duration={3000}
+              friction={2}
+              movementType="slide"
+              direction="left"
+              distance={70}
+            >
+              {this.state.fontLoaded ? (
+                <Text
+                  style={{
+                    fontFamily: "Mansalva-Regular",
+                    color: "#FFFFF",
+                    fontSize: 80
+                  }}
+                >
+                  u
+                </Text>
+              ) : null}
+            </SimpleAnimation>
+            <SimpleAnimation
+              delay={1500}
+              duration={3000}
+              friction={2}
+              movementType="spring"
+              direction="up"
+              distance={70}
+            >
+              {this.state.fontLoaded ? (
+                <Text
+                  style={{
+                    fontFamily: "Mansalva-Regular",
+                    color: "#FFFFF",
+                    fontSize: 80
+                  }}
+                >
+                  Fluent
+                </Text>
+              ) : null}
+            </SimpleAnimation>
+          </View>
         </View>
       </View>
     );
