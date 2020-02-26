@@ -8,8 +8,8 @@ import styles from "./HeaderBar.styles";
 
 export default props => {
   const colorStyle = currentPage => {
-    if (currentPage) return { backgroundColor: "white", color: "black" };
-    else return { backgroundColor: "black", color: "white" };
+    if (currentPage) return { backgroundColor: "white", color: "#454547" };
+    else return { backgroundColor: "#454547", color: "white" };
   };
 
   const navigation = useNavigation();
@@ -28,6 +28,7 @@ export default props => {
       file: require(`../Flags/de.png`)
     }
   };
+
   return (
     <View style={styles.headerBar}>
       <Button onPress={() => handlePress("Home")}>
@@ -37,6 +38,14 @@ export default props => {
           style={[styles.homeButton, colorStyle(props.children === "Home")]}
         />
       </Button>
+
+      <View>
+        <Text
+          style={{ fontFamily: "Baloo-Regular", fontSize: 30, color: "pink" }}
+        >
+          {"uFluent"}
+        </Text>
+      </View>
 
       <View style={styles.profileButtons}>
         <View

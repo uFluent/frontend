@@ -86,12 +86,11 @@ export default class Gallery extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.word !== prevState.word) {
-      this.setState({ fontSize: 50 - this.state.word.length * 1.5 });
+      this.setState({ fontSize: 55 - this.state.word.length * 1.5 });
     }
   }
 
   render() {
-    console.log(this.props.userData);
     const styles = styleMaker(this.state.saved, this.state.word);
     return (
       <React.Fragment>

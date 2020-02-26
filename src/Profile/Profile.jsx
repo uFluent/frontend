@@ -14,6 +14,7 @@ import {
 import * as api from "../../api";
 import styles from "./Profile.style";
 import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";
+import * as Font from "expo-font";
 
 import ModalDropdown from "react-native-modal-dropdown";
 import { SimpleAnimation } from "react-native-simple-animations";
@@ -65,9 +66,12 @@ export default class Profile extends React.Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({
       userData: this.props.route.params.userData
+    });
+    await Font.loadAsync({
+      "Baloo-Regular": require("../../assets/fonts/Baloo-Regular.ttf")
     });
   }
 
@@ -77,7 +81,6 @@ export default class Profile extends React.Component {
     const { themeNumber } = this.state;
     let score = 0;
     if (userData.score) score = (userData.score % 10) * 0.1;
-    console.log(score);
 
     return (
       <View style={styles.container}>
@@ -122,7 +125,9 @@ export default class Profile extends React.Component {
               backgroundDarker={themeArray[themeNumber].backgroundDark}
               raiseLevel={10}
             >
-              <Text style={styles.text}>{userName}</Text>
+              <Text style={[styles.text, { fontFamily: "Baloo-Regular" }]}>
+                {userName}
+              </Text>
             </AwesomeButtonCartman>
           </SimpleAnimation>
         </View>
@@ -162,7 +167,10 @@ export default class Profile extends React.Component {
                 <ModalDropdown
                   ref="dropdown_2"
                   style={styles.dropdown_2}
-                  textStyle={styles.dropdown_2_text}
+                  textStyle={[
+                    styles.dropdown_2_text,
+                    { fontFamily: "Baloo-Regular" }
+                  ]}
                   dropdownStyle={styles.dropdown_2_dropdown}
                   options={languageOptions}
                   defaultValue={this.displayCountry()}
@@ -210,10 +218,9 @@ export default class Profile extends React.Component {
               raiseLevel={10}
             >
               <View style={styles.sections}>
-
                 <View style={[styles.levelBar, { width: 320 * score }]}></View>
 
-                <Text style={styles.text}>
+                <Text style={[styles.text, { fontFamily: "Baloo-Regular" }]}>
                   Level: {Math.ceil(userData.score / 10)}
                 </Text>
               </View>
