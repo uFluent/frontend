@@ -73,12 +73,6 @@ export const styleMaker = state => {
       width: winWidth / 3,
       height: 40
     },
-    correctGuess: {
-      // backgroundColor: "green"
-    },
-    incorrectGuess: {
-      // backgroundColor: "orange"
-    },
     otherGuess: { opacity: 0.5 },
     guessConfirmationText: {
       fontSize: 40,
@@ -93,6 +87,7 @@ export const styleMaker = state => {
     },
     questionContainer: {
       width: winWidth - 10,
+      height: winHeight / 4,
       display: "flex",
       flexDirection: "row",
       justifyContent: "center",
@@ -104,13 +99,21 @@ export const styleMaker = state => {
       opacity: pictureOpacity
     },
     pictureOption: {
-      width: 140,
-      height: 140,
-      backgroundColor: "green",
-      zIndex: 10
+      width: 144,
+      height: 144,
+      zIndex: 10,
+      borderStyle: "solid",
+      borderWidth: 2,
+      borderColor: "black"
     },
+    correctGuess: {
+      borderColor: "green"
+    },
+    incorrectGuess: {
+      borderColor: "orange"
+    },
+    otherGuessPicture: { opacity: 0.2 },
     pictureOptions: {
-      backgroundColor: "blue",
       width: winWidth,
       height: winHeight * 0.5,
       display: "flex",
@@ -119,6 +122,15 @@ export const styleMaker = state => {
       justifyContent: "space-around",
       alignContent: "space-between",
       alignItems: "center"
+    },
+    wordOverlay: {
+      height: 200,
+      width: 200,
+      position: "absolute",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "space-around"
     }
   });
 };

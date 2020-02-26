@@ -10,15 +10,15 @@ export default StyleSheet.create({
     justifyContent: "center"
   },
   headerContainer: {
-    flex: 2,
+    flex: 1,
     alignItems: "center",
     justifyContent: "center"
   },
-  uFluentText: {
-    fontSize: 70,
-    color: "#bae1ff",
-    paddingBottom: 0
-  },
+  // uFluentText: {
+  //   fontSize: 70,
+  //   color: "#bae1ff",
+  //   paddingBottom: 0
+  // },
   loginContainer: {
     flex: 3,
     alignItems: "center",
@@ -42,6 +42,17 @@ export default StyleSheet.create({
     color: "black"
   },
 
+  textInput2: {
+    fontSize: 40,
+    width: 200,
+    color: "black"
+  },
+  whichPageText: {
+    width: 150,
+    height: 150,
+    // backgroundColor: "red",
+    paddingBottom: 100
+  },
   buttonStyle: {
     backgroundColor: "#ffb3ba",
     width: 70,

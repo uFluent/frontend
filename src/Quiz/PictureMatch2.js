@@ -205,7 +205,7 @@ export default class PictureMatch extends Component {
                 {this.state.guess !== null && (
                   <View style={styles.pictureOverlay}>
                     <Text style={styles.guessConfirmationText}>{feedback}</Text>
-                    <View style={styles.speakWord}></View>
+
                     {this.state.guess === "correct" ? (
                       <LottieView
                         source={require("../animations/4052-smoothymon-typing.json")}
