@@ -256,7 +256,14 @@ export default class PictureMatch extends Component {
                         borderRadius={10}
                         height={50}
                         textSize={15}
-                        textColor="black"
+                        textColor={
+                          this.state.guessedWord === word && this.state.guess
+                            ? "white"
+                            : this.state.guess &&
+                              this.state.currentPage.translatedAnswer === word
+                            ? "white"
+                            : "black"
+                        }
                         backgroundColor={
                           !this.state.guess
                             ? "yellow"
