@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableHighlight,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   Image,
   Alert,
   ScrollView,
@@ -16,6 +17,7 @@ import { SimpleAnimation } from "react-native-simple-animations";
 import * as Font from "expo-font";
 import styles from "./ProfileLogin.style";
 import * as api from "../../api";
+// import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export default class ProfileLogin extends React.Component {
   state = {
@@ -81,7 +83,8 @@ export default class ProfileLogin extends React.Component {
   async componentDidMount() {
     this.setState({ userData: this.props.userData });
     await Font.loadAsync({
-      "Mansalva-Regular": require("../../assets/fonts/Mansalva-Regular.ttf")
+      "Mansalva-Regular": require("../../assets/fonts/Mansalva-Regular.ttf"),
+      "Baloo-Regular": require("../../assets/fonts/Baloo-Regular.ttf")
     });
     return this.setState({ fontLoaded: true });
   }
@@ -155,7 +158,14 @@ export default class ProfileLogin extends React.Component {
           {!newUser ? (
             <View style={styles.loginContainer}>
               <View style={styles.whichPageText}>
-                <Text style={styles.textInput2}>EXISTING</Text>
+                <Text
+                  style={[
+                    styles.textInput2
+                    // , { fontFamily: "Baloo-Regular" }
+                  ]}
+                >
+                  LOGIN!
+                </Text>
               </View>
               <View style={styles.login}>
                 <TextInput
@@ -165,37 +175,46 @@ export default class ProfileLogin extends React.Component {
                   value={this.state.text}
                   maxLength={14}
                 />
-                <TouchableOpacity
+                <TouchableHighlight
                   onPress={this.handleSubmit}
                   style={styles.buttonStyle}
+                  underlayColor="lightblue"
                 >
-                  <Text>Login!</Text>
-                </TouchableOpacity>
+                  <Text>Submit</Text>
+                </TouchableHighlight>
               </View>
               <TouchableOpacity onPress={this.toggleNewUser}>
-                <Text style={styles.toggleText}>Create New User</Text>
+                <Text style={styles.toggleText}>Create New Account?</Text>
               </TouchableOpacity>
             </View>
           ) : (
             <View style={styles.loginContainer}>
               <View style={styles.whichPageText}>
-                <Text style={styles.textInput2}>NEW</Text>
+                <Text
+                  style={[
+                    styles.textInput2
+                    // { fontFamily: "Baloo-Regular" }
+                  ]}
+                >
+                  CREATE!
+                </Text>
               </View>
 
               <View style={styles.login}>
                 <TextInput
                   style={styles.textInput}
-                  placeholder="Create New User"
+                  placeholder="Make New User"
                   onChangeText={text => this.setState({ text })}
                   value={this.state.text}
                   maxLength={14}
                 />
-                <TouchableOpacity
+                <TouchableHighlight
                   onPress={this.handlePost}
                   style={styles.buttonStyle}
+                  underlayColor="lightblue"
                 >
                   <Text>Submit</Text>
-                </TouchableOpacity>
+                </TouchableHighlight>
               </View>
               <TouchableOpacity onPress={this.toggleNewUser}>
                 <Text style={styles.toggleText}>Already Have An Account?</Text>

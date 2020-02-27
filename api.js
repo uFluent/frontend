@@ -32,7 +32,7 @@ export const getPictureData = base64 => {
   return axios
     .post("https://ufluent.herokuapp.com/api/pictures/", {
       data: base64,
-      fast: true
+      fast: false
     })
     .then(results => {
       return results.data.outcome;

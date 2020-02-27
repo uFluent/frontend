@@ -117,7 +117,7 @@ export default class App extends React.Component {
       return (
         <View style={styled.alignCenter}>
           <LottieView
-            source={require("./src/animations/226-splashy-loader (1).json")}
+            source={require("./src/animations/2523-loading.json")}
             autoPlay
           />
         </View>
