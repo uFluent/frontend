@@ -47,10 +47,10 @@ export default class Profile extends React.Component {
       fontLoaded: false,
       font: "serif",
       DisplayFlag: {
-        fr: require(`./Flags/fr.png`),
-        es: require(`./Flags/es.png`),
-        en: require(`./Flags/en.png`),
-        de: require(`./Flags/de.png`)
+        fr: require(`../Flags/fr.png`),
+        es: require(`../Flags/es.png`),
+        en: require(`../Flags/en.png`),
+        de: require(`../Flags/de.png`)
       },
       userData: "",
       avatarUrl: {
