@@ -14,6 +14,7 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
+
   loginContainer: {
     flex: 3,
     alignItems: "center",
@@ -39,14 +40,21 @@ export default StyleSheet.create({
   },
 
   textInput2: {
-    fontSize: 40,
-    width: 200,
-    color: "black"
+    fontSize: 25,
+    width: 100,
+    height: 100,
+    color: "red",
+    textAlign: "center",
+    fontWeight: "bold"
   },
   whichPageText: {
-    width: 150,
+    width: 300,
     height: 150,
-    paddingBottom: 100
+
+    paddingBottom: 100,
+    alignItems: "flex-end",
+    justifyContent: "flex-end"
+
   },
   buttonStyle: {
     backgroundColor: "#ffb3ba",
