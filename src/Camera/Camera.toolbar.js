@@ -16,12 +16,6 @@ export const Toolbar = ({
   <Grid style={styles.bottomToolbar}>
     <Row>
       <Col size={2} style={styles.alignCenter}>
-        {/* <TouchableWithoutFeedback
-          onPressIn={onCaptureIn}
-          onPressOut={onCaptureOut}
-          onLongPress={onShortCapture}
-          onPress={onShortCapture}
-        > */}
         <AwesomeButtonCartman
           type="secondary"
           springRelease={false}
@@ -37,18 +31,12 @@ export const Toolbar = ({
           onPress={onShortCapture}
           backgroundColor="rgb(253,1,23)"
         >
-          {/* <View
-              style={[styles.captureBtn, capturing && styles.captureBtnActive]}
-            > */}
           <Ionicons
             name="md-camera"
             size={70}
             style={[styles.cameraIcon, capturing && styles.cameraIconActive]}
           />
-          {/* {capturing && <View style={styles.captureBtnInternal} />} */}
-          {/* </View> */}
         </AwesomeButtonCartman>
-        {/* </TouchableWithoutFeedback> */}
       </Col>
     </Row>
   </Grid>

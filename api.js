@@ -85,9 +85,6 @@ export const patchUser = (username, language, avatar) => {
       console.log("in the error");
     });
 };
-// avatarUrl: "https://picsum.photos/id/237/200/300",
-// score: 2,
-// img_id: 1
 
 export const patchLevel = (username, level) => {
   return fetch(`http://ufluent.herokuapp.com/api/users/${username}/`, {

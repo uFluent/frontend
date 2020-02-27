@@ -54,7 +54,7 @@ export default props => {
           ]}
         >
           <Text style={{ fontSize: 25 }}>
-            {Math.ceil(props.userData.score / 10)}
+            {Math.floor(props.userData.score / 10)}
           </Text>
         </View>
         <Button onPress={() => handlePress("Profile")}>

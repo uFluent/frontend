@@ -50,9 +50,11 @@ export default StyleSheet.create({
   whichPageText: {
     width: 300,
     height: 150,
+
     paddingBottom: 100,
     alignItems: "flex-end",
     justifyContent: "flex-end"
+
   },
   buttonStyle: {
     backgroundColor: "#ffb3ba",
