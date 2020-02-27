@@ -70,7 +70,7 @@ export default function QuizSelector() {
         <View
           style={{
             width: 400,
-            height: 400,
+            height: 300,
             position: "absolute",
             marginLeft: -190,
             marginTop: -180
