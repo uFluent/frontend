@@ -45,7 +45,7 @@ export default class Profile extends React.Component {
       dropdown_6_icon_heart: true,
       themeNumber: 0,
       fontLoaded: false,
-      font: "serif",
+      // font: "system font",
       DisplayFlag: {
         fr: require(`../Flags/fr.png`),
         es: require(`../Flags/es.png`),
@@ -125,7 +125,12 @@ export default class Profile extends React.Component {
               backgroundDarker={themeArray[themeNumber].backgroundDark}
               raiseLevel={10}
             >
-              <Text style={[styles.text, { fontFamily: this.state.font }]}>
+              <Text
+                style={[
+                  styles.text,
+                  this.state.font && { fontFamily: this.state.font }
+                ]}
+              >
                 {userName}
               </Text>
             </AwesomeButtonCartman>
@@ -168,7 +173,7 @@ export default class Profile extends React.Component {
                   style={styles.dropdown_2}
                   textStyle={[
                     styles.dropdown_2_text,
-                    { fontFamily: this.state.font }
+                    this.state.font && { fontFamily: this.state.font }
                   ]}
                   dropdownStyle={styles.dropdown_2_dropdown}
                   options={languageOptions}
@@ -219,7 +224,12 @@ export default class Profile extends React.Component {
               <View style={styles.sections}>
                 <View style={[styles.levelBar, { width: 320 * score }]}></View>
 
-                <Text style={[styles.text, { fontFamily: this.state.font }]}>
+                <Text
+                  style={[
+                    styles.text,
+                    this.state.font && { fontFamily: this.state.font }
+                  ]}
+                >
                   Level: {Math.floor(userData.score / 10)}
                 </Text>
               </View>
