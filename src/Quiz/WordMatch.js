@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { View, Text, Image } from "react-native";
-import { AsyncStorage } from "react-native";
 import Button from "react-native-button";
 
-import * as MediaLibrary from "expo-media-library";
 import { Ionicons } from "@expo/vector-icons";
 
-import { getListOfWords, words } from "./Words";
+import { words } from "./Words";
 
 import { sayWord, getGenericPicture, translateWord } from "../../api";
 
@@ -80,15 +78,13 @@ export default class PictureMatch extends Component {
     let num = Math.ceil(this.props.userData.score / 10);
     if (num > 3) num = 3;
     const picArray = [];
-    console.log(this.state[page].question);
-    //push correct pic into array
+
     const correctUri = await getGenericPicture(
       words.indexOf(this.state[page].question) + 1
     );
 
     picArray.push(correctUri.pictureData);
-    console.log(picArray);
-    //push more pics into array
+
     for (let i = 0; i < num; i++) {
       const uri = await getGenericPicture(Math.ceil(Math.random() * 80)).catch(
         err => {
@@ -167,31 +163,14 @@ export default class PictureMatch extends Component {
       return (
         <View style={styles.screen}>
           <View style={styles.questionContainer}>
-            {/* <SimpleAnimation
-              delay={500}
-              duration={2000}
-              // direction="right"
-              staticType="bounce"
-              distance={20}
-              // friction={4}
-            >
-              <Text
-                style={[styles.question, { fontSize: this.state.fontSize }]}
-              >
-                {this.state.currentPage.translatedQuestion}
-              </Text>
-            </SimpleAnimation> */}
             {this.state.guess === null && (
               <View>
                 <SimpleAnimation
                   delay={500}
                   duration={2000}
-                  // direction="right"
                   staticType="bounce"
                   distance={20}
-                  // friction={4}
                 >
-
                   <AwesomeButtonCartman
                     type="secondary"
                     size="large"
@@ -225,7 +204,6 @@ export default class PictureMatch extends Component {
                     />
                   </AwesomeButtonCartman>
                 </SimpleAnimation>
-
               </View>
             )}
             {this.state.guess !== null && (
@@ -266,10 +244,9 @@ export default class PictureMatch extends Component {
                 <SimpleAnimation
                   delay={500}
                   duration={2000}
-                  // direction="right"
                   staticType="zoom"
                   distance={20}
-                  // friction={4}
+                  key={picture}
                 >
                   <View
                     key={picture}

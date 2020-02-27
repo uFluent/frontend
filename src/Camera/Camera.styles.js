@@ -63,14 +63,7 @@ export default StyleSheet.create({
     borderColor: "rgb(43, 128, 62)",
     backgroundColor: "rgb(0, 210, 46)"
   },
-  captureBtnInternal: {
-    // width: 76,
-    // height: 76,
-    // borderWidth: 2,
-    // borderRadius: 76,
-    // backgroundColor: "red",
-    // borderColor: "transparent"
-  },
+  captureBtnInternal: {},
   cameraIcon: {
     color: "rgb(250,224,6)"
   },

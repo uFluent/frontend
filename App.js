@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { AsyncStorage } from "react-native";
@@ -72,13 +72,6 @@ export default class App extends React.Component {
   static getDerivedStateFromError(error) {
     return { hasError: true };
   }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   const { userName } = this.state;
-  //   if (userName !== prevState.userName) {
-  //     api.getUser(userName).then(res => this.setState({ userData: res }));
-  //   }
-  // }
 
   increaseScore = () => {
     this.setState(currentState => {

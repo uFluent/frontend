@@ -33,9 +33,6 @@ export class CameraPage extends React.Component {
   handleShortCapture = async () => {
     const photoData = await this.camera.takePictureAsync({ base64: true });
 
-    // const asset = await MediaLibrary.createAssetAsync(photoData.uri);
-    // MediaLibrary.createAlbumAsync("Expo", asset, false);
-
     this.setState({
       capturing: false,
       captures: [photoData, ...this.state.captures],

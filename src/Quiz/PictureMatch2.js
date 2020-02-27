@@ -63,7 +63,7 @@ export default class PictureMatch extends Component {
     const albumData = await MediaLibrary.getAlbumAsync("Expo");
     let numberOfPicturesInPhone = 0;
     if (albumData) numberOfPicturesInPhone = albumData.assetCount;
-    if (Math.random() > 8 / numberOfPicturesInPhone) {
+    if (Math.random() > 2 / numberOfPicturesInPhone) {
       //Get picture from phone
       const pictures = await MediaLibrary.getAssetsAsync({
         album: "-2075771444"
@@ -165,6 +165,7 @@ export default class PictureMatch extends Component {
 
   render() {
     const styles = styleMaker(this.state);
+    console.log(this.state);
 
     let feedback = "Great!";
 
@@ -175,9 +176,7 @@ export default class PictureMatch extends Component {
     if (this.state.currentPage.words) {
       return (
         <View style={styles.screen}>
-
           <View style={styles.selection}>
-
             <View style={styles.pictureContainer}>
               <SimpleAnimation
                 delay={500}
@@ -214,10 +213,8 @@ export default class PictureMatch extends Component {
                     size="small"
                     height={50}
                     textSize={15}
-
                     textColor="white"
                     backgroundColor="orange"
-
                     style={styles.nextButton}
                     onPress={this.nextWord}
                     disabled={this.state.disabledNext}
@@ -251,12 +248,10 @@ export default class PictureMatch extends Component {
                       // friction={4}
                     >
                       <AwesomeButtonCartman
-
                         type="secondary"
                         size="small"
                         borderRadius={10}
                         height={50}
-
                         textSize={15}
                         backgroundColor={
                           !this.state.guess
@@ -273,7 +268,6 @@ export default class PictureMatch extends Component {
                         // style={styles.wordOptionButton}
                       >
                         {word.charAt(0).toUpperCase() + word.slice(1)}
-
                       </AwesomeButtonCartman>
                     </SimpleAnimation>
                     {!this.state.guess && (
@@ -281,10 +275,8 @@ export default class PictureMatch extends Component {
                         <SimpleAnimation
                           delay={500}
                           duration={2000}
-
                           staticType="zoom"
                           distance={20}
-
                         >
                           <AwesomeButtonCartman
                             type="secondary"
@@ -295,9 +287,7 @@ export default class PictureMatch extends Component {
                             onPress={() => sayWord(word, this.state.language)}
                           >
                             <Ionicons
-
                               name="md-volume-high"
-
                               size={25}
                               color="yellow"
                             />

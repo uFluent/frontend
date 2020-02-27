@@ -32,7 +32,7 @@ export const getPictureData = base64 => {
   return axios
     .post("https://ufluent.herokuapp.com/api/pictures/", {
       data: base64,
-      fast: true
+      fast: false
     })
     .then(results => {
       return results.data.outcome;
@@ -85,9 +85,6 @@ export const patchUser = (username, language, avatar) => {
       console.log("in the error");
     });
 };
-// avatarUrl: "https://picsum.photos/id/237/200/300",
-// score: 2,
-// img_id: 1
 
 export const patchLevel = (username, level) => {
   return fetch(`http://ufluent.herokuapp.com/api/users/${username}/`, {
