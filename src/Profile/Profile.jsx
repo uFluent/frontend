@@ -1,14 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import {
-  AppRegistry,
-  StyleSheet,
   Text,
   View,
   Image,
   TouchableOpacity,
-  TouchableHighlight,
-  ScrollView,
-  Button
+  TouchableHighlight
 } from "react-native";
 
 import * as api from "../../api";
@@ -224,7 +220,7 @@ export default class Profile extends React.Component {
                 <View style={[styles.levelBar, { width: 320 * score }]}></View>
 
                 <Text style={[styles.text, { fontFamily: this.state.font }]}>
-                  Level: {Math.ceil(userData.score / 10)}
+                  Level: {Math.floor(userData.score / 10)}
                 </Text>
               </View>
             </AwesomeButtonCartman>

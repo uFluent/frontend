@@ -14,11 +14,7 @@ export const styleMaker = state => {
   return StyleSheet.create({
     screen: {
       height: winHeight,
-
       backgroundColor: "yellow"
-
-      // backgroundColor: "#fdcd3b"
-
     },
     selection: {
       display: "flex",
@@ -67,7 +63,6 @@ export const styleMaker = state => {
       justifyContent: "space-between",
       width: winWidth / 3,
       height: 40,
-      // backgroundColor: "grey",
       marginTop: 10,
       margin: 20,
       marginLeft: -50
@@ -89,7 +84,6 @@ export const styleMaker = state => {
     },
     speakWord: {
       marginLeft: 50,
-      // backgroundColor: "orange",
       width: 40,
       height: 40
     },

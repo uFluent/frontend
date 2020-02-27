@@ -86,17 +86,6 @@ export default class ProfileLogin extends React.Component {
     return this.setState({ fontLoaded: true });
   }
 
-  // componentDidUpdate(prevProp, prevState) {
-  //   if (this.state.submittedUser !== prevState.submittedUser) {
-  //     this.setState({
-  //       userData: {
-  //         ...this.state.userData,
-  //         username: this.state.submittedUser
-  //       }
-  //     }); //this will replace the user temp with the name of the user that is submitted, then at the same time there should be a post reqest to the backend database.
-  //   }
-  // }
-
   render(props) {
     const { userData, newUser } = this.state;
     if (!userData) {
@@ -104,11 +93,6 @@ export default class ProfileLogin extends React.Component {
         <View style={styles.container}>
           <View style={styles.headerContainer}>
             <View style={{ flexDirection: "row" }}>
-              {/* <LottieView
-              source={require("../animations/72-favourite-app-icon.json")}
-              autoPlay
-            style={{}}
-            /> */}
               <SimpleAnimation
                 delay={10}
                 duration={3000}
@@ -121,7 +105,6 @@ export default class ProfileLogin extends React.Component {
                   <Text
                     style={{
                       fontFamily: "Mansalva-Regular",
-                      // fontWeight: "bold",
                       fontSize: 80
                     }}
                   >
@@ -141,7 +124,6 @@ export default class ProfileLogin extends React.Component {
                   <Text
                     style={{
                       fontFamily: "Mansalva-Regular",
-                      // fontWeight: "bold",
                       fontSize: 80
                     }}
                   >
@@ -204,117 +186,6 @@ export default class ProfileLogin extends React.Component {
           )}
         </View>
       );
-
-      //   if (!newUser) {
-      //     return (
-      //       <View style={styles.container}>
-      //         <View style={styles.headerContainer}>
-      //           <View style={{ flexDirection: "row" }}>
-      //             {/* <LottieView
-      //         source={require("../animations/72-favourite-app-icon.json")}
-      //         autoPlay
-      //       style={{}}
-      //       /> */}
-      //             <SimpleAnimation
-      //               delay={10}
-      //               duration={3000}
-      //               friction={2}
-      //               movementType="slide"
-      //               direction="left"
-      //               distance={70}
-      //             >
-      //               {this.state.fontLoaded ? (
-      //                 <Text
-      //                   style={{
-      //                     fontFamily: "Mansalva-Regular",
-      //                     // fontWeight: "bold",
-      //                     fontSize: 80
-      //                   }}
-      //                 >
-      //                   u
-      //                 </Text>
-      //               ) : null}
-      //             </SimpleAnimation>
-      //             <SimpleAnimation
-      //               delay={15}
-      //               duration={3000}
-      //               friction={2}
-      //               movementType="spring"
-      //               direction="up"
-      //               distance={70}
-      //             >
-      //               {this.state.fontLoaded ? (
-      //                 <Text
-      //                   style={{
-      //                     fontFamily: "Mansalva-Regular",
-      //                     // fontWeight: "bold",
-      //                     fontSize: 80
-      //                   }}
-      //                 >
-      //                   Fluent
-      //                 </Text>
-      //               ) : null}
-      //             </SimpleAnimation>
-      //           </View>
-      //           <Text>EXISTING</Text>
-      //         </View>
-      //         <View style={styles.loginContainer}>
-      //           <View style={styles.login}>
-      //             <TextInput
-      //               style={styles.textInput}
-      //               placeholder="Existing User"
-      //               onChangeText={text => this.setState({ text })}
-      //               value={this.state.text}
-      //               maxLength={14}
-      //             />
-      //             <TouchableOpacity
-      //               onPress={this.handleSubmit}
-      //               style={styles.buttonStyle}
-      //             >
-      //               <Text>Login!</Text>
-      //             </TouchableOpacity>
-      //           </View>
-      //           <TouchableOpacity onPress={this.toggleNewUser}>
-      //             <Text style={styles.toggleText}>Create New User</Text>
-      //           </TouchableOpacity>
-      //         </View>
-      //       </View>
-      //     );
-      //   } else {
-      //     return (
-      //       <View style={styles.container}>
-      //         <View style={styles.headerContainer}>
-      //           <Text style={styles.uFluentText}>uFluent</Text>
-      //           <Text>NEW</Text>
-      //         </View>
-      //         <View style={styles.loginContainer}>
-      //           <View style={styles.login}>
-      //             <TextInput
-      //               style={styles.textInput}
-      //               placeholder="Create New User"
-      //               onChangeText={text => this.setState({ text })}
-      //               value={this.state.text}
-      //               maxLength={14}
-      //             />
-      //             <TouchableOpacity
-      //               onPress={this.handlePost}
-      //               style={styles.buttonStyle}
-      //             >
-      //               <Text>Submit</Text>
-      //             </TouchableOpacity>
-      //           </View>
-      //           <TouchableOpacity onPress={this.toggleNewUser}>
-      //             <Text style={styles.toggleText}>Already Have An Account?</Text>
-      //           </TouchableOpacity>
-      //         </View>
-      //       </View>
-      //     );
-      //   }
     }
-    // if (userData) {
-    //   return <Text>Welcome back {userData.username}</Text>;
-    // }
   }
-
-  // const navigation = useNavigation();
 }

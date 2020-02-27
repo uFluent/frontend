@@ -11,7 +11,7 @@ export default StyleSheet.create({
     alignItems: "center"
   },
   headerText: {
-    color: "pink",
+    color: "white",
     fontSize: 30,
     fontWeight: "bold"
   },

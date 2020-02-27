@@ -14,11 +14,6 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
-  // uFluentText: {
-  //   fontSize: 70,
-  //   color: "#bae1ff",
-  //   paddingBottom: 0
-  // },
   loginContainer: {
     flex: 3,
     alignItems: "center",
@@ -51,7 +46,6 @@ export default StyleSheet.create({
   whichPageText: {
     width: 150,
     height: 150,
-    // backgroundColor: "red",
     paddingBottom: 100
   },
   buttonStyle: {
