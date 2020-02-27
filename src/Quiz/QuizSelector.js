@@ -6,6 +6,7 @@ import Button from "react-native-button";
 import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";
 import styles from "../Styles";
 import { SimpleAnimation } from "react-native-simple-animations";
+import LottieView from "lottie-react-native";
 
 export default function QuizSelector() {
   const navigation = useNavigation();
@@ -30,7 +31,7 @@ export default function QuizSelector() {
           type="primary"
           size="large"
           style={{
-            marginTop: 100
+            marginTop: 50
           }}
           borderRadius={(20, 50)}
           height={100}
@@ -53,7 +54,7 @@ export default function QuizSelector() {
           onPress={goToWordMatch}
           type="secondary"
           style={{
-            marginTop: 50
+            marginTop: 150
           }}
           size="large"
           borderRadius={(20, 50)}
@@ -65,6 +66,24 @@ export default function QuizSelector() {
           Word Match
         </AwesomeButtonCartman>
       </SimpleAnimation>
+      <View>
+        <View
+          style={{
+            width: 400,
+            height: 400,
+            position: "absolute",
+            marginLeft: -190,
+            marginTop: -180
+          }}
+        >
+          <LottieView
+            source={require("../animations/16475-line-art-of-city-landscape-and-landmark.json")}
+            autoPlay
+            loop
+            speed={1}
+          />
+        </View>
+      </View>
     </View>
   );
 }
