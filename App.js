@@ -21,6 +21,8 @@ import * as api from "./api";
 import styled from "./src/Styles";
 const Stack = createStackNavigator();
 
+console.disableYellowBox = true;
+
 export default class App extends React.Component {
   state = {
     userName: "",

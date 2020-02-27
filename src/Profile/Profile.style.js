@@ -47,7 +47,7 @@ export default StyleSheet.create({
     position: "absolute",
     alignSelf: "flex-start"
   },
-  text: { fontSize: 40, padding: 30, color: "black" },
+  text: { fontSize: 40, padding: 0, color: "black" },
   row: {
     flex: 1,
     flexDirection: "row"

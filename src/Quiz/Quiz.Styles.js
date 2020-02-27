@@ -14,7 +14,7 @@ export const styleMaker = state => {
   return StyleSheet.create({
     screen: {
       height: winHeight,
-      backgroundColor: "yellow"
+      backgroundColor: "lightblue"
     },
     selection: {
       display: "flex",
@@ -30,13 +30,14 @@ export const styleMaker = state => {
       position: "relative"
     },
     pictureOverlay: {
-      height: 170,
+      height: 230,
       width: 200,
       position: "absolute",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      justifyContent: "space-around"
+      justifyContent: "space-between"
+      // backgroundColor: "green"
     },
     picture: {
       resizeMode: "cover",
@@ -75,7 +76,8 @@ export const styleMaker = state => {
     guessConfirmationText: {
       fontSize: 40,
       color: feedbackColour,
-      marginBottom: 260
+      marginBottom: winHeight / 5,
+      zIndex: 50
     },
     guessConfirmationText2: {
       fontSize: 40,
@@ -83,7 +85,7 @@ export const styleMaker = state => {
       marginBottom: -30
     },
     speakWord: {
-      marginLeft: 50,
+      marginLeft: 20,
       width: 40,
       height: 40
     },

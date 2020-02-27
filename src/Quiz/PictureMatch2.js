@@ -55,6 +55,9 @@ export default class PictureMatch extends Component {
     await Font.loadAsync({
       "Mansalva-Regular": require("../../assets/fonts/Mansalva-Regular.ttf")
     });
+    await Font.loadAsync({
+      "Baloo-Regular": require("../../assets/fonts/Baloo-Regular.ttf")
+    });
     return this.setState({ fontLoaded: true });
   }
 
@@ -193,7 +196,7 @@ export default class PictureMatch extends Component {
               </SimpleAnimation>
               {this.state.guess !== null && (
                 <View style={styles.pictureOverlay}>
-                  <Text style={styles.guessConfirmationText}>{feedback}</Text>
+                  <Text style={[styles.guessConfirmationText]}>{feedback}</Text>
 
                   {this.state.guess === "correct" ? (
                     <LottieView
@@ -249,13 +252,14 @@ export default class PictureMatch extends Component {
                     >
                       <AwesomeButtonCartman
                         type="secondary"
-                        size="small"
+                        size="medium"
                         borderRadius={10}
                         height={50}
                         textSize={15}
+                        textColor="black"
                         backgroundColor={
                           !this.state.guess
-                            ? "#00b8c4"
+                            ? "yellow"
                             : this.state.currentPage.translatedAnswer === word
                             ? "green"
                             : this.state.guessedWord === word
