@@ -112,10 +112,12 @@ export const styleMaker = state => {
       borderRadius: 20
     },
     correctGuess: {
-      borderColor: "green"
+      borderColor: "green",
+      color: "white"
     },
     incorrectGuess: {
-      borderColor: "orange"
+      borderColor: "orange",
+      color: "white"
     },
     otherGuessPicture: { opacity: 0.2 },
     pictureOptions: {
@@ -125,7 +127,7 @@ export const styleMaker = state => {
       flexDirection: "row",
       flexWrap: "wrap",
       justifyContent: "space-around",
-      alignContent: "space-between",
+      alignContent: "space-around",
       alignItems: "center"
     },
     wordOverlay: {

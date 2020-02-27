@@ -69,6 +69,8 @@ export default class App extends React.Component {
 
   async componentDidMount() {
     this.getUserFromLocalStorage();
+    ///!!!!!
+    AsyncStorage.removeItem("username");
   }
 
   static getDerivedStateFromError(error) {
