@@ -6,15 +6,29 @@ export default StyleSheet.create({
   alignCenter: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: "lightblue",
+
+    flexDirection: "column-reverse",
+    position: "relative"
+
   },
-  preview: {
+  logoText: {
+    fontSize: 70,
+    color: "green"
+  },
+  homepageButton: {
+    padding: 10,
+    borderColor: "black",
+    width: 90,
+    height: 90
+  },
+  loadingScreen: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     height: winHeight,
     width: winWidth,
-    position: "absolute",
-    left: 0,
-    top: 0,
-    right: 0,
-    bottom: 0
+    backgroundColor: "#ace8dc"
   }
 });
