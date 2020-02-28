@@ -1,7 +1,6 @@
 import React from "react";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import styles from "../Styles";
 import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";
 
 export default function HomeButtons() {

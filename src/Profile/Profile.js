@@ -6,12 +6,9 @@ import {
   TouchableOpacity,
   TouchableHighlight
 } from "react-native";
-
-import * as api from "../../api";
 import styles from "./Profile.style";
 import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";
 import * as Font from "expo-font";
-
 import ModalDropdown from "react-native-modal-dropdown";
 import { SimpleAnimation } from "react-native-simple-animations";
 
@@ -45,7 +42,6 @@ export default class Profile extends React.Component {
       dropdown_6_icon_heart: true,
       themeNumber: 0,
       fontLoaded: false,
-      // font: "system font",
       DisplayFlag: {
         fr: require(`../Flags/fr.png`),
         es: require(`../Flags/es.png`),
@@ -182,15 +178,10 @@ export default class Profile extends React.Component {
                     this._dropdown_2_renderButtonText(rowData)
                   }
                   renderRow={this._dropdown_2_renderRow.bind(this)}
-                  renderSeparator={(sectionID, rowID, adjacentRowHighlighted) =>
-                    this._dropdown_2_renderSeparator(
-                      sectionID,
-                      rowID,
-                      adjacentRowHighlighted
-                    )
+                  renderSeparator={rowID =>
+                    this._dropdown_2_renderSeparator(rowID)
                   }
                 ></ModalDropdown>
-                {/* </View> */}
               </View>
             </AwesomeButtonCartman>
           </SimpleAnimation>
@@ -307,7 +298,7 @@ export default class Profile extends React.Component {
     );
   }
 
-  _dropdown_2_renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
+  _dropdown_2_renderSeparator(rowID) {
     if (rowID == languageOptions.length - 1) return;
     let key = `spr_${rowID}`;
     return <View style={styles.dropdown_2_separator} key={key} />;

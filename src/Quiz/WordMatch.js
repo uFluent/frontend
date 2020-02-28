@@ -1,15 +1,10 @@
 import React, { Component } from "react";
 import { View, Text, Image } from "react-native";
 import Button from "react-native-button";
-
 import { Ionicons } from "@expo/vector-icons";
-
 import { words } from "./Words";
-
 import { sayWord, getGenericPicture, translateWord } from "../../api";
-
 import { styleMaker } from "./Quiz.Styles";
-
 import styled from "../Styles";
 import LottieView from "lottie-react-native";
 import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";

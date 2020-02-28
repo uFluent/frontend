@@ -1,8 +1,6 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Button from "react-native-button";
-// import styles from "./QuizSelector.styles";
 import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";
 import styles from "../Styles";
 import { SimpleAnimation } from "react-native-simple-animations";

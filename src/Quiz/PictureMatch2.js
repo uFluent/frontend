@@ -1,31 +1,16 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacityBase,
-  TouchableHighlightBase,
-  ImageBackground
-} from "react-native";
+import { View, Text, Image } from "react-native";
 import { AsyncStorage } from "react-native";
-import Button from "react-native-button";
-
 import * as MediaLibrary from "expo-media-library";
 import { Ionicons } from "@expo/vector-icons";
-
 import { getListOfWords } from "./Words";
-
 import { sayWord, getGenericPicture } from "../../api";
-
 import { styleMaker } from "./Quiz.Styles";
-
 import styled from "../Styles";
 import LottieView from "lottie-react-native";
-
 import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";
 import { SimpleAnimation } from "react-native-simple-animations";
 import * as Font from "expo-font";
-import { LinearGradient } from "expo-linear-gradient";
 
 export default class PictureMatch extends Component {
   state = {
@@ -65,6 +50,8 @@ export default class PictureMatch extends Component {
     //Decided whether to get picture from phone album or backend
     const albumData = await MediaLibrary.getAlbumAsync("Expo");
     let numberOfPicturesInPhone = 0;
+    // const x = await AsyncStorage.getAllKeys(); //use this to change the AsyncStorage.getItem file...
+
     if (albumData) numberOfPicturesInPhone = albumData.assetCount;
     if (Math.random() > 2 / numberOfPicturesInPhone) {
       //Get picture from phone
@@ -78,19 +65,22 @@ export default class PictureMatch extends Component {
         "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FcameraApp-33d6ed69-a607-41a5-9687-1eb6229ce0d9/Camera/" +
           pic.uri.slice(32)
       );
-      //Set state
-      this.setState(
-        {
-          [page]: {
-            ...this.state[page],
-            image: pic.uri,
-            answer: correctWord
+      if (correctWord === null) {
+        return this.getPicture(page); //if it cannot get picture from cameraroll, it calls the function again until it can.
+      } else {
+        this.setState(
+          {
+            [page]: {
+              ...this.state[page],
+              image: pic.uri,
+              answer: correctWord
+            }
+          },
+          () => {
+            return "done";
           }
-        },
-        () => {
-          return "done";
-        }
-      );
+        );
+      }
     } else {
       //Get picture and word from backend
       const randomNum = Math.ceil(Math.random() * 80);
@@ -184,7 +174,6 @@ export default class PictureMatch extends Component {
               <SimpleAnimation
                 delay={500}
                 duration={1000}
-                // direction="right"
                 staticType="bounce"
                 distance={20}
                 friction={4}
@@ -245,10 +234,8 @@ export default class PictureMatch extends Component {
                     <SimpleAnimation
                       delay={500}
                       duration={2000}
-                      // direction="right"
                       staticType="zoom"
                       distance={20}
-                      // friction={4}
                     >
                       <AwesomeButtonCartman
                         type="secondary"
@@ -275,8 +262,6 @@ export default class PictureMatch extends Component {
                         }
                         onPress={() => this.guessWord(word)}
                         disabled={this.state.guess !== null}
-
-                        // style={styles.wordOptionButton}
                       >
                         {word.charAt(0).toUpperCase() + word.slice(1)}
                       </AwesomeButtonCartman>
@@ -311,7 +296,6 @@ export default class PictureMatch extends Component {
               })}
             </View>
           </View>
-          {/* </LinearGradient> */}
         </View>
       );
     } else {

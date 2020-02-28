@@ -56,7 +56,6 @@ The information below will allow you to get this application up and running.
 - "expo-font": "^8.0.0",
 - "expo-image-manipulator": "^8.0.0",
 - "expo-image-picker": "~8.0.1",
-- "expo-linear-gradient": "^8.0.0",
 - "expo-media-library": "^8.0.0",
 - "expo-permissions": "~8.0.0",
 - "expo-speech": "^8.0.0",
@@ -77,8 +76,7 @@ The information below will allow you to get this application up and running.
 - "react-native-safe-area-context": "0.6.0",
 - "react-native-screens": "2.0.0-alpha.12",
 - "react-native-simple-animations": "^0.2.2",
-- "react-native-web": "~0.11.7",
-- "redux": "^4.0.5"
+- "react-native-web": "~0.11.7"s
 
 # Authors
 

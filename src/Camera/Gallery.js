@@ -1,24 +1,15 @@
 import React from "react";
-import { View, Image, Text, TouchableOpacity } from "react-native";
-
+import { View, Image, Text } from "react-native";
 import Button from "react-native-button";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
-
 import { AsyncStorage } from "react-native";
-
 import { getPictureData, sayWord, translateWord } from "../../api";
-
 import * as MediaLibrary from "expo-media-library";
 import * as ImageManipulator from "expo-image-manipulator";
-
 import { styleMaker } from "./Gallery.styles";
-
 import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";
-
 import { SimpleAnimation } from "react-native-simple-animations";
 import LoadingDots from "react-native-loading-dots";
-
-// import ImageCompressor from "@trunkrs/react-native-image-compressor";
 
 export default class Gallery extends React.Component {
   state = {
@@ -42,7 +33,7 @@ export default class Gallery extends React.Component {
     }
   };
 
-  storeData = async (uri, word) => {
+  storeData = async uri => {
     try {
       await AsyncStorage.setItem(uri, this.state.englishWord);
     } catch (error) {}

@@ -37,7 +37,6 @@ export const styleMaker = state => {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "space-between"
-      // backgroundColor: "green"
     },
     picture: {
       resizeMode: "cover",

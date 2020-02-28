@@ -9,11 +9,9 @@ import {
   Easing
 } from "react-native";
 import styles from "../Styles";
-import * as Animatable from "react-native-animatable";
 import HomeButtons from "./HomeButtons";
 import { SimpleAnimation } from "react-native-simple-animations";
 import * as Font from "expo-font";
-import LottieView from "lottie-react-native";
 
 const { width: winWidth, height: winHeight } = Dimensions.get("window");
 

@@ -1,18 +1,11 @@
 import React from "react";
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { View, TouchableWithoutFeedback } from "react-native";
-
 import styles from "./Camera.styles";
 import AwesomeButtonCartman from "react-native-really-awesome-button/src/themes/cartman";
 
 import { Ionicons } from "@expo/vector-icons";
 
-export const Toolbar = ({
-  capturing = false,
-  onCaptureIn,
-  onCaptureOut,
-  onShortCapture
-}) => (
+export const Toolbar = ({ capturing = false, onShortCapture }) => (
   <Grid style={styles.bottomToolbar}>
     <Row>
       <Col size={2} style={styles.alignCenter}>

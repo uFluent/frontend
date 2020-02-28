@@ -4,7 +4,6 @@ import { View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { AsyncStorage } from "react-native";
-
 import QuizSelector from "./src/Quiz/QuizSelector";
 import Home from "./src/Home/Home";
 import Profile from "./src/Profile/Profile";
@@ -13,9 +12,7 @@ import HeaderBar from "./src/Headers/HeaderBar";
 import Gallery from "./src/Camera/Gallery";
 import PictureMatch from "./src//Quiz/PictureMatch2";
 import WordMatch from "./src/Quiz/WordMatch";
-import LoadingScreen from "./src/Loading";
 import LottieView from "lottie-react-native";
-
 import ProfileLogin from "./src/Profile/ProfileLogin";
 import * as api from "./api";
 import styled from "./src/Styles";
@@ -70,7 +67,7 @@ export default class App extends React.Component {
   async componentDidMount() {
     this.getUserFromLocalStorage();
     ///!!!!!
-    AsyncStorage.removeItem("username");
+    // AsyncStorage.removeItem("username"); // use this to log out...
   }
 
   static getDerivedStateFromError(error) {

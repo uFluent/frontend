@@ -2,29 +2,21 @@ import React from "react";
 import {
   Text,
   View,
-  Button,
   TextInput,
   TouchableHighlight,
   TouchableOpacity,
-  TouchableWithoutFeedback,
-  Image,
   Alert,
-  ScrollView,
-  AppRegistry,
   AsyncStorage
 } from "react-native";
 import { SimpleAnimation } from "react-native-simple-animations";
 import * as Font from "expo-font";
 import styles from "./ProfileLogin.style";
 import * as api from "../../api";
-// import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export default class ProfileLogin extends React.Component {
   state = {
     text: "",
-    // submittedUser: "",
     userData: "",
-
     newUser: true
   };
 
@@ -41,10 +33,6 @@ export default class ProfileLogin extends React.Component {
         } else {
           AsyncStorage.setItem("username", this.state.text);
           this.props.setUsername(this.state.text, res);
-          // this.setState({
-          //   submittedUser: this.state.text,
-          //   text: ""
-          // });
         }
       });
     }
@@ -63,10 +51,6 @@ export default class ProfileLogin extends React.Component {
         } else {
           AsyncStorage.setItem("username", this.state.text);
           this.props.setUsername(this.state.text, res);
-          // this.setState({
-          //   submittedUser: this.state.text,
-          //   text: ""
-          // });
         }
       });
     }
@@ -89,7 +73,7 @@ export default class ProfileLogin extends React.Component {
     return this.setState({ fontLoaded: true });
   }
 
-  render(props) {
+  render() {
     const { userData, newUser } = this.state;
     if (!userData) {
       return (
@@ -140,14 +124,7 @@ export default class ProfileLogin extends React.Component {
           {!newUser ? (
             <View style={styles.loginContainer}>
               <View style={styles.whichPageText}>
-                <Text
-                  style={[
-                    styles.textInput2
-                    // , { fontFamily: "Baloo-Regular" }
-                  ]}
-                >
-                  LOGIN!
-                </Text>
+                <Text style={[styles.textInput2]}>LOGIN!</Text>
               </View>
               <View style={styles.login}>
                 <TextInput
@@ -172,14 +149,7 @@ export default class ProfileLogin extends React.Component {
           ) : (
             <View style={styles.loginContainer}>
               <View style={styles.whichPageText}>
-                <Text
-                  style={[
-                    styles.textInput2
-                    // { fontFamily: "Baloo-Regular" }
-                  ]}
-                >
-                  CREATE!
-                </Text>
+                <Text style={[styles.textInput2]}>CREATE!</Text>
               </View>
 
               <View style={styles.login}>

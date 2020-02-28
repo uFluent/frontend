@@ -1,23 +1,14 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { Toolbar } from "./Camera.toolbar";
-
-import * as MediaLibrary from "expo-media-library";
-
 import Gallery from "./Gallery";
-
 import styles from "./Camera.styles";
-import { SimpleAnimation } from "react-native-simple-animations";
 
 export class CameraPage extends React.Component {
   camera = null;
-
   state = {
-    //The captures array, a gallery of pictures, will need moving to a context that stores things between app loads
     captures: [],
     capturing: null,
     hasCameraPermission: null,
