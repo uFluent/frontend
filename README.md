@@ -19,9 +19,9 @@ The information below will allow you to get this application up and running.
 
 - Installation:
 
-* Clone this repository on to your local machine git clone https://github.com/taxenco/fend-nc-news ;
+* Clone this repository on to your local machine git clone https://github.com/ufluent/frontend ;
 * Navigate into the repository;
-* cd fe-nc-news;
+* cd frontend;
 * Open in your code editor (code .);
 * Install dependencies (`npm install`);
 * Start the application to run on your default browser (`npm start`);
